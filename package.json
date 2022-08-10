@@ -1,0 +1,37 @@
+{
+  "name": "tuantao-next-js",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint:es": "eslint . --ext ts,tsx,js",
+    "lint:style": "stylelint 'src/**/styled.ts' 'src/**/*.tsx'",
+    "lint": "yarn lint:es && yarn lint:style"
+  },
+  "dependencies": {
+    "@firebase/database": "^0.13.4",
+    "eslint-config-airbnb": "^19.0.4",
+    "firebase": "^9.9.2",
+    "next": "12.2.4",
+    "prettier": "^2.7.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^12.2.4",
+    "eslint": "8.21.0",
+    "eslint-config-acme": "^1.4.0",
+    "eslint-config-next": "12.2.4",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "stylelint": "^14.9.1",
+    "stylelint-a11y": "^1.2.3",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0"
+  }
+}
