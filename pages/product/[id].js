@@ -273,7 +273,7 @@ export default function ProductDetail(props) {
         <div className='container'>
           <BreadCrumb productName={product.name} category={product.category} />
           <h2 className='product-detail__title'>{product.name}</h2>
-          {/* <div className='product-detail__content'>
+          <div className='product-detail__content'>
             <div className='product-detail__info'>
               <div className='product-detail__images'>
                 <ProductSlide productImages={product.images} />
@@ -367,7 +367,7 @@ export default function ProductDetail(props) {
                                 <span className='bag'>KM {idx}</span>
                                 <span className='promotion__detail'>{ckPromotion.promotion_text}</span>
                                 <Link href='/xem-them-khuyen-mai' className='promotion__link'>
-                                  Xem thêm &gt;&gt;
+                                  <a>Xem thêm&gt;&gt;</a>
                                 </Link>
                               </li>
                             )
@@ -404,9 +404,11 @@ export default function ProductDetail(props) {
                       }
                     })}
                     <div className='waranty__item waranty__item--more'>
-                      <Link to={'/page/chinh-sach-bao-hanh'}>
-                        <br />
-                        Xem chi tiết
+                      <Link href={'/page/chinh-sach-bao-hanh'}>
+                        <a>
+                          <br />
+                          Xem chi tiết
+                        </a>
                       </Link>
                     </div>
                   </div>
@@ -420,7 +422,7 @@ export default function ProductDetail(props) {
               <ProductRelated productCategory={product.category} />
             </div>
             <VideoReview dataVideo={dataVideo} productName={product.name} />
-          </div> */}
+          </div>
         </div>
       </div>
     )

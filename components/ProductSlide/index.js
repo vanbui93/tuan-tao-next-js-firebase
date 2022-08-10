@@ -11,7 +11,7 @@ export default function ProductSlide(props) {
     <div className='product-slide'>
       <Swiper
         navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
+        thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
         modules={[FreeMode, Navigation, Thumbs]}
         className='productSwiper2'
       >

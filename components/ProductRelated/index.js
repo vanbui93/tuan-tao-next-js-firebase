@@ -53,20 +53,22 @@ export default function ProductRelated(props) {
             return (
               <SwiperSlide className='product-related__item' key={key}>
                 <Link className='product-related__link' href={`/product/${key}`} onClick={() => window.scrollTo(0, 0)}>
-                  {getImgThumb(val.images)}
-                  <div className='product-related__info'>
-                    <h4 className='product-related__title'>{val.name}</h4>
-                    <p className='product-related__price'>
-                      <strong className='product-related__new-price'>
-                        {val.price ? `${numberWithCommas(val.price)}đ` : `Liên hệ: ${mainData?.phone}`}
-                      </strong>
-                      {val.price && val.compare_price && (
-                        <strike className='product-related__compare-price'>
-                          {numberWithCommas(val.compare_price)} đ
-                        </strike>
-                      )}
-                    </p>
-                  </div>
+                  <a>
+                    {getImgThumb(val.images)}
+                    <div className='product-related__info'>
+                      <h4 className='product-related__title'>{val.name}</h4>
+                      <p className='product-related__price'>
+                        <strong className='product-related__new-price'>
+                          {val.price ? `${numberWithCommas(val.price)}đ` : `Liên hệ: ${mainData?.phone}`}
+                        </strong>
+                        {val.price && val.compare_price && (
+                          <strike className='product-related__compare-price'>
+                            {numberWithCommas(val.compare_price)} đ
+                          </strike>
+                        )}
+                      </p>
+                    </div>
+                  </a>
                 </Link>
               </SwiperSlide>
             )
