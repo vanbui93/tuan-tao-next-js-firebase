@@ -2,6 +2,12 @@
 @import "purecss/reset.css";
 @import "purecss/common.css";
 
+//library
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/scrollbar';
+
 //components
 @import "components/common.module.scss";
 @import "components/header.module.scss";

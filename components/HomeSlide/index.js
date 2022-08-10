@@ -1,10 +1,9 @@
 import { onValue, ref } from 'firebase/database'
-import { db } from './../../utils/firebase'
 import parse from 'html-react-parser'
 import React, { useEffect, useState } from 'react'
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
+import { db } from './../../utils/firebase'
 
 export default function HomeSlide() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)

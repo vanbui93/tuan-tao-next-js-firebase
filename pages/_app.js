@@ -6,6 +6,9 @@ import Header from '../components/Header'
 import { getMain } from '../store/actions/main'
 import { useEffect } from 'react'
 import Footer from '../components/Footer'
+import '@fortawesome/fontawesome-svg-core/styles.css' // import Font Awesome CSS
+import { config } from '@fortawesome/fontawesome-svg-core'
+config.autoAddCss = false
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch()
   const mainData = useSelector(state => state.main.data)
