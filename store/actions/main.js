@@ -1,5 +1,5 @@
 import { onValue, ref, remove, set, update } from 'firebase/database'
-import { db } from '../../utils/firebase'
+import { db } from './../../utils/firebase'
 
 import {
   ADD_MAIN_OBJECT,
