@@ -1,11 +1,10 @@
+import { onValue, ref } from 'firebase/database'
+import { db } from './../../utils/firebase'
+import parse from 'html-react-parser'
 import React, { useEffect, useState } from 'react'
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-import 'swiper/swiper-bundle.min.css'
-import 'swiper/swiper.min.css'
-import { db } from 'utils/firebase'
-import { onValue, ref } from 'firebase/database'
-import parse from 'html-react-parser'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 
 export default function HomeSlide() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -33,7 +32,7 @@ export default function HomeSlide() {
         slidesPerView={1}
         spaceBetween={10}
         navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
+        thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
         modules={[FreeMode, Pagination, Navigation, Thumbs]}
         pagination={{
           clickable: true,
@@ -46,13 +45,16 @@ export default function HomeSlide() {
           },
         }}
       >
-        {Object.values(slideImage)?.map((val, idx) => {
-          return (
-            <SwiperSlide key={idx}>
-              <img src={val.image_url} alt='' />
-            </SwiperSlide>
-          )
-        })}
+        {slideImage &&
+          Object.values(slideImage)?.map((val, idx) => {
+            return (
+              val && (
+                <SwiperSlide key={idx}>
+                  <img src={val.image_url} alt={val} />
+                </SwiperSlide>
+              )
+            )
+          })}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}

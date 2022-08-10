@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import HomePage from './HomePage'
 import { getMain } from './../store/actions/main'
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header headerData={mainData} />
+      <HomePage />
       <div className='tel'>
         <a href={`tel:${mainData.phone}`} className='tel-call'>
           <i className='fa fa-phone' aria-hidden='true'></i>
