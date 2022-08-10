@@ -1,11 +1,21 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Footer from '../components/Footer'
 import styles from '../styles/Home.module.css'
+// import './../assets/scss/common.scss'
+// import './../assets/css/footer.scss'
+// import './../assets/css/header.scss'
+// import './../assets/css/variables.scss'
+import { getMain } from './../store/actions/main'
 
 export default function Home() {
-  const fd = x => {
-    return dsds
-  }
+  const dispatch = useDispatch()
+  const mainData = useSelector(state => state.main.data)
+
+  useEffect(() => {
+    dispatch(getMain())
+  }, [])
   return (
     <div className={styles.container}>
       <Head>
@@ -19,18 +29,7 @@ export default function Home() {
         </h1>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src='/vercel.svg' alt='Vercel Logo' width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <Footer footerData={mainData} />
     </div>
   )
 }
