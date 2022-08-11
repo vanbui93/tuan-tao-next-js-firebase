@@ -18,23 +18,23 @@ export default function MenuHamburger(props) {
       <div className='menu-hamberger__wrap'>
         <ul className='menu-hamberger__list'>
           <li className='menu-hamberger__item'>
-            <Link href={`/page/${headerData.menu_hambuger?.link_menu_01}`} onClick={handleCloseHambuger}>
-              <a>{headerData.menu_hambuger?.text_menu_01}</a>
+            <Link href={`/page/${headerData.menu_hambuger?.link_menu_01}`}>
+              <a onClick={handleCloseHambuger}>{headerData.menu_hambuger?.text_menu_01}</a>
             </Link>
           </li>
           <li className='menu-hamberger__item'>
-            <Link href={`/page/${headerData.menu_hambuger?.link_menu_02}`} onClick={handleCloseHambuger}>
-              <a>{headerData.menu_hambuger?.text_menu_02}</a>
+            <Link href={`/page/${headerData.menu_hambuger?.link_menu_02}`}>
+              <a onClick={handleCloseHambuger}>{headerData.menu_hambuger?.text_menu_02}</a>
             </Link>
           </li>
           <li className='menu-hamberger__item'>
-            <Link href={`/page/${headerData.menu_hambuger?.link_menu_03}`} onClick={handleCloseHambuger}>
-              <a>{headerData.menu_hambuger?.text_menu_03}</a>
+            <Link href={`/page/${headerData.menu_hambuger?.link_menu_03}`}>
+              <a onClick={handleCloseHambuger}>{headerData.menu_hambuger?.text_menu_03}</a>
             </Link>
           </li>
           <li className='menu-hamberger__item'>
-            <Link href={`/page/${headerData.menu_hambuger?.link_menu_04}`} onClick={handleCloseHambuger}>
-              <a>{headerData.menu_hambuger?.text_menu_04}</a>
+            <Link href={`/page/${headerData.menu_hambuger?.link_menu_04}`}>
+              <a onClick={handleCloseHambuger}>{headerData.menu_hambuger?.text_menu_04}</a>
             </Link>
           </li>
         </ul>

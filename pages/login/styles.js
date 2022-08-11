@@ -1,6 +1,6 @@
-import { red } from "@material-ui/core/colors";
+import { red } from '@material-ui/core/colors'
 
-const styles = (theme) => ({
+const styles = theme => ({
   background: {
     backgroundColor: theme.palette.primary.main,
     padding: 40,
@@ -14,11 +14,12 @@ const styles = (theme) => ({
   },
   error: {
     color: '#f00',
-    textAlign: 'left'
+    textAlign: 'left',
   },
+  login: {},
   title: {
     display: 'inline-block',
-    marginBottom: '10px'
-  }
-});
-export default styles;
+    marginBottom: '10px',
+  },
+})
+export default styles

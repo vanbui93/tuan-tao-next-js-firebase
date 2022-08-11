@@ -1,12 +1,13 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
 import { onValue, ref } from 'firebase/database'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import LayoutLogin from '../../components/LayoutLogin'
 import { db } from './../../utils/firebase'
+import { withStyles } from '@material-ui/core/styles'
 import styles from './styles'
+import dynamic from 'next/dynamic'
 
 function Login(props) {
   const [userStorage, setUserStorage] = useState(undefined)
@@ -122,7 +123,14 @@ function Login(props) {
                 <Typography variant='caption' className={classes.title} color='textSecondary' gutterBottom>
                   Bạn đã đăng nhập
                 </Typography>
-                <Button variant='contained' color='primary' fullWidth type='submit' onClick={handleLogout}>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  fullWidth
+                  type='submit'
+                  onClick={handleLogout}
+                  style={{ marginBottom: '10px' }}
+                >
                   Đăng xuất
                 </Button>
                 <Box sx={{ mt: 1 }}>
@@ -143,4 +151,4 @@ Login.propTypes = {
   classes: PropTypes.object,
 }
 
-export default withStyles(styles)(Login)
+export default dynamic(() => Promise.resolve(withStyles(styles)(Login)), { ssr: false })

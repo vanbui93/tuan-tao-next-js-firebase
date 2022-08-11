@@ -14,10 +14,10 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Stack } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { AdminStyle } from '../../../admin_components/AdminStyle'
 import LayoutAdmin from '../../../components/LayoutAdmin'
 import { getMain, updateMain } from '../../../store/actions/main'
 import styles from './styles'
+import { AdminStyle } from '../AdminStyle'
 
 const Main = props => {
   const { classes } = props
@@ -255,8 +255,8 @@ const Main = props => {
   console.log(editMain)
 
   return (
-    <LayoutAdmin>
-      <AdminStyle open={!opensidebar}>
+    <AdminStyle open={!opensidebar}>
+      <LayoutAdmin>
         {!isEditMain ? (
           <div>
             <Grid style={{ paddingBottom: '20px' }}>
@@ -894,8 +894,8 @@ const Main = props => {
             </Stack>
           </Grid>
         )}
-      </AdminStyle>
-    </LayoutAdmin>
+      </LayoutAdmin>
+    </AdminStyle>
   )
 }
 

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/styles'
 import { AccountCircle } from '@mui/icons-material'
 import MenuIcon from '@mui/icons-material/Menu'
+import dynamic from 'next/dynamic'
 import { Router } from 'next/router'
 import PropTypes from 'prop-types'
 import * as React from 'react'
@@ -99,4 +100,4 @@ HeaderAdmin.propTypes = {
   history: PropTypes.object,
 }
 
-export default withStyles(styles)(HeaderAdmin)
+export default dynamic(() => Promise.resolve(withStyles(styles)(HeaderAdmin)), { ssr: false })
