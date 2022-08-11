@@ -21,6 +21,7 @@ export default function ProductRelated(props) {
     spaceBetween: 10,
     navigation: true,
     modules: [Navigation],
+    allowTouchMove: true,
     breakpoints: {
       0: {
         slidesPerView: 2,

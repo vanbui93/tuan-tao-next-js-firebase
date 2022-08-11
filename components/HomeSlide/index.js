@@ -31,6 +31,7 @@ export default function HomeSlide() {
         slidesPerView={1}
         spaceBetween={10}
         navigation={true}
+        allowTouchMove={true}
         thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
         modules={[FreeMode, Pagination, Navigation, Thumbs]}
         pagination={{

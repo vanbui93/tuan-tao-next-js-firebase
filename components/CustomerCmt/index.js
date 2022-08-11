@@ -31,6 +31,7 @@ export default function CustomerCmt() {
     pagination: {
       clickable: true,
     },
+    allowTouchMove: true,
     modules: [FreeMode, Pagination, Navigation, Thumbs],
     breakpoints: {
       0: {
