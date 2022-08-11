@@ -50,9 +50,6 @@ export default function ProductItem(props) {
             ) : (
               ''
             )}
-            <span className='collections__hot-deal'>
-              {/* <img src={'./../../assets/img/products/gia-soc.png'} alt='' /> */}
-            </span>
           </div>
           <div className='collections__info'>
             <h4 className='collections__title'>{name}</h4>

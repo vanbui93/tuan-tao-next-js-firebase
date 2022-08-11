@@ -65,15 +65,16 @@ export default function HomeSlide() {
         modules={[FreeMode, Navigation, Thumbs]}
         className='mySwiper'
       >
-        {Object.values(slideImage)?.map((val, idx) => {
-          return (
-            <SwiperSlide key={idx}>
-              <div className='slide-text'>
-                <p>{parse(val.text)}</p>
-              </div>
-            </SwiperSlide>
-          )
-        })}
+        {slideImage &&
+          Object.values(slideImage)?.map((val, idx) => {
+            return (
+              <SwiperSlide key={idx}>
+                <div className='slide-text'>
+                  <p>{parse(val.text)}</p>
+                </div>
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
     </div>
   )

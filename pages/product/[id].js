@@ -16,7 +16,7 @@ import { getPromotions } from './../../store/actions/promotions'
 import { getSkus } from './../../store/actions/skus'
 import { getVideo } from './../../store/actions/videos'
 import { getWarantys } from './../../store/actions/warantys'
-import BreadCrumb from './../../utils/BreadCrumb'
+import BreadCrumb from '../../components/BreadCrumb'
 
 export default function ProductDetail(props) {
   const [skus, setSkus] = useState({})
