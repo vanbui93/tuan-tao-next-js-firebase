@@ -1,16 +1,7 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getMain } from './../store/actions/main'
 import HomePage from './HomePage'
 
 export default function Home() {
-  const dispatch = useDispatch()
-  const mainData = useSelector(state => state.main.data)
-
-  useEffect(() => {
-    dispatch(getMain())
-  }, [])
   return (
     <div>
       <Head>

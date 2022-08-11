@@ -1,7 +1,6 @@
 import { Provider, useDispatch, useSelector } from 'react-redux'
 import { store, wrapper } from '../store/configureStore'
 import styles from './../assets/scss/styles.scss'
-import './../assets/scss/components/common.module.scss'
 import Header from '../components/Header'
 import { getMain } from '../store/actions/main'
 import { useEffect } from 'react'

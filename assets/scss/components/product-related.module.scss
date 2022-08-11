@@ -35,12 +35,28 @@
 
     .swiper-button-prev,
     .swiper-button-next {
+        opacity: 0;
         top: 40%;
 
         &::after {
             font-size: 20px;
             font-weight: bold;
         }
+    }
+
+    &:hover {
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            opacity: 1;
+        }
+
+        .swiper-button-disabled {
+            opacity: 0.5;
+            cursor: auto;
+            pointer-events: none;
+        }
+
     }
 
     .swiper-button-next {

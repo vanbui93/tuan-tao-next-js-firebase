@@ -118,7 +118,7 @@ export default function Header(props) {
                 </a>
               </li>
               <li>
-                <Link href={`page/${headerData.header_content?.header_link_01}`}>
+                <Link href={`/page/${headerData.header_content?.header_link_01}`}>
                   <a>
                     <i className='fa fa-credit-card' aria-hidden='true' />
                     {headerData.header_content?.header_text_01}
@@ -126,7 +126,7 @@ export default function Header(props) {
                 </Link>
               </li>
               <li>
-                <Link href={`page/${headerData.header_content?.header_link_02}`}>
+                <Link href={`/page/${headerData.header_content?.header_link_02}`}>
                   <a>
                     <i className='fa fa-refresh' aria-hidden='true' />
                     {headerData.header_content?.header_text_02}

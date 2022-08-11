@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigation } from 'swiper'
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import numberWithCommas from './../../utils/numberWithComas'
 import { getProduct } from './../../store/actions/products'
+import numberWithCommas from './../../utils/numberWithComas'
 export default function ProductRelated(props) {
   const products = useSelector(state => state.products.data)
   const mainData = useSelector(state => state.main.data)

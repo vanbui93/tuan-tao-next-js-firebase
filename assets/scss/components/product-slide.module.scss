@@ -12,6 +12,13 @@
             .swiper-button-next {
                 opacity: 1;
             }
+
+            .swiper-button-disabled {
+                opacity: 0.5;
+                cursor: auto;
+                pointer-events: none;
+            }
+
         }
 
         .swiper-slide {
@@ -25,24 +32,14 @@
 
         .swiper-button-prev,
         .swiper-button-next {
+            width: 35px;
+            height: 35px;
             color: var(--gray);
             opacity: 0;
             transition: all 0.5s ease-in;
-        }
 
-        .swiper-button-prev {
             &:after {
-                font: var(--fa-font-solid);
-                content: '\f0a8';
-                font-size: 40px;
-            }
-        }
-
-        .swiper-button-next {
-            &:after {
-                font: var(--fa-font-solid);
-                content: '\f0a9';
-                font-size: 40px;
+                font-size: 19px;
             }
         }
     }
