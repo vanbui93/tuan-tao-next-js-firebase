@@ -13,17 +13,19 @@ import {
 import EditIcon from '@mui/icons-material/Edit'
 import { Stack } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../components/LayoutAdmin'
 import { getMain, updateMain } from '../../../store/actions/main'
 import styles from './styles'
 import { AdminStyle } from '../AdminStyle'
+import dynamic from 'next/dynamic'
 
 const Main = props => {
   const { classes } = props
   const mainData = useSelector(state => state.main.data)
   const opensidebar = useSelector(state => state.ui.opensidebar)
   const [isEditMain, setIsEditMain] = useState(false)
+  const dispatch = useDispatch()
 
   const [editMain, setEditMain] = useState({
     logo_img: '',
@@ -73,8 +75,6 @@ const Main = props => {
       text_menu_04: '',
     },
   })
-
-  const dispatch = useDispatch()
 
   const handleEditMain = () => {
     setIsEditMain(true)
@@ -252,11 +252,9 @@ const Main = props => {
     }
   }
 
-  console.log(editMain)
-
   return (
-    <AdminStyle open={!opensidebar}>
-      <LayoutAdmin>
+    <LayoutAdmin>
+      <AdminStyle open={!opensidebar}>
         {!isEditMain ? (
           <div>
             <Grid style={{ paddingBottom: '20px' }}>
@@ -894,13 +892,8 @@ const Main = props => {
             </Stack>
           </Grid>
         )}
-      </LayoutAdmin>
-    </AdminStyle>
+      </AdminStyle>
+    </LayoutAdmin>
   )
 }
-
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
-export default connect(mapDispatchToProps)(withStyles(styles)(Main))
+export default dynamic(() => Promise.resolve(withStyles(styles)(Main)), { ssr: false })
