@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import '../../assets/scss/pages/collection.module.scss'
 import { onValue, ref } from 'firebase/database'
+import React, { useEffect, useState } from 'react'
 import { db } from '../../utils/firebase'
 import ProductItem from './../../components/ProductItem'
 

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import MenuHamburger from './../MenuHamburger'
 import { limitToLast, onValue, orderByChild, query, ref } from 'firebase/database'
-import { db } from './../../utils/firebase'
-import SearchResult from './../SearchResult'
-import * as hamgugerActions from './../../store/actions/mobileMenu'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
 import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import * as hamgugerActions from './../../store/actions/mobileMenu'
+import { db } from './../../utils/firebase'
+import MenuHamburger from './../MenuHamburger'
+import SearchResult from './../SearchResult'
 
 export default function Header(props) {
   const { headerData } = props
@@ -170,7 +169,7 @@ export default function Header(props) {
                 {Object.values(menus)?.map((menu, idx) => {
                   return (
                     <li className='menu__item' key={idx}>
-                      <Link href={menu.link} className='menu__link'>
+                      <Link href={`/${menu.link}`} className='menu__link'>
                         <a> {menu.name}</a>
                       </Link>
                     </li>
