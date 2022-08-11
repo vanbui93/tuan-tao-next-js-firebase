@@ -24,14 +24,14 @@ export default function BreadCrumb(props) {
           return (
             category === val.category && (
               <li className='breadcrumb__item' key={idx}>
-                <Link className='breadcrumb__link' href='/'>
-                  <a>Trang chủ</a>
+                <Link href='/'>
+                  <a className='breadcrumb__link'>Trang chủ</a>
                 </Link>
-                <Link className='breadcrumb__link' href={val.to}>
-                  <a>{val.label}</a>
+                <Link href={val.to}>
+                  <a className='breadcrumb__link'>{val.label}</a>
                 </Link>
-                <Link className='breadcrumb__link' href=''>
-                  <a>{productName}</a>
+                <Link href=''>
+                  <a className='breadcrumb__link'>{productName}</a>
                 </Link>
               </li>
             )

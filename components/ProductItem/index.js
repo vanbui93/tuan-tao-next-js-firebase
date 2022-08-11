@@ -1,11 +1,19 @@
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getPromotions } from '../../store/actions/promotions'
 import numberWithCommas from './../../utils/numberWithComas'
 
 export default function ProductItem(props) {
   const { id, name, price, comparePrice, newPercent, images, promotions } = props
   const allPromotions = useSelector(state => state.promotions.data)
   const mainData = useSelector(state => state.main.data)
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getPromotions())
+  }, [dispatch])
+
   const img = []
   images !== null &&
     images !== undefined &&

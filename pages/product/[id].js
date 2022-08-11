@@ -7,6 +7,7 @@ import { db } from './../../utils/firebase'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
+import BreadCrumb from '../../components/BreadCrumb'
 import ProductRelated from './../../components/ProductRelated'
 import ProductSlide from './../../components/ProductSlide'
 import VideoReview from './../../components/VideoReview'
@@ -16,7 +17,6 @@ import { getPromotions } from './../../store/actions/promotions'
 import { getSkus } from './../../store/actions/skus'
 import { getVideo } from './../../store/actions/videos'
 import { getWarantys } from './../../store/actions/warantys'
-import BreadCrumb from '../../components/BreadCrumb'
 
 export default function ProductDetail(props) {
   const [skus, setSkus] = useState({})
@@ -366,8 +366,8 @@ export default function ProductDetail(props) {
                               <li className='promotion__item' key={idx}>
                                 <span className='bag'>KM {idx}</span>
                                 <span className='promotion__detail'>{ckPromotion.promotion_text}</span>
-                                <Link href='/xem-them-khuyen-mai' className='promotion__link'>
-                                  <a>Xem thêm&gt;&gt;</a>
+                                <Link href='/xem-them-khuyen-mai'>
+                                  <a className='promotion__link'>Xem thêm&gt;&gt;</a>
                                 </Link>
                               </li>
                             )
