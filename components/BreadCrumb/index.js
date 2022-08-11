@@ -35,9 +35,7 @@ export default function BreadCrumb(props) {
                 <Link href={val.to}>
                   <a className='breadcrumb__link'>{val.label}</a>
                 </Link>
-                <Link href=''>
-                  <a className='breadcrumb__link'>{productName}</a>
-                </Link>
+                <a className='breadcrumb__link'>{productName}</a>
               </li>
             )
           )

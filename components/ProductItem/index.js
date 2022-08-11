@@ -45,7 +45,7 @@ export default function ProductItem(props) {
 
   return (
     <li className='collections__item'>
-      <Link href={`/product/${id}`} className='collection__link' onClick={() => window.scrollTo(0, 0)}>
+      <Link href={`/product/${id}`} className='collection__link'>
         <a>
           <div className='collections__img'>
             <img src={img[0]} alt='' />

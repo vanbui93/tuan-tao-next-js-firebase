@@ -12,22 +12,22 @@ export default function Footer(props) {
                   <h3>{footerData.footer_title?.footer_title_01}</h3>
                   <ul className='footer__list'>
                     <li className='footer__item'>
-                      <Link href={`/page/${footerData.footer_sub?.link_01}`} onClick={() => window.scrollTo(0, 0)}>
+                      <Link href={`/page/${footerData.footer_sub?.link_01}`}>
                         <a>{footerData.footer_sub?.text_01}</a>
                       </Link>
                     </li>
                     <li className='footer__item'>
-                      <Link href={`/page/${footerData.footer_sub?.link_02}`} onClick={() => window.scrollTo(0, 0)}>
+                      <Link href={`/page/${footerData.footer_sub?.link_02}`}>
                         <a>{footerData.footer_sub?.text_02}</a>
                       </Link>
                     </li>
                     <li className='footer__item'>
-                      <Link href={`/page/${footerData.footer_sub?.link_03}`} onClick={() => window.scrollTo(0, 0)}>
+                      <Link href={`/page/${footerData.footer_sub?.link_03}`}>
                         <a>{footerData.footer_sub?.text_03}</a>
                       </Link>
                     </li>
                     <li className='footer__item'>
-                      <Link href={`/page/${footerData.footer_sub?.link_04}`} onClick={() => window.scrollTo(0, 0)}>
+                      <Link href={`/page/${footerData.footer_sub?.link_04}`}>
                         <a>{footerData.footer_sub?.text_04}</a>
                       </Link>
                     </li>

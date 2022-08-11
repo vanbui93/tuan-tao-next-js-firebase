@@ -17,6 +17,8 @@ import { getPromotions } from './../../store/actions/promotions'
 import { getSkus } from './../../store/actions/skus'
 import { getVideo } from './../../store/actions/videos'
 import { getWarantys } from './../../store/actions/warantys'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShield } from '@fortawesome/free-solid-svg-icons'
 
 export default function ProductDetail(props) {
   const [skus, setSkus] = useState({})
@@ -215,8 +217,9 @@ export default function ProductDetail(props) {
       dataColor.length !== undefined
     ) {
       if (isSkuSelected !== 'init' && isColorSelected !== 'init') {
-        router.push('/checkout', {
-          state: {
+        router.push({
+          pathname: '/checkout',
+          query: {
             productName: product.name ? product.name : '',
             productPrice: product.price ? product.price : '',
             productNewBox: product.newBox ? product.newBox : '',
@@ -232,8 +235,9 @@ export default function ProductDetail(props) {
         setColorInvalid(true)
       }
     } else {
-      router.push('/checkout', {
-        state: {
+      router.push({
+        pathname: '/checkout',
+        query: {
           productName: product.name ? product.name : '',
           productPrice: product.price ? product.price : '',
           productNewBox: product.newBox ? product.newBox : '',
@@ -396,6 +400,7 @@ export default function ProductDetail(props) {
                         return (
                           <div className='waranty__item' key={idx}>
                             <span className='waranty__icon'>
+                              <FontAwesomeIcon icon={faShield} style={{ color: '#515154' }} />
                               <i className='fa fa-shield' aria-hidden='true'></i>
                             </span>
                             <p className='waranty__detail'>{parse(item.waranty_text)}</p>

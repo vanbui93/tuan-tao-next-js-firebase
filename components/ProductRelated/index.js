@@ -52,7 +52,7 @@ export default function ProductRelated(props) {
           if (productCategory === category) {
             return (
               <SwiperSlide className='product-related__item' key={key}>
-                <Link className='product-related__link' href={`/product/${key}`} onClick={() => window.scrollTo(0, 0)}>
+                <Link className='product-related__link' href={`/product/${key}`}>
                   <a>
                     {getImgThumb(val.images)}
                     <div className='product-related__info'>
