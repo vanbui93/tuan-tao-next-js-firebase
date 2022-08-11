@@ -2,14 +2,17 @@ import CoreValue from '../../components/CoreValue'
 import CustomerCmt from '../../components/CustomerCmt'
 import HomeProduct from '../../components/HomeProduct'
 import HomeSlide from '../../components/HomeSlide'
+import LayoutUser from '../../components/LayoutUser'
 
-export default function HomePage() {
+function HomePage() {
   return (
-    <div>
+    <LayoutUser>
       <HomeSlide />
       <HomeProduct />
       <CustomerCmt />
       <CoreValue />
-    </div>
+    </LayoutUser>
   )
 }
+HomePage.layout = 'L1'
+export default HomePage

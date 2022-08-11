@@ -196,7 +196,7 @@
     .header-top {
         display: flex;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
         background-color: var(--gray);
         padding: 15px 10px 15px 15px;
     }

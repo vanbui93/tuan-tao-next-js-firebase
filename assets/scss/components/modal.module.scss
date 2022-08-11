@@ -67,7 +67,7 @@
     &__footer {
         display: flex;
         align-items: center;
-        justify-content: end;
+        justify-content: flex-end;
         width: calc(100% - 30px);
         margin: 15px;
     }

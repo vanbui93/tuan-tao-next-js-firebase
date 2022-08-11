@@ -1,5 +1,6 @@
 import { onValue, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
+import LayoutUser from '../../components/LayoutUser'
 import { db } from '../../utils/firebase'
 import ProductItem from './../../components/ProductItem'
 
@@ -42,11 +43,13 @@ export default function Iphone() {
   }
 
   return (
-    <div className='collections'>
-      <div className='container'>
-        <h2 className='collection__title'>iPhone</h2>
-        <ul className='collections__list'>{getDulieu(1)}</ul>
+    <LayoutUser>
+      <div className='collections'>
+        <div className='container'>
+          <h2 className='collection__title'>iPhone</h2>
+          <ul className='collections__list'>{getDulieu(1)}</ul>
+        </div>
       </div>
-    </div>
+    </LayoutUser>
   )
 }

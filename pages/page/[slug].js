@@ -2,6 +2,7 @@ import parse from 'html-react-parser'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import LayoutUser from '../../components/LayoutUser'
 import { getPageDetail } from './../../store/actions/page'
 
 export default function PagesContent() {
@@ -19,12 +20,14 @@ export default function PagesContent() {
 
   return (
     currentPage?.isDisplay === '1' && (
-      <div className='post'>
-        <div className='container'>
-          <h2>{currentPage?.name}</h2>
-          <div>{parse(currentPage?.content)}</div>
+      <LayoutUser>
+        <div className='post'>
+          <div className='container'>
+            <h2>{currentPage?.name}</h2>
+            <div>{parse(currentPage?.content)}</div>
+          </div>
         </div>
-      </div>
+      </LayoutUser>
     )
   )
 }

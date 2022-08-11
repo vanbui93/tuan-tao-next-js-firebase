@@ -19,6 +19,7 @@ import { getVideo } from './../../store/actions/videos'
 import { getWarantys } from './../../store/actions/warantys'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShield } from '@fortawesome/free-solid-svg-icons'
+import LayoutUser from '../../components/LayoutUser'
 
 export default function ProductDetail(props) {
   const [skus, setSkus] = useState({})
@@ -273,163 +274,168 @@ export default function ProductDetail(props) {
 
   return (
     product && (
-      <div className='product-detail'>
-        <div className='container'>
-          <BreadCrumb productName={product.name} category={product.category} />
-          <h2 className='product-detail__title'>{product.name}</h2>
-          <div className='product-detail__content'>
-            <div className='product-detail__info'>
-              <div className='product-detail__images'>
-                <ProductSlide productImages={product.images} />
-              </div>
-              <div className='product-detail__variant'>
-                <div className='product-detail__current-price'>
-                  <strong>
-                    {product.price
-                      ? `${numberWithCommas(product.price)} đ`
-                      : `Liên hệ : ${mainData?.phone ? mainData?.phone : ''}`}
-                  </strong>
-                  &nbsp;&nbsp; | <i>Giá đã bao gồm 10% VAT</i>
+      <LayoutUser>
+        <div className='product-detail'>
+          <div className='container'>
+            <BreadCrumb productName={product.name} category={product.category} />
+            <h2 className='product-detail__title'>{product.name}</h2>
+            <div className='product-detail__content'>
+              <div className='product-detail__info'>
+                <div className='product-detail__images'>
+                  <ProductSlide productImages={product.images} />
                 </div>
-                <p className='product-detail__free-ship'>
-                  <span>Miễn phí vận chuyển toàn quốc</span>
-                </p>
-                <div className='product-detail__color'>
-                  <div className='option__title'>
-                    {dataColor.length > 0 && (
-                      <strong className='option__title'>
-                        Lựa chọn màu
-                        {colorInvalid && (
-                          <span className={colorInvalid ? 'option__highlight' : ''}> ( vui lòng chọn màu ! )</span>
-                        )}
-                      </strong>
-                    )}
-                    <ul className='color'>
-                      {dataColor?.map((colorId, idx) => {
-                        return (
-                          <li
-                            key={idx}
-                            className={`color__item ${isColorSelected === idx ? 'selected' : ''}`}
-                            data-sku='IPN1164W'
-                            data-id='22'
-                            data-bestprice='12,990,000 ₫'
-                            data-lastprice='21,990,000 ₫'
-                            data-color='#fffc17'
-                          >
-                            <span
-                              className='color__option'
-                              style={{ backgroundColor: `${colorId.data_color}` }}
-                              onClick={() => toggleClassColor(idx, colorId.data_color)}
+                <div className='product-detail__variant'>
+                  <div className='product-detail__current-price'>
+                    <strong>
+                      {product.price
+                        ? `${numberWithCommas(product.price)} đ`
+                        : `Liên hệ : ${mainData?.phone ? mainData?.phone : ''}`}
+                    </strong>
+                    &nbsp;&nbsp; | <i>Giá đã bao gồm 10% VAT</i>
+                  </div>
+                  <p className='product-detail__free-ship'>
+                    <span>Miễn phí vận chuyển toàn quốc</span>
+                  </p>
+                  <div className='product-detail__color'>
+                    <div className='option__title'>
+                      {dataColor.length > 0 && (
+                        <strong className='option__title'>
+                          Lựa chọn màu
+                          {colorInvalid && (
+                            <span className={colorInvalid ? 'option__highlight' : ''}> ( vui lòng chọn màu ! )</span>
+                          )}
+                        </strong>
+                      )}
+                      <ul className='color'>
+                        {dataColor?.map((colorId, idx) => {
+                          return (
+                            <li
+                              key={idx}
+                              className={`color__item ${isColorSelected === idx ? 'selected' : ''}`}
+                              data-sku='IPN1164W'
+                              data-id='22'
+                              data-bestprice='12,990,000 ₫'
+                              data-lastprice='21,990,000 ₫'
+                              data-color='#fffc17'
                             >
-                              <span className='blind'>{colorId.data_color}</span>
-                            </span>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
-                </div>
-                <div className='product-detail__version'>
-                  <div className='option'>
-                    {dataSku.length > 0 && (
-                      <strong className='option__title'>
-                        Lựa chọn dung lượng
-                        {skuInvalid && (
-                          <span className={skuInvalid ? 'option__highlight' : ''}> ( vui lòng chọn dung lượng ! )</span>
-                        )}
-                      </strong>
-                    )}
-                    <ul className='option__list'>
-                      {dataSku?.map((skuId, idx) => {
-                        return (
-                          <li
-                            className={`option__item ${isSkuSelected === idx ? 'selected' : ''}`}
-                            data-sku={skuId.data_sku}
-                            key={idx}
-                          >
-                            <div className='option__wrap'>
-                              <label className='option__label'>
-                                <strong onClick={() => toggleClassSku(idx, skuId.memory)}>{skuId.memory}</strong>
-                              </label>
-                            </div>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
-                </div>
-                {ckPromotionIds ? (
-                  <div className='product-detail__promotion'>
-                    <strong>KHUYẾN MÃI</strong>
-                    <ul className='promotion'>
-                      {allPromotions !== null &&
-                        allPromotions !== undefined &&
-                        Object.values(allPromotions)?.map((ckPromotion, idx) => {
-                          if (ckPromotionIds?.includes(ckPromotion.promotion_id)) {
-                            return (
-                              <li className='promotion__item' key={idx}>
-                                <span className='bag'>KM {idx}</span>
-                                <span className='promotion__detail'>{ckPromotion.promotion_text}</span>
-                                <Link href='/xem-them-khuyen-mai'>
-                                  <a className='promotion__link'>Xem thêm&gt;&gt;</a>
-                                </Link>
-                              </li>
-                            )
-                          }
+                              <span
+                                className='color__option'
+                                style={{ backgroundColor: `${colorId.data_color}` }}
+                                onClick={() => toggleClassColor(idx, colorId.data_color)}
+                              >
+                                <span className='blind'>{colorId.data_color}</span>
+                              </span>
+                            </li>
+                          )
                         })}
-                    </ul>
+                      </ul>
+                    </div>
                   </div>
-                ) : (
-                  ''
-                )}
-                <div className='product-detail__purchase'>
-                  <div className='purchase'>
-                    <button className='purchase__link' data-sku='IPN11128G' onClick={e => gotoCheckout(e)}>
-                      <strong className='purchase__action'>MUA NGAY</strong>
-                      <span> Giao tận nhà (COD) hoặc Nhận tại cửa hàng</span>
-                    </button>
+                  <div className='product-detail__version'>
+                    <div className='option'>
+                      {dataSku.length > 0 && (
+                        <strong className='option__title'>
+                          Lựa chọn dung lượng
+                          {skuInvalid && (
+                            <span className={skuInvalid ? 'option__highlight' : ''}>
+                              {' '}
+                              ( vui lòng chọn dung lượng ! )
+                            </span>
+                          )}
+                        </strong>
+                      )}
+                      <ul className='option__list'>
+                        {dataSku?.map((skuId, idx) => {
+                          return (
+                            <li
+                              className={`option__item ${isSkuSelected === idx ? 'selected' : ''}`}
+                              data-sku={skuId.data_sku}
+                              key={idx}
+                            >
+                              <div className='option__wrap'>
+                                <label className='option__label'>
+                                  <strong onClick={() => toggleClassSku(idx, skuId.memory)}>{skuId.memory}</strong>
+                                </label>
+                              </div>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+                  {ckPromotionIds ? (
+                    <div className='product-detail__promotion'>
+                      <strong>KHUYẾN MÃI</strong>
+                      <ul className='promotion'>
+                        {allPromotions !== null &&
+                          allPromotions !== undefined &&
+                          Object.values(allPromotions)?.map((ckPromotion, idx) => {
+                            if (ckPromotionIds?.includes(ckPromotion.promotion_id)) {
+                              return (
+                                <li className='promotion__item' key={idx}>
+                                  <span className='bag'>KM {idx}</span>
+                                  <span className='promotion__detail'>{ckPromotion.promotion_text}</span>
+                                  <Link href='/xem-them-khuyen-mai'>
+                                    <a className='promotion__link'>Xem thêm&gt;&gt;</a>
+                                  </Link>
+                                </li>
+                              )
+                            }
+                          })}
+                      </ul>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <div className='product-detail__purchase'>
+                    <div className='purchase'>
+                      <button className='purchase__link' data-sku='IPN11128G' onClick={e => gotoCheckout(e)}>
+                        <strong className='purchase__action'>MUA NGAY</strong>
+                        <span> Giao tận nhà (COD) hoặc Nhận tại cửa hàng</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className='product-detail__waranty'>
-                <div className='waranty'>
-                  <h4 className='waranty__title'>Thông tin sản phẩm</h4>
-                  <div className='warranty__info'>
-                    {allWarantys?.map((item, idx) => {
-                      if (ckWarantyIds?.includes(item.waranty_id)) {
-                        return (
-                          <div className='waranty__item' key={idx}>
-                            <span className='waranty__icon'>
-                              <FontAwesomeIcon icon={faShield} style={{ color: '#515154' }} />
-                              <i className='fa fa-shield' aria-hidden='true'></i>
-                            </span>
-                            <p className='waranty__detail'>{parse(item.waranty_text)}</p>
-                          </div>
-                        )
-                      }
-                    })}
-                    <div className='waranty__item waranty__item--more'>
-                      <Link href={'/page/chinh-sach-bao-hanh'}>
-                        <a>
-                          <br />
-                          Xem chi tiết
-                        </a>
-                      </Link>
+                <div className='product-detail__waranty'>
+                  <div className='waranty'>
+                    <h4 className='waranty__title'>Thông tin sản phẩm</h4>
+                    <div className='warranty__info'>
+                      {allWarantys?.map((item, idx) => {
+                        if (ckWarantyIds?.includes(item.waranty_id)) {
+                          return (
+                            <div className='waranty__item' key={idx}>
+                              <span className='waranty__icon'>
+                                <FontAwesomeIcon icon={faShield} style={{ color: '#515154' }} />
+                                <i className='fa fa-shield' aria-hidden='true'></i>
+                              </span>
+                              <p className='waranty__detail'>{parse(item.waranty_text)}</p>
+                            </div>
+                          )
+                        }
+                      })}
+                      <div className='waranty__item waranty__item--more'>
+                        <Link href={'/page/chinh-sach-bao-hanh'}>
+                          <a>
+                            <br />
+                            Xem chi tiết
+                          </a>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='product-detail__related'>
-              <div className='page-title'>
-                <h3>Gợi ý cho bạn</h3>
+              <div className='product-detail__related'>
+                <div className='page-title'>
+                  <h3>Gợi ý cho bạn</h3>
+                </div>
+                <ProductRelated productCategory={product.category} />
               </div>
-              <ProductRelated productCategory={product.category} />
+              <VideoReview dataVideo={dataVideo} productName={product.name} />
             </div>
-            <VideoReview dataVideo={dataVideo} productName={product.name} />
           </div>
         </div>
-      </div>
+      </LayoutUser>
     )
   )
 }

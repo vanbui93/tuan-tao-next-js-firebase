@@ -11,10 +11,16 @@
     "lint": "yarn lint:es && yarn lint:style"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@firebase/database": "^0.13.4",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.0",
     "eslint-config-airbnb": "^19.0.4",
     "firebase": "^9.9.2",
     "html-react-parser": "^3.0.1",
