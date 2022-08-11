@@ -5,9 +5,11 @@ import Header from '../components/Header'
 import { getMain } from '../store/actions/main'
 import { useEffect } from 'react'
 import Footer from '../components/Footer'
-import '@fortawesome/fontawesome-svg-core/styles.css' // import Font Awesome CSS
 import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css' // import Font Awesome CSS
 config.autoAddCss = false
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone } from '@fortawesome/free-solid-svg-icons'
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch()
   const mainData = useSelector(state => state.main.data)
@@ -22,7 +24,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
         <div className='tel'>
           <a href={`tel:${mainData.phone}`} className='tel-call'>
-            <i className='fa fa-phone' aria-hidden='true'></i>
+            <FontAwesomeIcon icon={faPhone} style={{ fontSize: 25, color: '#fff' }} />
           </a>
         </div>
         <Footer footerData={mainData} />

@@ -38,14 +38,10 @@
         }
 
         &:first-child {
-            &::before {
-                font: var(--fa-font-solid);
-                content: '\f015';
-                color: var(--gray);
-            }
-
             >a {
-                padding-left: 10px;
+                .svg-inline--fa {
+                    padding-right: 10px;
+                }
             }
         }
 

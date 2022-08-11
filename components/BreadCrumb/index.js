@@ -1,3 +1,5 @@
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React from 'react'
 
@@ -25,7 +27,10 @@ export default function BreadCrumb(props) {
             category === val.category && (
               <li className='breadcrumb__item' key={idx}>
                 <Link href='/'>
-                  <a className='breadcrumb__link'>Trang chủ</a>
+                  <a className='breadcrumb__link'>
+                    <FontAwesomeIcon icon={faHouse} style={{ color: '#515154' }} />
+                    Trang chủ
+                  </a>
                 </Link>
                 <Link href={val.to}>
                   <a className='breadcrumb__link'>{val.label}</a>

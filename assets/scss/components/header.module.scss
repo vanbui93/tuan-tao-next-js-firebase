@@ -117,7 +117,16 @@
 
                 .call {
                     padding: 5px 0;
-                    display: inline-block;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .call-phone {
+                    display: block;
+                }
+
+                .call-text {
+                    display: block;
                 }
 
                 .hotline {
@@ -127,7 +136,7 @@
                 a {
                     color: #d2d2d7;
 
-                    .fa {
+                    .svg-inline--fa {
                         margin-right: 10px;
                         font-size: 25px;
                         vertical-align: middle;

@@ -6,6 +6,8 @@ import * as hamgugerActions from './../../store/actions/mobileMenu'
 import { db } from './../../utils/firebase'
 import MenuHamburger from './../MenuHamburger'
 import SearchResult from './../SearchResult'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone, faCreditCard, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
 export default function Header(props) {
   const { headerData } = props
@@ -112,15 +114,20 @@ export default function Header(props) {
                     <i className='fa fa-phone' aria-hidden='true' />
                   </span>
                   <span className='call'>
-                    {headerData?.phone_text}
-                    <span className='hotline'>{headerData.phone}</span>
+                    <span className='call-phone'>
+                      <FontAwesomeIcon icon={faPhone} style={{ fontSize: 25, color: '#d2d2d7' }} />
+                    </span>
+                    <span className='call-text'>
+                      <span>{headerData?.phone_text}</span>
+                      <span className='hotline'>{headerData.phone}</span>
+                    </span>
                   </span>
                 </a>
               </li>
               <li>
                 <Link href={`/page/${headerData.header_content?.header_link_01}`}>
                   <a>
-                    <i className='fa fa-credit-card' aria-hidden='true' />
+                    <FontAwesomeIcon icon={faCreditCard} style={{ fontSize: 25, color: '#d2d2d7' }} />
                     {headerData.header_content?.header_text_01}
                   </a>
                 </Link>
@@ -128,7 +135,7 @@ export default function Header(props) {
               <li>
                 <Link href={`/page/${headerData.header_content?.header_link_02}`}>
                   <a>
-                    <i className='fa fa-refresh' aria-hidden='true' />
+                    <FontAwesomeIcon icon={faArrowsRotate} style={{ fontSize: 25, color: '#d2d2d7' }} />
                     {headerData.header_content?.header_text_02}
                   </a>
                 </Link>
@@ -169,8 +176,8 @@ export default function Header(props) {
                 {Object.values(menus)?.map((menu, idx) => {
                   return (
                     <li className='menu__item' key={idx}>
-                      <Link href={`/${menu.link}`} className='menu__link'>
-                        <a> {menu.name}</a>
+                      <Link href={`/${menu.link}`}>
+                        <a className='menu__link'> {menu.name}</a>
                       </Link>
                     </li>
                   )
