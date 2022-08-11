@@ -46,12 +46,14 @@ export default function SearchResult(props) {
           const info = val[1] ? val[1] : ''
           return (
             <li className='search-result__item' key={index}>
-              <Link href={`/product/${link}`} className='search-result__link'>
-                {getThumbnail(info.images)}
-                <div className='search-result__info'>
-                  <span className='search-result__name'>{info.name}</span>
-                  <span className='search-result__price'>{info.price}</span>
-                </div>
+              <Link href={`/product/${link}`}>
+                <a className='search-result__link'>
+                  {getThumbnail(info.images)}
+                  <div className='search-result__info'>
+                    <span className='search-result__name'>{info.name}</span>
+                    <span className='search-result__price'>{info.price}</span>
+                  </div>
+                </a>
               </Link>
             </li>
           )
