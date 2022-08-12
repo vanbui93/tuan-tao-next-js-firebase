@@ -1,198 +1,96 @@
-import { Button, Fab, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, withStyles } from '@material-ui/core';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { Stack, TextField } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import { deleteWaranty, getWarantys, updateWaranty } from 'actions/warantys';
-import { AdminStyle, StyledTableCell, StyledTableRow } from 'Admin/AdminStyle';
-import DiaLogPopup from 'Admin/components/DiaLogPopup';
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import styles from "./styles";
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TextField,
+  withStyles,
+} from '@material-ui/core'
+import { Stack } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import nextId, { setPrefix } from 'react-id-generator'
+import { useDispatch, useSelector } from 'react-redux'
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
+import { addWarantyObject, getWarantys } from '../../../store/actions/warantys'
+import { AdminStyle } from '../AdminStyle'
+import styles from './styles'
 
-const AdminWaranty = (props) => {
-  const opensidebar = useSelector(state => state.ui.opensidebar);
-  const allWarantys = useSelector(state => state.warantys.data);
-  const dispatch = useDispatch();
+function WarantyAdd(props) {
+  const opensidebar = useSelector(state => state.ui.opensidebar)
 
-  //Thiết lập trạng thái DiaLog
-  const [dialog, setDialog] = useState({
-    message: '',
-    isOpenDiaLog: false,
-  });
+  const dispatch = useDispatch()
+  let router = useRouter()
+  const { classes } = props
 
-  const [isEdit, setIsEdit] = useState(false);
-  const [editWarantyObject, setEditWarantyObject] = useState({
-    waranty_text: ''
-  });
-
-  const arrayWaranty = [];
-  allWarantys !== null && allWarantys !== undefined && Object.keys(allWarantys)?.map((element) => {
-    const key = element;
-    if (allWarantys[key] !== null) {
-      const waranty_text = allWarantys[key].waranty_text ? allWarantys[key].waranty_text : '';
-      arrayWaranty.push({
-        id: key,
-        waranty_text: waranty_text
-      })
-    }
+  const [waranty, setWaranty] = useState({
+    waranty_text: '',
   })
 
-  useEffect(() => {
-    dispatch(getWarantys());
-  }, [dispatch]);
+  const handleEditOnchange = e => {
+    let name = e.target.name
+    let value = e.target.value
 
-  const { classes } = props;
-
-  const navigate = useNavigate();
-  //Thêm màu sản phẩm
-  const handleAddWaranty = () => {
-    navigate("/dashboard/waranty_add", { replace: true })
-  }
-
-  //Nội dung dialog
-  const handleDialog = (message, isOpenDiaLog) => {
-    setDialog({
-      message,
-      isOpenDiaLog,
-    })
-  }
-
-  const idWarantyRef = useRef();
-  const handleDelete = (id) => {
-    handleDialog('Bán có chắc chắn muốn xóa không ?', true);
-    idWarantyRef.current = id;
-  }
-
-  const handleEditWaranty = (waranty) => {
-    idWarantyRef.current = waranty.id;
-    setIsEdit(true);
-    setEditWarantyObject(waranty);
-  }
-
-  //Bạn có chắc chắn muốn xóa
-  const areUSureDelete = (status) => {
-    if (status) {
-      dispatch(deleteWaranty(idWarantyRef.current));
-      dispatch(getWarantys());
-      handleDialog('', false);
-    } else {
-      handleDialog('', false);
-    }
-  }
-
-  const handleEditOnchage = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    setEditWarantyObject(prevState => ({
+    setWaranty(prevState => ({
       ...prevState,
-      [name]: value
-    }));
+      [name]: value,
+    }))
+  }
+
+  setPrefix('')
+  const keyAdd = nextId()
+  const handleSaveWaranty = async () => {
+    try {
+      dispatch(addWarantyObject(waranty, Number(keyAdd)))
+      dispatch(getWarantys())
+      router.push('/dashboard/waranty')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const handleCancel = () => {
-    setIsEdit(false);
-  }
-
-  //Submit edit
-  const handleEditSubmit = async () => {
-    try {
-      dispatch(updateWaranty(editWarantyObject));
-      setIsEdit(false);
-      dispatch(getWarantys());
-    }
-    catch (err) {
-      console.log(err);
-    }
+    router.push('/dashboard/waranty')
   }
 
   return (
     <AdminStyle open={!opensidebar}>
-      {dialog.isOpenDiaLog && <DiaLogPopup onDialog={areUSureDelete} message={dialog.message} isOpenDiaLog={dialog.isOpenDiaLog} />}
-      {
-        !isEdit ?
-          <div>
-            <Grid style={{ paddingBottom: '20px' }}>
-              <Button variant="contained" color="primary"
-                onClick={handleAddWaranty}
-              >
-                <AddIcon />&nbsp;&nbsp;Thêm bảo hành
-              </Button>
-            </Grid>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell align="left">Nội dung bảo hành</StyledTableCell>
-                    <StyledTableCell align="right">SỬA</StyledTableCell>
-                    <StyledTableCell align="right">XÓA</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {
-                    arrayWaranty !== null && arrayWaranty !== undefined &&
-                    Object.values(arrayWaranty)?.map((item, idx) => (
-                      item &&
-                      <StyledTableRow key={idx}>
-                        <StyledTableCell align="left">{item.waranty_text}</StyledTableCell>
-                        <StyledTableCell align="right">
-                          <Fab size="small"
-                            color="primary"
-                              aria-label="add"
-                              onClick={() => handleEditWaranty(item)}
-                          >
-                            <EditIcon />
-                          </Fab>
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          <Fab size="small"
-                            color="primary"
-                            aria-label="add"
-                            onClick={() => handleDelete(item.id)}
-                          >
-                            <DeleteIcon />
-                          </Fab>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                    )
-                  }
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div> :
-          <Grid>
-            <TableContainer component={Paper}>
-              <Table>
-                {
-                  editWarantyObject !== null && editWarantyObject !== undefined &&
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className={classes.tbHeadLeft} variant="head">Nội dung</TableCell>
-                      <TableCell>
-                        <TextField
-                          id="outlined-size-small"
-                          size="small"
-                          fullWidth
-                          defaultValue={editWarantyObject.waranty_text}
-                          name="waranty_text"
-                          onChange={handleEditOnchage}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                }
-              </Table>
-            </TableContainer>
-            <Stack spacing={2} direction="row" style={{ paddingTop: '20px' }}>
-              <Button variant="contained" color="primary" onClick={handleCancel}>Hủy bỏ</Button>
-              <Button variant="contained" color="secondary" onClick={handleEditSubmit}>Lưu</Button>
-            </Stack>
-          </Grid>
-      }
+      <LayoutAdmin>
+        <TableContainer component={Paper}>
+          <Table>
+            {
+              <TableBody>
+                <TableRow>
+                  <TableCell className={classes.tbHeadLeft} variant='head'>
+                    Nội dung bảo hành
+                  </TableCell>
+                  <TableCell>
+                    <TextField
+                      id='outlined-size-small'
+                      size='small'
+                      fullWidth
+                      name='waranty_text'
+                      onChange={handleEditOnchange}
+                    />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            }
+          </Table>
+        </TableContainer>
+        <Stack spacing={2} direction='row' style={{ paddingTop: '20px' }}>
+          <Button variant='contained' color='primary' onClick={handleCancel}>
+            Hủy bỏ
+          </Button>
+          <Button variant='contained' color='secondary' onClick={handleSaveWaranty}>
+            Lưu
+          </Button>
+        </Stack>
+      </LayoutAdmin>
     </AdminStyle>
-  );
+  )
 }
-export default withStyles(styles)(AdminWaranty)
+export default withStyles(styles)(WarantyAdd)

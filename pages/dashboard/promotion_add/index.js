@@ -1,201 +1,96 @@
-import { Button, Fab, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, withStyles } from '@material-ui/core';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { Stack, TextField } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import { deletePromotion, getPromotions, updatePromotion } from 'actions/promotions';
-import { AdminStyle, StyledTableCell, StyledTableRow } from 'Admin/AdminStyle';
-import DiaLogPopup from 'Admin/components/DiaLogPopup';
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import styles from "./styles";
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TextField,
+  withStyles,
+} from '@material-ui/core'
+import { Stack } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import nextId, { setPrefix } from 'react-id-generator'
+import { useDispatch, useSelector } from 'react-redux'
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
+import { addPromotionObject, getPromotions } from '../../../store/actions/promotions'
+import { AdminStyle } from '../AdminStyle'
+import styles from './styles'
 
-const AdminPromotion = (props) => {
-  const opensidebar = useSelector(state => state.ui.opensidebar);
-  const allPromotions = useSelector(state => state.promotions.data);
-  const dispatch = useDispatch();
+function PromotionAdd(props) {
+  const opensidebar = useSelector(state => state.ui.opensidebar)
 
-  //Thiết lập trạng thái DiaLog
-  const [dialog, setDialog] = useState({
-    message: '',
-    isOpenDiaLog: false,
-  });
+  const dispatch = useDispatch()
+  let router = useRouter()
+  const { classes } = props
 
-  const [isEdit, setIsEdit] = useState(false);
-  const [editPromotionObject, setEditPromotionObject] = useState({
-    promotion_text: ''
-  });
-
-  const arrayPromotion = [];
-  allPromotions !== null && allPromotions !== undefined && Object.keys(allPromotions)?.map((element) => {
-    const key = element;
-    if (allPromotions[key] !== null) {
-      const promotion_text = allPromotions[key].promotion_text ? allPromotions[key].promotion_text : '';
-      arrayPromotion.push({
-        id: key,
-        promotion_text: promotion_text
-      })
-    }
+  const [promotion, setPromotion] = useState({
+    promotion_text: '',
   })
 
-  useEffect(() => {
-    dispatch(getPromotions());
-  }, [dispatch]);
+  const handleEditOnchange = e => {
+    let name = e.target.name
+    let value = e.target.value
 
-  const { classes } = props;
-
-  const navigate = useNavigate();
-  //Thêm màu sản phẩm
-  const handleAddPromotion = () => {
-    navigate("/dashboard/promotion_add", { replace: true })
-  }
-
-  //Nội dung dialog
-  const handleDialog = (message, isOpenDiaLog) => {
-    setDialog({
-      message,
-      isOpenDiaLog,
-    })
-  }
-
-  const idPromotionRef = useRef();
-  const handleDelete = (id) => {
-    handleDialog('Bán có chắc chắn muốn xóa không ?', true);
-    idPromotionRef.current = id;
-  }
-
-  const handleEditPromotion = (promotion) => {
-    idPromotionRef.current = promotion.id;
-    setIsEdit(true);
-    setEditPromotionObject(promotion);
-  }
-
-  //Bạn có chắc chắn muốn xóa
-  const areUSureDelete = (status) => {
-    if (status) {
-      dispatch(deletePromotion(idPromotionRef.current));
-      dispatch(getPromotions());
-      handleDialog('', false);
-    } else {
-      handleDialog('', false);
-    }
-  }
-
-  const handleEditOnchage = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    setEditPromotionObject(prevState => ({
+    setPromotion(prevState => ({
       ...prevState,
-      [name]: value
-    }));
+      [name]: value,
+    }))
+  }
+
+  setPrefix('')
+  const keyAdd = nextId()
+  const handleSavePromotion = async () => {
+    try {
+      dispatch(addPromotionObject(promotion, Number(keyAdd)))
+      dispatch(getPromotions())
+      router.push('/dashboard/promotion')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const handleCancel = () => {
-    setIsEdit(false);
-  }
-
-  //Submit edit
-  const handleEditSubmit = async () => {
-    try {
-      dispatch(updatePromotion(editPromotionObject));
-      setIsEdit(false);
-      dispatch(getPromotions());
-    }
-    catch (err) {
-      console.log(err);
-    }
+    router.push('/dashboard/promotion')
   }
 
   return (
     <AdminStyle open={!opensidebar}>
-      {dialog.isOpenDiaLog && <DiaLogPopup onDialog={areUSureDelete} message={dialog.message} isOpenDiaLog={dialog.isOpenDiaLog} />}
-      {
-        !isEdit ?
-          <div>
-            <Grid style={{ paddingBottom: '20px' }}>
-              <Button variant="contained" color="primary"
-                onClick={handleAddPromotion}
-              >
-                <AddIcon />&nbsp;&nbsp;Thêm khuyến mãi
-              </Button>
-            </Grid>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell align="left">Nội dung khuyến mãi</StyledTableCell>
-                    <StyledTableCell align="right">SỬA</StyledTableCell>
-                    <StyledTableCell align="right">XÓA</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {
-                    arrayPromotion !== null && arrayPromotion !== undefined &&
-                    Object.values(arrayPromotion)?.map((item, idx) => {
-                      if (item !== null && item !== undefined) {
-                        return (
-                          <StyledTableRow key={idx}>
-                            <StyledTableCell align="left">{item.promotion_text}</StyledTableCell>
-                            <StyledTableCell align="right">
-                              <Fab size="small"
-                                color="primary"
-                                aria-label="add"
-                                onClick={() => handleEditPromotion(item)}
-                              >
-                                <EditIcon />
-                              </Fab>
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
-                              <Fab size="small"
-                                color="primary"
-                                aria-label="add"
-                                onClick={() => handleDelete(item.id)}
-                              >
-                                <DeleteIcon />
-                              </Fab>
-                            </StyledTableCell>
-                          </StyledTableRow>
-                        )
-                      }
-                    }
-                    )
-                  }
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div> :
-          <Grid>
-            <TableContainer component={Paper}>
-              <Table>
-                {
-                  editPromotionObject !== null && editPromotionObject !== undefined &&
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className={classes.tbHeadLeft} variant="head">Nội dung</TableCell>
-                      <TableCell>
-                        <TextField
-                          id="outlined-size-small"
-                          size="small"
-                          fullWidth
-                          defaultValue={editPromotionObject.promotion_text}
-                          name="promotion_text"
-                          onChange={handleEditOnchage}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                }
-              </Table>
-            </TableContainer>
-            <Stack spacing={2} direction="row" style={{ paddingTop: '20px' }}>
-              <Button variant="contained" color="primary" onClick={handleCancel}>Hủy bỏ</Button>
-              <Button variant="contained" color="secondary" onClick={handleEditSubmit}>Lưu</Button>
-            </Stack>
-          </Grid>
-      }
+      <LayoutAdmin>
+        <TableContainer component={Paper}>
+          <Table>
+            {
+              <TableBody>
+                <TableRow>
+                  <TableCell className={classes.tbHeadLeft} variant='head'>
+                    Nội dung khuyến mãi
+                  </TableCell>
+                  <TableCell>
+                    <TextField
+                      id='outlined-size-small'
+                      size='small'
+                      fullWidth
+                      name='promotion_text'
+                      onChange={handleEditOnchange}
+                    />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            }
+          </Table>
+        </TableContainer>
+        <Stack spacing={2} direction='row' style={{ paddingTop: '20px' }}>
+          <Button variant='contained' color='primary' onClick={handleCancel}>
+            Hủy bỏ
+          </Button>
+          <Button variant='contained' color='secondary' onClick={handleSavePromotion}>
+            Lưu
+          </Button>
+        </Stack>
+      </LayoutAdmin>
     </AdminStyle>
-  );
+  )
 }
-export default withStyles(styles)(AdminPromotion)
+export default withStyles(styles)(PromotionAdd)

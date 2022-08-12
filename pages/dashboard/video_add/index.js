@@ -11,33 +11,32 @@ import {
   withStyles,
 } from '@material-ui/core'
 import { Stack } from '@mui/material'
-import { addColorObject, getColors } from '../../../store/actions/colors'
-import { AdminStyle } from '../AdminStyle'
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import nextId, { setPrefix } from 'react-id-generator'
-import styles from './styles'
+import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
+import { addVideoObject, getVideo } from '../../../store/actions/videos'
+import { AdminStyle } from '../AdminStyle'
+import styles from './styles'
 
-function ColorAdd(props) {
+function VideoAdd(props) {
   const opensidebar = useSelector(state => state.ui.opensidebar)
 
   const dispatch = useDispatch()
   let router = useRouter()
   const { classes } = props
 
-  const [color, setColor] = useState({
-    color_name: '',
-    data_color: '',
+  const [video, setVideo] = useState({
+    video_text: '',
+    video_link: '',
   })
 
   const handleEditOnchange = e => {
     let name = e.target.name
     let value = e.target.value
 
-    setColor(prevState => ({
+    setVideo(prevState => ({
       ...prevState,
       [name]: value,
     }))
@@ -45,25 +44,25 @@ function ColorAdd(props) {
 
   setPrefix('')
   const keyAdd = nextId()
-  const handleSaveColor = async () => {
+  const handleSaveVideo = async () => {
     try {
-      dispatch(addColorObject(color, Number(keyAdd)))
-      dispatch(getColors())
-      router.push('/dashboard/color')
+      dispatch(addVideoObject(video, Number(keyAdd)))
+      dispatch(getVideo())
+      router.push('/dashboard/video', { replace: true })
     } catch (err) {
       console.log(err)
     }
   }
 
   const handleCancel = () => {
-    router.push('/dashboard/color')
+    router.push('/dashboard/video', { replace: true })
   }
 
   return (
     <AdminStyle open={!opensidebar}>
       <LayoutAdmin>
         <Grid style={{ paddingBottom: '20px' }}>
-          <img src={'/assets/img/ma_mau.png'} alt='' />
+          <img src={'/assets/img/youtube_img.png'} alt='' />
         </Grid>
         <Grid>
           <TableContainer component={Paper}>
@@ -72,28 +71,28 @@ function ColorAdd(props) {
                 <TableBody>
                   <TableRow>
                     <TableCell className={classes.tbHeadLeft} variant='head'>
-                      Tên màu
+                      Link video
                     </TableCell>
                     <TableCell>
                       <TextField
                         id='outlined-size-small'
                         size='small'
                         fullWidth
-                        name='color_name'
+                        name='video_link'
                         onChange={handleEditOnchange}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className={classes.tbHeadLeft} variant='head'>
-                      Mã màu
+                      Nội dung video
                     </TableCell>
                     <TableCell>
                       <TextField
                         id='outlined-size-small'
                         size='small'
                         fullWidth
-                        name='data_color'
+                        name='video_text'
                         onChange={handleEditOnchange}
                       />
                     </TableCell>
@@ -106,7 +105,7 @@ function ColorAdd(props) {
             <Button variant='contained' color='primary' onClick={handleCancel}>
               Hủy bỏ
             </Button>
-            <Button variant='contained' color='secondary' onClick={handleSaveColor}>
+            <Button variant='contained' color='secondary' onClick={handleSaveVideo}>
               Lưu
             </Button>
           </Stack>
@@ -115,5 +114,4 @@ function ColorAdd(props) {
     </AdminStyle>
   )
 }
-
-export default withStyles(styles)(ColorAdd)
+export default withStyles(styles)(VideoAdd)
