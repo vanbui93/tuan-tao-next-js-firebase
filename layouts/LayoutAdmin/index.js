@@ -1,15 +1,24 @@
+import { ServerStyleSheets } from '@material-ui/core/styles'
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import HeaderAdmin from '../../admin_components/HeaderAdmin'
 import Sidebar from '../../admin_components/Sidebar'
 import { getMain } from '../../store/actions/main'
 import * as uiActions from './../../store/actions/ui'
-import { ServerStyleSheets } from '@material-ui/core/styles'
 
 function LayoutAdmin({ children }) {
+  const router = useRouter()
   const dispatch = useDispatch()
   const mainData = useSelector(state => state.main.data)
   const opensidebar = useSelector(state => state.ui.opensidebar)
+
+  useEffect(() => {
+    if (!sessionStorage.getItem('user')) {
+      router.push('/login')
+    }
+  }, [])
+
   useEffect(() => {
     dispatch(getMain())
   }, [])
