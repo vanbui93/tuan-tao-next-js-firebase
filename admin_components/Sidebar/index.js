@@ -37,7 +37,7 @@ function Sidebar(props) {
       name: 'Tài khoản',
     },
     {
-      path: '/dashboard/slide',
+      path: '/dashboard/home_slide',
       name: 'Hình slide trang chủ',
     },
     {
