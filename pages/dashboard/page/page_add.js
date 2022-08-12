@@ -1,6 +1,5 @@
 import {
   Button,
-  Grid,
   Paper,
   Table,
   TableBody,
@@ -11,17 +10,19 @@ import {
   withStyles,
 } from '@material-ui/core'
 import { Stack } from '@mui/material'
-import { addPageObject, getPageDetail } from './../../../store/actions/page'
 import Editor from 'material-ui-editor'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import nextId, { setPrefix } from 'react-id-generator'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
+import { addPageObject, getPageDetail } from './../../../store/actions/page'
 import { AdminStyle } from './../AdminStyle'
 import styles from './styles'
 
 const PageAdd = props => {
   const opensidebar = useSelector(state => state.ui.opensidebar)
+  const router = useRouter()
 
   const dispatch = useDispatch()
   const { classes } = props

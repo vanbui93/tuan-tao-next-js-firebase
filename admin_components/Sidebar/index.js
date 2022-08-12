@@ -25,16 +25,8 @@ function Sidebar(props) {
       name: 'Page',
     },
     {
-      path: '/dashboard/page_add',
-      name: 'Page Add',
-    },
-    {
       path: '/dashboard/product',
       name: 'Sản phẩm',
-    },
-    {
-      path: '/dashboard/product_add',
-      name: 'Thêm Sản phẩm',
     },
     {
       path: '/dashboard/menu',
@@ -49,64 +41,32 @@ function Sidebar(props) {
       name: 'Tài khoản',
     },
     {
-      path: '/dashboard/user_add',
-      name: 'Tạo tài khoản',
-    },
-    {
       path: '/dashboard/slide',
       name: 'Hình slide trang chủ',
-    },
-    {
-      path: '/dashboard/slide_add',
-      name: 'Thêm hình slide trang chủ',
     },
     {
       path: '/dashboard/comment',
       name: 'Nhận xét khách hàng',
     },
     {
-      path: '/dashboard/comment_add',
-      name: 'Thêm nhận xét khách hàng',
-    },
-    {
       path: '/dashboard/color',
       name: 'Màu Sản phẩm',
-    },
-    {
-      path: '/dashboard/color_add',
-      name: 'Thêm màu sắc',
     },
     {
       path: '/dashboard/sku',
       name: 'Dung lượng',
     },
     {
-      path: '/dashboard/sku_add',
-      name: 'Thêm dung lượng',
-    },
-    {
       path: '/dashboard/video',
       name: 'Video',
-    },
-    {
-      path: '/dashboard/video_add',
-      name: 'Thêm video',
     },
     {
       path: '/dashboard/waranty',
       name: 'Bảo hành',
     },
     {
-      path: '/dashboard/waranty_add',
-      name: 'Thêm bảo hành',
-    },
-    {
       path: '/dashboard/promotion',
       name: 'Khuyến mãi',
-    },
-    {
-      path: '/dashboard/promotion_add',
-      name: 'Thêm khuyến mãi',
     },
   ]
 
