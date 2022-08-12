@@ -64,7 +64,7 @@ const AdminSku = props => {
     return () => {
       dispatch(getSkus())
     }
-  }, [dispatch])
+  }, [])
 
   //Thêm tài khoản mới
   const handleAddAccount = () => {

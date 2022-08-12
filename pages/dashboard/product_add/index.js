@@ -61,29 +61,29 @@ const ProductAdd = props => {
 
   useEffect(() => {
     dispatch(getSkus())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getColors())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getVideo())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getWarantys())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getPromotions())
-  }, [dispatch])
+  }, [])
 
   const [imgsSrc, setImgsSrc] = useState([])
 
   useEffect(() => {
     dispatch(getProduct())
-  }, [dispatch]) //Load lại trang sau khi add, uporderByChild, delete thành công
+  }, []) //Load lại trang sau khi add, uporderByChild, delete thành công
 
   const arrayProduct = []
   // eslint-disable-next-line array-callback-return

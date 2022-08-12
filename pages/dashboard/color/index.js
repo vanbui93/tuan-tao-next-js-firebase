@@ -64,7 +64,7 @@ const AdminColors = props => {
     return () => {
       dispatch(getColors())
     }
-  }, [dispatch])
+  }, [])
 
   //Thêm tài khoản mới
   const handleAddAccount = () => {

@@ -57,7 +57,7 @@ const AdminPromotion = props => {
 
   useEffect(() => {
     dispatch(getPromotions())
-  }, [dispatch])
+  }, [])
 
   const { classes } = props
   //Thêm màu sản phẩm

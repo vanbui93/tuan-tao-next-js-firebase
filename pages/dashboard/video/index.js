@@ -60,7 +60,7 @@ const AdminColor = props => {
 
   useEffect(() => {
     dispatch(getVideo())
-  }, [dispatch])
+  }, [])
 
   const { classes } = props
   //Thêm màu sản phẩm

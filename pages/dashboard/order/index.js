@@ -48,7 +48,7 @@ const AdminOrder = props => {
 
   useEffect(() => {
     dispatch(getPromotions())
-  }, [dispatch])
+  }, [])
 
   const [isView, setIsView] = useState(false)
   const [isEdit, setIsEdit] = useState(false)

@@ -14,7 +14,7 @@ const HomeProduct = props => {
 
   useEffect(() => {
     dispatch(getPromotions())
-  }, [dispatch])
+  }, [])
 
   let data = { ...products }
 

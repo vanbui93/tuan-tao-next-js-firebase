@@ -64,7 +64,7 @@ const AdminMenus = props => {
     return () => {
       dispatch(getMenu())
     }
-  }, [dispatch])
+  }, [])
 
   //Thêm tài khoản mới
   const handleAddAccount = () => {

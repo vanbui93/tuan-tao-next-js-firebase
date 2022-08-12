@@ -84,7 +84,7 @@ const AdminPage = props => {
     return () => {
       dispatch(getPageDetail())
     }
-  }, [dispatch])
+  }, [])
 
   //Thêm tài khoản mới
   const handleAddAccount = () => {

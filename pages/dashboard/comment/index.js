@@ -71,7 +71,7 @@ const AdminCmts = props => {
     return () => {
       dispatch(getComments())
     }
-  }, [dispatch])
+  }, [])
 
   //Thêm tài khoản mới
   const handleAddAccount = () => {

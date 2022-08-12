@@ -67,7 +67,7 @@ const AdminUsers = props => {
     return () => {
       dispatch(getUser())
     }
-  }, [dispatch])
+  }, [])
 
   //Thêm tài khoản mới
   const handleAddAccount = () => {

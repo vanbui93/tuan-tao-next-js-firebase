@@ -60,7 +60,7 @@ const AdminSlide = props => {
 
   useEffect(() => {
     dispatch(getSlides())
-  }, [dispatch])
+  }, [])
 
   const { classes } = props
 

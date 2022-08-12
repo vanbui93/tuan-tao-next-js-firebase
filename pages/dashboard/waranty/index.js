@@ -57,7 +57,7 @@ const AdminWaranty = props => {
 
   useEffect(() => {
     dispatch(getWarantys())
-  }, [dispatch])
+  }, [])
 
   const { classes } = props
   //Thêm màu sản phẩm

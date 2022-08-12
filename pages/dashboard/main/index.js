@@ -14,7 +14,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Stack } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { getMain, updateMain } from '../../../store/actions/main'
 import { AdminStyle } from '../AdminStyle'
@@ -22,6 +22,7 @@ import styles from './styles'
 
 const Main = props => {
   const { classes } = props
+  const dispatch = useDispatch()
   const mainData = useSelector(state => state.main.data)
   const opensidebar = useSelector(state => state.ui.opensidebar)
   const [isEditMain, setIsEditMain] = useState(false)

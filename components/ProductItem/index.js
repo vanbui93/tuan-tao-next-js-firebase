@@ -12,7 +12,7 @@ export default function ProductItem(props) {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getPromotions())
-  }, [dispatch])
+  }, [])
 
   const img = []
   images !== null &&
