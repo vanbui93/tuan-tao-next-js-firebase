@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/styles'
 import { AccountCircle } from '@mui/icons-material'
 import MenuIcon from '@mui/icons-material/Menu'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { Router } from 'next/router'
 import PropTypes from 'prop-types'
 import * as React from 'react'
@@ -50,8 +51,10 @@ function HeaderAdmin(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography className={classes.title} variant='h6' noWrap>
-              {name}Admin
+            <Typography variant='h6' noWrap>
+              <Link href={'/dashboard/main'}>
+                <a className={classes.title}>Admin</a>
+              </Link>
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>

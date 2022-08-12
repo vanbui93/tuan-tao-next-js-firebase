@@ -5,6 +5,9 @@ const styles = theme => ({
   sectionDesktop: {
     display: 'flex',
   },
+  title: {
+    color: '#fff',
+  },
 })
 
-export default styles;
+export default styles
