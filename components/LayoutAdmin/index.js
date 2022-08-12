@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import HeaderAdmin from '../../admin_components/HeaderAdmin'
 import Sidebar from '../../admin_components/Sidebar'
 import { getMain } from '../../store/actions/main'
+import * as uiActions from './../../store/actions/ui'
+import { ServerStyleSheets } from '@material-ui/core/styles'
 
 function LayoutAdmin({ children }) {
   const dispatch = useDispatch()
@@ -24,15 +26,33 @@ function LayoutAdmin({ children }) {
 
   return (
     <div className='layout2'>
-      <HeaderAdmin headerData={mainData} />
+      <HeaderAdmin headerData={mainData} openSidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
       <div className='wrap-admin'>
         {children}
         <div className='sidebar-wrapper'>
-          <Sidebar opensidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
+          <Sidebar openSidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
         </div>
       </div>
     </div>
   )
 }
 
-export default dynamic(() => Promise.resolve(LayoutAdmin), { ssr: false })
+export default LayoutAdmin
+
+LayoutAdmin.getInitialProps = async ctx => {
+  const sheets = new ServerStyleSheets()
+  const originalRenderPage = ctx.renderPage
+
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: App => props => sheets.collect(<App {...props} />),
+    })
+
+  const initialProps = await Document.getInitialProps(ctx)
+
+  return {
+    ...initialProps,
+    // Styles fragment is rendered after the app and page rendering finish.
+    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
+  }
+}

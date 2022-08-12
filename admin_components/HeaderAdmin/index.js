@@ -16,10 +16,10 @@ function HeaderAdmin(props) {
   const [auth, setAuth] = React.useState(true)
   const [anchorEl, setAnchorEl] = React.useState(null)
 
-  const { openSidebar } = props
+  const { openSidebar, onToggleSidebar } = props
 
-  const { onToggleSidebar } = props
   const handleToggleSidebar = () => {
+    console.log(openSidebar)
     if (onToggleSidebar) {
       onToggleSidebar(!openSidebar)
     }

@@ -1,6 +1,7 @@
 import {
   Button,
   Grid,
+  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -12,20 +13,20 @@ import {
 } from '@material-ui/core'
 import EditIcon from '@mui/icons-material/Edit'
 import { Stack } from '@mui/material'
+import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
 import LayoutAdmin from '../../../components/LayoutAdmin'
 import { getMain, updateMain } from '../../../store/actions/main'
-import styles from './styles'
 import { AdminStyle } from '../AdminStyle'
-import dynamic from 'next/dynamic'
+import styles from './styles'
 
 const Main = props => {
   const { classes } = props
   const mainData = useSelector(state => state.main.data)
   const opensidebar = useSelector(state => state.ui.opensidebar)
   const [isEditMain, setIsEditMain] = useState(false)
-  const dispatch = useDispatch()
 
   const [editMain, setEditMain] = useState({
     logo_img: '',
@@ -253,8 +254,8 @@ const Main = props => {
   }
 
   return (
-    <LayoutAdmin>
-      <AdminStyle open={!opensidebar}>
+    <AdminStyle open={!opensidebar}>
+      <LayoutAdmin>
         {!isEditMain ? (
           <div>
             <Grid style={{ paddingBottom: '20px' }}>
@@ -892,8 +893,8 @@ const Main = props => {
             </Stack>
           </Grid>
         )}
-      </AdminStyle>
-    </LayoutAdmin>
+      </LayoutAdmin>
+    </AdminStyle>
   )
 }
 export default dynamic(() => Promise.resolve(withStyles(styles)(Main)), { ssr: false })

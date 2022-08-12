@@ -69,7 +69,6 @@ img {
 }
 
 .wrap-admin {
-  display: flex;
   flex-direction: row-reverse;
   margin-top: 64px;
 }

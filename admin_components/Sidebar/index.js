@@ -132,10 +132,10 @@ function Sidebar(props) {
     return xhtml
   }
 
-  const { classes, opensidebar } = props
+  const { classes, openSidebar } = props
   return (
     <Drawer
-      open={opensidebar}
+      open={openSidebar}
       onClose={() => this.toggleDrawer(false)}
       variant='persistent'
       anchor='left'
