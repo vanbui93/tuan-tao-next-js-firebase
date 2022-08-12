@@ -1,4 +1,5 @@
 import { onValue, ref } from 'firebase/database'
+import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import LayoutUser from '../../layouts/LayoutUser'
 import { db } from '../../utils/firebase'
@@ -43,13 +44,20 @@ export default function Iphone() {
   }
 
   return (
-    <LayoutUser>
-      <div className='collections'>
-        <div className='container'>
-          <h2 className='collection__title'>iPhone</h2>
-          <ul className='collections__list'>{getDulieu(1)}</ul>
+    <div>
+      <Head>
+        <title>iPhone</title>
+        <meta name='description' content='Tuấn táo apple - iPhone' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <LayoutUser>
+        <div className='collections'>
+          <div className='container'>
+            <h2 className='collection__title'>iPhone</h2>
+            <ul className='collections__list'>{getDulieu(1)}</ul>
+          </div>
         </div>
-      </div>
-    </LayoutUser>
+      </LayoutUser>
+    </div>
   )
 }

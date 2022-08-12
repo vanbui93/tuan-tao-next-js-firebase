@@ -5,7 +5,7 @@ function Home() {
   return (
     <div>
       <Head>
-        <title>Tuấn táo</title>
+        <title>Tuấn táo Apple</title>
         <meta name='description' content='Tuấn táo apple - Điện thoại iphone chính hãng' />
         <link rel='icon' href='/favicon.ico' />
       </Head>

@@ -1,4 +1,5 @@
 import parse from 'html-react-parser'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,14 +21,21 @@ export default function PagesContent() {
 
   return (
     currentPage?.isDisplay === '1' && (
-      <LayoutUser>
-        <div className='post'>
-          <div className='container'>
-            <h2>{currentPage?.name}</h2>
-            <div>{parse(currentPage?.content)}</div>
+      <div>
+        <Head>
+          <title>{currentPage?.name}</title>
+          <meta name='description' content={`Tuấn táo apple - ${currentPage?.name}`} />
+          <link rel='icon' href='/favicon.ico' />
+        </Head>
+        <LayoutUser>
+          <div className='post'>
+            <div className='container'>
+              <h2>{currentPage?.name}</h2>
+              <div>{parse(currentPage?.content)}</div>
+            </div>
           </div>
-        </div>
-      </LayoutUser>
+        </LayoutUser>
+      </div>
     )
   )
 }

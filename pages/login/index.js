@@ -2,6 +2,7 @@ import { onValue, ref } from '@firebase/database'
 import { Box, Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
@@ -80,74 +81,81 @@ function Login(props) {
   }
 
   return (
-    <LayoutLogin>
-      <div className={classes.background}>
-        {!userStorage ? (
-          <div className={classes.login}>
-            <Card>
-              <CardContent>
-                <form onSubmit={handleLogin}>
-                  <div className='text-xs-center pb-xs'>
-                    <Typography variant='caption' className={classes.title} color='textSecondary' gutterBottom>
-                      Đăng nhập để tiếp tục
-                    </Typography>
-                    <TextField
-                      id='username'
-                      label='Tên đăng nhập'
-                      className={classes.textField}
-                      fullWidth
-                      name='uname'
-                      margin='normal'
-                      required
-                    />
-                    {renderErrorMessage('uname')}
-                    <TextField
-                      id='password'
-                      label='Mật khẩu'
-                      className={classes.textField}
-                      fullWidth
-                      type='password'
-                      name='pass'
-                      margin='normal'
-                      required
-                    />
-                    {renderErrorMessage('pass')}
-                    <Button variant='contained' color='primary' fullWidth type='submit'>
-                      Login
-                    </Button>
-                  </div>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        ) : (
-          <div className={classes.login}>
-            <Card>
-              <CardContent>
-                <Typography variant='caption' className={classes.title} color='textSecondary' gutterBottom>
-                  Bạn đã đăng nhập
-                </Typography>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  fullWidth
-                  type='submit'
-                  onClick={handleLogout}
-                  style={{ marginBottom: '10px' }}
-                >
-                  Đăng xuất
-                </Button>
-                <Box sx={{ mt: 1 }}>
-                  <Button variant='contained' color='primary' fullWidth type='submit' onClick={redirectAdmin}>
-                    Trang quản trị
+    <div>
+      <Head>
+        <title>Đăng nhập</title>
+        <meta name='description' content='Tuấn táo apple - Đăng nhập' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <LayoutLogin>
+        <div className={classes.background}>
+          {!userStorage ? (
+            <div className={classes.login}>
+              <Card>
+                <CardContent>
+                  <form onSubmit={handleLogin}>
+                    <div className='text-xs-center pb-xs'>
+                      <Typography variant='caption' className={classes.title} color='textSecondary' gutterBottom>
+                        Đăng nhập để tiếp tục
+                      </Typography>
+                      <TextField
+                        id='username'
+                        label='Tên đăng nhập'
+                        className={classes.textField}
+                        fullWidth
+                        name='uname'
+                        margin='normal'
+                        required
+                      />
+                      {renderErrorMessage('uname')}
+                      <TextField
+                        id='password'
+                        label='Mật khẩu'
+                        className={classes.textField}
+                        fullWidth
+                        type='password'
+                        name='pass'
+                        margin='normal'
+                        required
+                      />
+                      {renderErrorMessage('pass')}
+                      <Button variant='contained' color='primary' fullWidth type='submit'>
+                        Login
+                      </Button>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          ) : (
+            <div className={classes.login}>
+              <Card>
+                <CardContent>
+                  <Typography variant='caption' className={classes.title} color='textSecondary' gutterBottom>
+                    Bạn đã đăng nhập
+                  </Typography>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    fullWidth
+                    type='submit'
+                    onClick={handleLogout}
+                    style={{ marginBottom: '10px' }}
+                  >
+                    Đăng xuất
                   </Button>
-                </Box>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-      </div>
-    </LayoutLogin>
+                  <Box sx={{ mt: 1 }}>
+                    <Button variant='contained' color='primary' fullWidth type='submit' onClick={redirectAdmin}>
+                      Trang quản trị
+                    </Button>
+                  </Box>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </div>
+      </LayoutLogin>
+    </div>
   )
 }
 

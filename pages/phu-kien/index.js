@@ -1,4 +1,5 @@
 import { onValue, ref } from 'firebase/database'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import LayoutUser from '../../layouts/LayoutUser'
 import { db } from '../../utils/firebase'
@@ -43,13 +44,20 @@ export default function Accessories() {
   }
 
   return (
-    <LayoutUser>
-      <div className='collections'>
-        <div className='container'>
-          <h2 className='collection__title'>Phụ kiện điện thoại</h2>
-          <ul className='collections__list'>{getDulieu(2)}</ul>
+    <div>
+      <Head>
+        <title>Phụ kiện điện thoại</title>
+        <meta name='description' content='Tuấn táo apple - Phụ kiện điện thoại' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <LayoutUser>
+        <div className='collections'>
+          <div className='container'>
+            <h2 className='collection__title'>Phụ kiện điện thoại</h2>
+            <ul className='collections__list'>{getDulieu(2)}</ul>
+          </div>
         </div>
-      </div>
-    </LayoutUser>
+      </LayoutUser>
+    </div>
   )
 }
