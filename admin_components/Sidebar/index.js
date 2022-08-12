@@ -2,14 +2,15 @@ import { ListItem } from '@material-ui/core'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import { withStyles } from '@material-ui/styles'
-import Link from 'next/link'
-import { PropTypes } from 'prop-types'
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import styles from './styles'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { PropTypes } from 'prop-types'
+import styles from './styles'
 
 function Sidebar(props) {
+  const router = useRouter()
+
   const ADMIN_ROUTES = [
     {
       path: '/dashboard/main',
@@ -118,7 +119,7 @@ function Sidebar(props) {
           {ADMIN_ROUTES?.map((item, index) => {
             return (
               <Link key={index} href={item.path}>
-                <a className={({ isActive }) => `${classes.menuLink} ${isActive ? classes.menuLinkActive : ''}`}>
+                <a className={router.pathname == `${item.path}` ? `${classes.menuLink} ${classes.menuLinkActive}` : ''}>
                   <ListItem key={index} className={classes.menuItem} button>
                     {item.name}
                   </ListItem>
@@ -154,4 +155,4 @@ Sidebar.propTypes = {
   opensidebar: PropTypes.bool,
   onToggleSidebar: PropTypes.func,
 }
-export default dynamic(() => Promise.resolve(withStyles(styles)(Sidebar)), { ssr: false })
+export default dynamic(() => Promise.resolve(withStyles(styles)(Sidebar)), { ssr: true })

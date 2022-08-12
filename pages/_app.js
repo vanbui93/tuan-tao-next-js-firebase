@@ -8,6 +8,7 @@ import LayoutUser from '../layouts/LayoutUser'
 import LayoutAdmin from '../layouts/LayoutAdmin'
 import { ThemeProvider } from 'styled-components'
 import { createTheme } from '@material-ui/core'
+import { useEffect, useState } from 'react'
 function MyApp({ Component, pageProps }) {
   let theme = createTheme({
     zIndex: {
@@ -22,15 +23,28 @@ function MyApp({ Component, pageProps }) {
   }
   const Layout = layouts[Component.layout] || (children => <>{children}</>)
 
-  return (
-    <>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </Provider>
-    </>
-  )
+  const [showChild, setShowChild] = useState(false)
+
+  useEffect(() => {
+    setShowChild(true)
+  }, [])
+
+  if (!showChild) {
+    return null
+  }
+  if (typeof window === 'undefined') {
+    return <></>
+  } else {
+    return (
+      <>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </Provider>
+      </>
+    )
+  }
 }
 
 export default wrapper.withRedux(MyApp)

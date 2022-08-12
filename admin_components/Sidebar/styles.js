@@ -1,5 +1,5 @@
-const drawerWidth = 240;
-const styles = (theme) => ({
+const drawerWidth = 240
+const styles = theme => ({
   wrapadmin: {
     top: '64px',
     width: drawerWidth,
@@ -9,17 +9,14 @@ const styles = (theme) => ({
       boxSizing: 'border-box',
     },
   },
-  menuLink: {
-    textDecoration: 'none',
-  },
   menuLinkActive: {
-    "&>div": {
+    '&>div': {
       backgroundColor: '#4287f5',
       color: '#ffffff',
-      "&:hover": {
+      '&:hover': {
         backgroundColor: '#6e98dc',
-      }
+      },
     },
-  }
-});
-export default styles;
+  },
+})
+export default styles
