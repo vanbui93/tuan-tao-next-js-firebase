@@ -8,7 +8,7 @@ import { AccountCircle } from '@mui/icons-material'
 import MenuIcon from '@mui/icons-material/Menu'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Router } from 'next/router'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import styles from './styles'
@@ -17,10 +17,11 @@ function HeaderAdmin(props) {
   const [auth, setAuth] = React.useState(true)
   const [anchorEl, setAnchorEl] = React.useState(null)
 
+  const router = useRouter()
+
   const { openSidebar, onToggleSidebar } = props
 
   const handleToggleSidebar = () => {
-    console.log(openSidebar)
     if (onToggleSidebar) {
       onToggleSidebar(!openSidebar)
     }
@@ -28,7 +29,7 @@ function HeaderAdmin(props) {
   const handleLogout = e => {
     setAnchorEl(null)
     e.preventDefault()
-    Router.push('/login')
+    router.push('/login')
     sessionStorage.clear('user')
   }
 

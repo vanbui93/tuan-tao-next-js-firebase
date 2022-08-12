@@ -1,33 +1,31 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
-import { onValue, ref } from 'firebase/database'
-import Router from 'next/router'
+import { withStyles } from '@material-ui/core/styles'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import { db } from './../../utils/firebase'
-import { withStyles } from '@material-ui/core/styles'
-import styles from './styles'
-import dynamic from 'next/dynamic'
+import { useDispatch, useSelector } from 'react-redux'
 import LayoutLogin from '../../layouts/LayoutLogin'
+import { getUser } from '../../store/actions/account'
+import styles from './styles'
 
 function Login(props) {
-  const [userStorage, setUserStorage] = useState(undefined)
   const { classes } = props
-  const [userData, setUserData] = useState({})
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const userData = useSelector(state => state.account.data)
+
+  const [userStorage, setUserStorage] = useState(undefined)
   const [errorMessages, setErrorMessages] = useState({})
 
   useEffect(() => {
-    setUserStorage(sessionStorage.getItem('user') || '')
-  }, [])
+    return () => {
+      dispatch(getUser())
+    }
+  }, [dispatch])
 
   useEffect(() => {
-    const userRef = ref(db, `users`)
-    return onValue(userRef, snapshot => {
-      if (snapshot.val() !== null) {
-        setUserData({ ...snapshot.val() })
-      } else {
-        setUserData({})
-      }
-    })
+    setUserStorage(sessionStorage.getItem('user') || '')
   }, [])
 
   const errors = {
@@ -49,7 +47,7 @@ function Login(props) {
         setErrorMessages({ name: 'pass', message: errors.pass })
       } else {
         sessionStorage.setItem('user', JSON.stringify(users))
-        Router.push('/dashboard/main')
+        router.push('/dashboard/main')
       }
     } else {
       // Username not found
@@ -59,13 +57,13 @@ function Login(props) {
 
   const handleLogout = e => {
     e.preventDefault()
-    Router.push('/login')
+    router.push('/login')
     sessionStorage.clear('user')
   }
 
   const redirectAdmin = e => {
     e.preventDefault()
-    Router.push('/dashboard/main')
+    router.push('/dashboard/main')
   }
 
   // Generate JSX code for error message
