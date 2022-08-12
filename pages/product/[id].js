@@ -19,7 +19,7 @@ import { getVideo } from './../../store/actions/videos'
 import { getWarantys } from './../../store/actions/warantys'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShield } from '@fortawesome/free-solid-svg-icons'
-import LayoutUser from '../../components/LayoutUser'
+import LayoutUser from '../../layouts/LayoutUser'
 
 export default function ProductDetail(props) {
   const [skus, setSkus] = useState({})

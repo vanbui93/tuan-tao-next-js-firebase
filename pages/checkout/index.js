@@ -5,7 +5,7 @@ import { useRouter, withRouter } from 'next/router'
 import { useState } from 'react'
 import numberWithCommas from '../../utils/numberWithComas'
 import Link from 'next/link'
-import LayoutUser from '../../components/LayoutUser'
+import LayoutUser from '../../layouts/LayoutUser'
 
 function Checkout(props) {
   const state = props.router.query

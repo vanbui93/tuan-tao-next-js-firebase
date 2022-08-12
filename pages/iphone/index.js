@@ -1,6 +1,6 @@
 import { onValue, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
-import LayoutUser from '../../components/LayoutUser'
+import LayoutUser from '../../layouts/LayoutUser'
 import { db } from '../../utils/firebase'
 import ProductItem from './../../components/ProductItem'
 

@@ -1,7 +1,6 @@
 import {
   Button,
   Grid,
-  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -16,8 +15,7 @@ import { Stack } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import LayoutAdmin from '../../../components/LayoutAdmin'
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { getMain, updateMain } from '../../../store/actions/main'
 import { AdminStyle } from '../AdminStyle'
 import styles from './styles'

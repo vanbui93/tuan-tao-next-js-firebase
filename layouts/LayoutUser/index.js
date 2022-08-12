@@ -2,9 +2,9 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Footer from '../../components/Footer'
+import Header from '../../components/Header'
 import { getMain } from '../../store/actions/main'
-import Footer from '../Footer'
-import Header from '../Header'
 
 function LayoutUser({ children }) {
   const dispatch = useDispatch()

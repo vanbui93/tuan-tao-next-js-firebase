@@ -3,11 +3,11 @@ import { onValue, ref } from 'firebase/database'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import LayoutLogin from '../../components/LayoutLogin'
 import { db } from './../../utils/firebase'
 import { withStyles } from '@material-ui/core/styles'
 import styles from './styles'
 import dynamic from 'next/dynamic'
+import LayoutLogin from '../../layouts/LayoutLogin'
 
 function Login(props) {
   const [userStorage, setUserStorage] = useState(undefined)

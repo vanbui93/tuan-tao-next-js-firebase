@@ -1,6 +1,6 @@
 import { withRouter } from 'next/router'
 import React from 'react'
-import LayoutUser from '../../components/LayoutUser'
+import LayoutUser from '../../layouts/LayoutUser'
 import numberWithCommas from '../../utils/numberWithComas'
 
 function ThankYou(props) {

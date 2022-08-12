@@ -2,7 +2,7 @@ import parse from 'html-react-parser'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import LayoutUser from '../../components/LayoutUser'
+import LayoutUser from '../../layouts/LayoutUser'
 import { getPageDetail } from './../../store/actions/page'
 
 export default function PagesContent() {
