@@ -1,11 +1,7 @@
 import {
   Button,
   Fab,
-  FormControl,
-  FormControlLabel,
   Grid,
-  Radio,
-  RadioGroup,
   Table,
   TableBody,
   TableCell,
@@ -20,23 +16,20 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { Stack } from '@mui/material'
 import Paper from '@mui/material/Paper'
-import Editor from 'material-ui-editor'
-import { useRouter } from 'next/router'
+import { deleteUser, getUser, updateUser } from '../../../store/actions/account'
+import { AdminStyle, StyledTableCell, StyledTableRow } from '../AdminStyle'
+import DiaLogPopup from '../../../admin_components/DiaLogPopup'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import LayoutAdmin from '../../../layouts/LayoutAdmin'
-import DiaLogPopup from './../../../admin_components/DiaLogPopup'
-import { deletePageDetail, getPageDetail, updatePageDetail } from './../../../store/actions/page'
-import { AdminStyle, StyledTableCell, StyledTableRow } from './../AdminStyle'
+import { useRouter } from 'next/router'
 import styles from './styles'
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
 
-const AdminPage = props => {
+const AdminUsers = props => {
   const opensidebar = useSelector(state => state.ui.opensidebar)
-  const pageData = useSelector(state => state.page.data)
+  const users = useSelector(state => state.account.data)
   const dispatch = useDispatch()
-  const router = useRouter()
-  const ref = useRef()
-
+  let router = useRouter()
   //Thiết lập trạng thái DiaLog
   const [dialog, setDialog] = useState({
     message: '',
@@ -46,62 +39,51 @@ const AdminPage = props => {
   const { classes } = props
 
   const [isEdit, setIsEdit] = useState(false)
-  const [initContent, setInitContent] = useState('')
-  const [editPageObject, setEditPageObject] = useState({
+  const [editUserObject, setEditUserObject] = useState({
     name: '',
-    slug: '',
-    content: '',
-    isDisplay: '0',
-    create_date: '',
-    update_date: '',
+    email: '',
+    pass: '',
   })
 
-  const arrayPage = []
-  pageData !== null &&
-    pageData !== undefined &&
-    Object.keys(pageData)?.map(element => {
+  const arrayUser = []
+  users !== null &&
+    users !== undefined &&
+    Object.keys(users)?.map(element => {
       const key = element
-      if (pageData[key] !== null) {
-        const name = pageData[key].name ? pageData[key].name : ''
-        const slug = pageData[key].slug ? pageData[key].slug : ''
-        const content = pageData[key].content ? pageData[key].content : ''
-        const isDisplay = pageData[key].isDisplay ? pageData[key].isDisplay : ''
-        const create_date = pageData[key].create_date ? pageData[key].create_date : ''
-        const update_date = pageData[key].update_date ? pageData[key].update_date : ''
-        arrayPage.push({
+      if (users[key] !== null) {
+        const name = users[key].name ? users[key].name : ''
+        const email = users[key].email ? users[key].email : ''
+        const pass = users[key].pass ? users[key].pass : ''
+        arrayUser.push({
           id: key,
           name: name,
-          slug: slug,
-          content: content,
-          isDisplay: isDisplay.toString(),
-          create_date: create_date,
-          update_date: update_date,
+          email: email,
+          pass: pass,
         })
       }
     })
 
   useEffect(() => {
     return () => {
-      dispatch(getPageDetail())
+      dispatch(getUser())
     }
   }, [dispatch])
 
   //Thêm tài khoản mới
   const handleAddAccount = () => {
-    router.push('/dashboard/page_add')
+    router.push('/dashboard/user_add')
   }
 
-  const idPageRef = useRef()
+  const idUserRef = useRef()
   const handleDelete = id => {
     handleDialog('Bán có chắc chắn muốn xóa không ?', true)
-    idPageRef.current = id
+    idUserRef.current = id
   }
 
-  const handleEditPage = page => {
-    idPageRef.current = page.id
+  const handleEdit = user => {
+    idUserRef.current = user.id
     setIsEdit(true)
-    setEditPageObject(page)
-    setInitContent(page.content)
+    setEditUserObject(user)
   }
 
   //Nội dung dialog
@@ -115,8 +97,8 @@ const AdminPage = props => {
   //Bạn có chắc chắn muốn xóa
   const areUSureDelete = status => {
     if (status) {
-      dispatch(deletePageDetail(idPageRef.current))
-      dispatch(getPageDetail())
+      dispatch(deleteUser(idUserRef.current))
+      dispatch(getUser())
       handleDialog('', false)
     } else {
       handleDialog('', false)
@@ -126,16 +108,9 @@ const AdminPage = props => {
   const handleEditOnchage = e => {
     let name = e.target.name
     let value = e.target.value
-    setEditPageObject(prevState => ({
+    setEditUserObject(prevState => ({
       ...prevState,
       [name]: value,
-    }))
-  }
-
-  const handleOnChageEditor = event => {
-    setEditPageObject(prevState => ({
-      ...prevState,
-      content: event,
     }))
   }
 
@@ -146,9 +121,9 @@ const AdminPage = props => {
   //Submit edit
   const handleEditSubmit = async () => {
     try {
-      dispatch(updatePageDetail(editPageObject))
+      dispatch(updateUser(editUserObject))
       setIsEdit(false)
-      dispatch(getPageDetail())
+      dispatch(getUser())
     } catch (err) {
       console.log(err)
     }
@@ -165,42 +140,38 @@ const AdminPage = props => {
             <Grid style={{ paddingBottom: '20px' }}>
               <Button variant='contained' color='primary' onClick={handleAddAccount}>
                 <AddIcon />
-                &nbsp;&nbsp;Tạo mới page
+                &nbsp;&nbsp;Tạo tài khoản
               </Button>
             </Grid>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label='customized table'>
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>Tên page</StyledTableCell>
-                    <StyledTableCell align='left'>Link</StyledTableCell>
-                    <StyledTableCell align='left'>Ngày tạo</StyledTableCell>
-                    <StyledTableCell align='left'>Ngày chỉnh sửa</StyledTableCell>
-                    <StyledTableCell align='left'>Hiển thị</StyledTableCell>
+                    <StyledTableCell>username</StyledTableCell>
+                    <StyledTableCell align='left'>email</StyledTableCell>
+                    <StyledTableCell align='left'>password</StyledTableCell>
                     <StyledTableCell align='right'>SỬA</StyledTableCell>
                     <StyledTableCell align='right'>XÓA</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {arrayPage !== null &&
-                    arrayPage !== undefined &&
-                    Object.values(arrayPage)?.map((page, idx) => {
+                  {arrayUser !== null &&
+                    arrayUser !== undefined &&
+                    Object.values(arrayUser)?.map((user, idx) => {
                       return (
-                        page !== null &&
-                        page !== undefined && (
+                        user !== null &&
+                        user !== undefined && (
                           <StyledTableRow key={idx}>
-                            <StyledTableCell>{page.name}</StyledTableCell>
-                            <StyledTableCell align='left'>{page.slug}</StyledTableCell>
-                            <StyledTableCell align='left'>{page.create_date}</StyledTableCell>
-                            <StyledTableCell align='left'>{page.update_date}</StyledTableCell>
-                            <StyledTableCell align='left'>{page.isDisplay === '1' ? 'Hiển thị' : 'Ẩn'}</StyledTableCell>
+                            <StyledTableCell>{user.name ? user.name : ''}</StyledTableCell>
+                            <StyledTableCell align='left'>{user.email}</StyledTableCell>
+                            <StyledTableCell align='left'>{user.pass}</StyledTableCell>
                             <StyledTableCell align='right'>
-                              <Fab size='small' color='primary' aria-label='add' onClick={() => handleEditPage(page)}>
+                              <Fab size='small' color='primary' aria-label='add' onClick={() => handleEdit(user)}>
                                 <EditIcon />
                               </Fab>
                             </StyledTableCell>
                             <StyledTableCell align='right'>
-                              <Fab size='small' color='primary' aria-label='add' onClick={() => handleDelete(page.id)}>
+                              <Fab size='small' color='primary' aria-label='add' onClick={() => handleDelete(user.id)}>
                                 <DeleteIcon />
                               </Fab>
                             </StyledTableCell>
@@ -213,21 +184,21 @@ const AdminPage = props => {
             </TableContainer>
           </div>
         ) : (
-          <Grid ref={ref}>
+          <Grid>
             <TableContainer component={Paper}>
               <Table>
-                {editPageObject !== null && editPageObject !== undefined && (
+                {editUserObject !== null && editUserObject !== undefined && (
                   <TableBody>
                     <TableRow>
                       <TableCell className={classes.tbHeadLeft} variant='head'>
-                        Tên Page
+                        Username
                       </TableCell>
                       <TableCell>
                         <TextField
                           id='outlined-size-small'
                           size='small'
                           fullWidth
-                          defaultValue={editPageObject.name}
+                          defaultValue={editUserObject.name}
                           name='name'
                           onChange={handleEditOnchage}
                         />
@@ -235,45 +206,32 @@ const AdminPage = props => {
                     </TableRow>
                     <TableRow>
                       <TableCell className={classes.tbHeadLeft} variant='head'>
-                        Link
+                        Email
                       </TableCell>
                       <TableCell>
                         <TextField
                           id='outlined-size-small'
                           size='small'
                           fullWidth
-                          defaultValue={editPageObject.slug}
-                          name='slug'
+                          defaultValue={editUserObject.email}
+                          name='email'
                           onChange={handleEditOnchage}
                         />
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className={classes.tbHeadLeft} variant='head'>
-                        Nội dung
+                        Password
                       </TableCell>
                       <TableCell>
-                        <Editor content={initContent} onChange={handleOnChageEditor} />
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className={classes.tbHeadLeft} variant='head'>
-                        Trạng thái hiển thị
-                      </TableCell>
-                      <TableCell>
-                        <FormControl>
-                          <RadioGroup
-                            row
-                            aria-labelledby='demo-row-radio-buttons-group-label'
-                            name='isDisplay'
-                            defaultValue={editPageObject.isDisplay === '1' ? true : false}
-                            value={editPageObject.isDisplay}
-                            onChange={handleEditOnchage}
-                          >
-                            <FormControlLabel value='1' control={<Radio />} label='Hiện' />
-                            <FormControlLabel value='0' control={<Radio />} label='Ẩn' />
-                          </RadioGroup>
-                        </FormControl>
+                        <TextField
+                          id='outlined-size-small'
+                          size='small'
+                          fullWidth
+                          defaultValue={editUserObject.pass}
+                          name='pass'
+                          onChange={handleEditOnchage}
+                        />
                       </TableCell>
                     </TableRow>
                   </TableBody>
@@ -294,4 +252,4 @@ const AdminPage = props => {
     </AdminStyle>
   )
 }
-export default withStyles(styles)(AdminPage)
+export default withStyles(styles)(AdminUsers)

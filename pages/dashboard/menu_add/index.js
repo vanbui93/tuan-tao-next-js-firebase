@@ -1,5 +1,6 @@
 import {
   Button,
+  Grid,
   Paper,
   Table,
   TableBody,
@@ -10,62 +11,51 @@ import {
   withStyles,
 } from '@material-ui/core'
 import { Stack } from '@mui/material'
-import Editor from 'material-ui-editor'
-import { useRouter } from 'next/router'
+import { addMenuObject, getMenu } from '../../../store/actions/menu'
+import { AdminStyle } from '../AdminStyle'
 import { useState } from 'react'
-import nextId, { setPrefix } from 'react-id-generator'
 import { useDispatch, useSelector } from 'react-redux'
-import LayoutAdmin from '../../../layouts/LayoutAdmin'
-import { addPageObject, getPageDetail } from './../../../store/actions/page'
-import { AdminStyle } from './../AdminStyle'
+import { useRouter } from 'next/router'
+import nextId, { setPrefix } from 'react-id-generator'
 import styles from './styles'
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
 
-const PageAdd = props => {
+const MenuAdd = props => {
   const opensidebar = useSelector(state => state.ui.opensidebar)
-  const router = useRouter()
 
   const dispatch = useDispatch()
+  let router = useRouter()
   const { classes } = props
 
-  const [addPage, setAddPage] = useState({
+  const [menu, setMenu] = useState({
     name: '',
-    slug: '',
-    content: '',
-    isDisplay: '1',
-    create_date: new Date().toString().replace(/GMT.*/g, ''),
+    link: '',
   })
 
   const handleEditOnchage = e => {
     let name = e.target.name
     let value = e.target.value
 
-    setAddPage(prevState => ({
+    setMenu(prevState => ({
       ...prevState,
       [name]: value,
     }))
   }
 
-  const handleOnChageEditor = event => {
-    setAddPage(prevState => ({
-      ...prevState,
-      content: event,
-    }))
-  }
-
   setPrefix('')
   const keyAdd = nextId()
-  const handleSavePage = async () => {
+  const handleSaveMenu = async () => {
     try {
-      dispatch(addPageObject(addPage, Number(keyAdd)))
-      dispatch(getPageDetail())
-      router.push('/dashboard/page')
+      dispatch(addMenuObject(menu, Number(keyAdd)))
+      dispatch(getMenu())
+      router.push('/dashboard/menu')
     } catch (err) {
       console.log(err)
     }
   }
 
   const handleCancel = () => {
-    router.push('/dashboard/page')
+    router.push('/dashboard/menu')
   }
 
   return (
@@ -76,7 +66,7 @@ const PageAdd = props => {
             <TableBody>
               <TableRow>
                 <TableCell className={classes.tbHeadLeft} variant='head'>
-                  Tên page
+                  Tên menu
                 </TableCell>
                 <TableCell>
                   <TextField id='outlined-size-small' size='small' fullWidth name='name' onChange={handleEditOnchage} />
@@ -90,14 +80,6 @@ const PageAdd = props => {
                   <TextField id='outlined-size-small' size='small' fullWidth name='link' onChange={handleEditOnchage} />
                 </TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell className={classes.tbHeadLeft} variant='head'>
-                  Noi dung
-                </TableCell>
-                <TableCell>
-                  <Editor content={''} onChange={handleOnChageEditor} />
-                </TableCell>
-              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -105,7 +87,7 @@ const PageAdd = props => {
           <Button variant='contained' color='primary' onClick={handleCancel}>
             Hủy bỏ
           </Button>
-          <Button variant='contained' color='secondary' onClick={handleSavePage}>
+          <Button variant='contained' color='secondary' onClick={handleSaveMenu}>
             Lưu
           </Button>
         </Stack>
@@ -114,4 +96,4 @@ const PageAdd = props => {
   )
 }
 
-export default withStyles(styles)(PageAdd)
+export default withStyles(styles)(MenuAdd)

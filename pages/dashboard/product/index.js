@@ -254,7 +254,7 @@ const AdminProduct = props => {
 
   //Thêm sản phẩm mới
   const handleAddProduct = () => {
-    router.push('/dashboard/product/product_add')
+    router.push('/dashboard/product_add')
   }
 
   //Kiểm tra màu có nằm trong danh sách màu hay không

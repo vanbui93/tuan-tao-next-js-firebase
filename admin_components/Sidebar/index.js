@@ -33,10 +33,6 @@ function Sidebar(props) {
       name: 'Menu',
     },
     {
-      path: '/dashboard/menu_add',
-      name: 'Thêm menu',
-    },
-    {
       path: '/dashboard/user',
       name: 'Tài khoản',
     },
