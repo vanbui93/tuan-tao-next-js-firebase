@@ -1,28 +1,34 @@
+import { onValue, ref } from '@firebase/database'
 import { Box, Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import LayoutLogin from '../../layouts/LayoutLogin'
-import { getUser } from '../../store/actions/account'
+import { db } from '../../utils/firebase'
 import styles from './styles'
 
 function Login(props) {
   const { classes } = props
   const router = useRouter()
   const dispatch = useDispatch()
-  const userData = useSelector(state => state.account.data)
+  const [userData, setUserData] = useState({})
 
   const [userStorage, setUserStorage] = useState(undefined)
   const [errorMessages, setErrorMessages] = useState({})
 
   useEffect(() => {
-    return () => {
-      dispatch(getUser())
-    }
-  }, [dispatch])
+    const userRef = ref(db, `users`)
+    return onValue(userRef, snapshot => {
+      if (snapshot.val() !== null) {
+        setUserData({ ...snapshot.val() })
+      } else {
+        setUserData({})
+      }
+    })
+  }, [])
 
   useEffect(() => {
     setUserStorage(sessionStorage.getItem('user') || '')
@@ -38,7 +44,7 @@ function Login(props) {
     let { uname, pass } = document.forms[0]
 
     // Find user login info
-    const users = Object.values(userData)?.find(user => user.name === uname.value)
+    const users = userData && Object.values(userData)?.find(user => user.name === uname.value)
 
     // Compare user info
     if (users) {
