@@ -58,23 +58,23 @@ const AdminProduct = props => {
 
   useEffect(() => {
     dispatch(getSkus())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getColors())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getVideo())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getWarantys())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getPromotions())
-  }, [dispatch])
+  }, [])
 
   const [isEdit, setIsEdit] = useState(false)
   const [editObject, setEditObject] = useState({
@@ -96,7 +96,7 @@ const AdminProduct = props => {
 
   useEffect(() => {
     dispatch(getProduct())
-  }, [dispatch]) //Load lại trang sau khi add, update, delete thành công
+  }, []) //Load lại trang sau khi add, update, delete thành công
 
   const arrayProduct = []
   products !== null &&

@@ -44,23 +44,23 @@ export default function ProductDetail(props) {
 
   useEffect(() => {
     dispatch(getSkus())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getColors())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getVideo())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getWarantys())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(getPromotions())
-  }, [dispatch])
+  }, [])
 
   const [isSkuSelected, setIsSkuSelected] = useState('init')
   const setSkuValue = newValue => {
