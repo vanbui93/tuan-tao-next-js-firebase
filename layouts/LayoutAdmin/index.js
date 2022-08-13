@@ -14,12 +14,6 @@ function LayoutAdmin({ children }) {
   const opensidebar = useSelector(state => state.ui.opensidebar)
 
   useEffect(() => {
-    if (!sessionStorage.getItem('user')) {
-      router.push('/login')
-    }
-  }, [])
-
-  useEffect(() => {
     dispatch(getMain())
   }, [])
 
@@ -31,17 +25,22 @@ function LayoutAdmin({ children }) {
     }
   }
 
-  return (
-    <div className='layout2'>
-      <HeaderAdmin headerData={mainData} openSidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
-      <div className='wrap-admin'>
-        {children}
-        <div className='sidebar-wrapper'>
-          <Sidebar openSidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
+  if (!sessionStorage.getItem('user')) {
+    router.push('/login')
+  }
+  else {
+    return (
+      <div className='layout2'>
+        <HeaderAdmin headerData={mainData} openSidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
+        <div className='wrap-admin'>
+          {children}
+          <div className='sidebar-wrapper'>
+            <Sidebar openSidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default LayoutAdmin
