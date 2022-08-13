@@ -21,8 +21,6 @@ function MyApp({ Component, pageProps }) {
     L1: LayoutUser,
     L2: LayoutAdmin,
   }
-  const Layout = layouts[Component.layout] || (children => <>{children}</>)
-
   const [showChild, setShowChild] = useState(false)
 
   useEffect(() => {

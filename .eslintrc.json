@@ -1,16 +1,5 @@
 {
-  "plugins": [
-    "prettier"
-  ],
   "extends": [
-    "next",
-    "plugin:react/recommended",
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "airbnb",
-    "prettier"
-  ],
-  "rules": {
-    "prettier/prettier": "warn"
-  }
+    "next"
+  ]
 }
