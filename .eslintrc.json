@@ -5,8 +5,9 @@
   "extends": [
     "next",
     "eslint:recommended",
-    "airbnb",
+    "plugin:prettier/recommended",
     "plugin:react/recommended",
+    "airbnb",
     "prettier"
   ],
   "rules": {
