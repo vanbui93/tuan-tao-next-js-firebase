@@ -20,7 +20,6 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { Stack } from '@mui/material'
 import Paper from '@mui/material/Paper'
-// import Editor from 'material-ui-editor'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,7 +29,7 @@ import { deletePageDetail, getPageDetail, updatePageDetail } from './../../../st
 import { AdminStyle, StyledTableCell, StyledTableRow } from './../AdminStyle'
 import styles from './styles'
 import { storage } from './../../../utils/firebase'
-import { ref,uploadBytesResumable } from "firebase/storage";
+import { ref, uploadBytesResumable } from 'firebase/storage'
 
 import { EditorState } from 'draft-js'
 import dynamic from 'next/dynamic'
@@ -168,26 +167,21 @@ const AdminPage = props => {
         setEditorState(editorState)
     }
 
-    const [url, setUrl] = useState(null)
+    const [uploadedImages, setUploadedImages] = useState([])
 
     function uploadImageCallBack(file) {
+        const imageObject = {
+            file: file,
+            localSrc: URL.createObjectURL(file),
+        }
+
+        setUploadedImages(prevState => [...prevState, imageObject])
+
         const imagesRef = ref(storage, `images/${file.name}`)
-        const uploadTask = uploadBytesResumable(imagesRef, file);
+        const uploadTask = uploadBytesResumable(imagesRef, file)
+
         return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest()
-            const data = new FormData()
-            data.append('image', file)
-            xhr.send(data)
-            xhr.addEventListener('load', () => {
-                const response = JSON.parse(xhr.responseText)
-                console.log(response)
-                resolve(response)
-            })
-            xhr.addEventListener('error', () => {
-                const error = JSON.parse(xhr.responseText)
-                console.log(error)
-                reject(error)
-            })
+            resolve({ data: { link: imageObject.localSrc } })
         })
     }
 
@@ -310,7 +304,6 @@ const AdminPage = props => {
                                                 Nội dung
                                             </TableCell>
                                             <TableCell>
-                                                {/* <Editor content={initContent} onChange={handleOnChageEditor} /> */}
                                                 <Editor
                                                     editorState={editorState}
                                                     toolbarClassName='toolbarClassName'
@@ -327,6 +320,8 @@ const AdminPage = props => {
                                                             uploadCallback: uploadImageCallBack,
                                                             alt: { present: true, mandatory: false },
                                                         },
+                                                        inputAccept:
+                                                            'application/pdf,text/plain,application/vnd.openxmlformatsofficedocument.wordprocessingml.document,application/msword,application/vnd.ms-excel',
                                                     }}
                                                 />
                                             </TableCell>
