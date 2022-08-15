@@ -167,16 +167,7 @@ const AdminPage = props => {
         setEditorState(editorState)
     }
 
-    const [uploadedImages, setUploadedImages] = useState([])
-
     function uploadImageCallBack(file) {
-        const imageObject = {
-            file: file,
-            localSrc: URL.createObjectURL(file),
-        }
-
-        setUploadedImages(prevState => [...prevState, imageObject])
-
         const imagesRef = ref(storage, `images/${file.name}`)
         const uploadTask = uploadBytesResumable(imagesRef, file)
 
