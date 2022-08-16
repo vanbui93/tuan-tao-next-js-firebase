@@ -25,7 +25,6 @@
     "firebase": "^9.9.2",
     "html-react-parser": "^3.0.1",
     "html-to-draftjs": "^1.5.0",
-    "material-ui-editor": "^1.0.6",
     "next": "12.2.4",
     "next-redux-wrapper": "^7.0.5",
     "prettier": "^2.7.1",

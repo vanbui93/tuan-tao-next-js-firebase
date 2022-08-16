@@ -13,30 +13,30 @@ import {
     TableHead,
     TableRow,
     TextField,
-    withStyles,
+    withStyles
 } from '@material-ui/core'
 import AddIcon from '@mui/icons-material/Add'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { Stack } from '@mui/material'
 import Paper from '@mui/material/Paper'
+import { ContentState, convertToRaw, EditorState } from 'draft-js'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-import { EditorState, ContentState, convertFromHTML, convertToRaw } from 'draft-js'
-import dynamic from 'next/dynamic'
-import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import DiaLogPopup from '../../../admin_components/DiaLogPopup'
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { deletePageDetail, getPageDetail, updatePageDetail } from '../../../store/actions/page'
+import { storage } from '../../../utils/firebase'
 import { AdminStyle, StyledTableCell, StyledTableRow } from './../../../admin_components/AdminStyle'
 import styles from './styles'
-import { storage } from '../../../utils/firebase'
 
+import draftToHtml from 'draftjs-to-html'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Editor), { ssr: false })
-import draftToHtml from 'draftjs-to-html'
 const htmlToDraft = typeof window === 'object' && require('html-to-draftjs').default
 
 function AdminPage(props) {
@@ -167,7 +167,6 @@ function AdminPage(props) {
             content: currentContent,
         }))
     }
-    console.log(editPageObject.content)
 
     function uploadImageCallBack(file) {
         const imagesRef = ref(storage, `images/${file.name}`)
