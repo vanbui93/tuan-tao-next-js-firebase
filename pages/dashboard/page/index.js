@@ -24,7 +24,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-import { ContentState, convertFromHTML, EditorState } from 'draft-js'
+import { EditorState, ContentState, convertFromHTML, convertToRaw } from 'draft-js'
 import dynamic from 'next/dynamic'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import DiaLogPopup from '../../../admin_components/DiaLogPopup'
@@ -52,8 +52,9 @@ function AdminPage(props) {
 
     const { classes } = props
 
+    const [editorState, setEditorState] = useState(EditorState.createEmpty())
+
     const [isEdit, setIsEdit] = useState(false)
-    const [initContent, setInitContent] = useState('')
     const [editPageObject, setEditPageObject] = useState({
         name: '',
         slug: '',
@@ -106,7 +107,7 @@ function AdminPage(props) {
         idPageRef.current = page.id
         setIsEdit(true)
         setEditPageObject(page)
-        setInitContent(page.content)
+        setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(page.content))))
     }
 
     // Nội dung dialog
@@ -137,13 +138,6 @@ function AdminPage(props) {
         }))
     }
 
-    const handleOnChageEditor = event => {
-        setEditPageObject(prevState => ({
-            ...prevState,
-            content: event,
-        }))
-    }
-
     const handleCancel = () => {
         setIsEdit(false)
     }
@@ -159,13 +153,8 @@ function AdminPage(props) {
         }
     }
 
-    const [editorState, setEditorState] = useState(
-        EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(editPageObject?.content)))
-    )
-
     const onEditorStateChange = editorState => {
-        console.log(editorState)
-        // setEditorState(editPageObject.content)
+        setEditorState(editorState)
     }
 
     function uploadImageCallBack(file) {
@@ -325,8 +314,6 @@ function AdminPage(props) {
                                                             uploadCallback: uploadImageCallBack,
                                                             alt: { present: true, mandatory: false },
                                                         },
-                                                        inputAccept:
-                                                            'application/pdf,text/plain,application/vnd.openxmlformatsofficedocument.wordprocessingml.document,application/msword,application/vnd.ms-excel',
                                                     }}
                                                 />
                                             </TableCell>
@@ -341,7 +328,6 @@ function AdminPage(props) {
                                                         row
                                                         aria-labelledby='demo-row-radio-buttons-group-label'
                                                         name='isDisplay'
-                                                        defaultValue={editPageObject.isDisplay === '1'}
                                                         value={editPageObject.isDisplay}
                                                         onChange={handleEditOnchage}
                                                     >
