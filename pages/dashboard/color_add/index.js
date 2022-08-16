@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { Stack } from '@mui/material'
 import { addColorObject, getColors } from '../../../store/actions/colors'
-import { AdminStyle } from '../AdminStyle'
+import { AdminStyle } from './../../../admin_components/AdminStyle'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'

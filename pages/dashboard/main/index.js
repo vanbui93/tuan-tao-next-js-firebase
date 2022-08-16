@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { getMain, updateMain } from '../../../store/actions/main'
-import { AdminStyle } from '../AdminStyle'
+import { AdminStyle } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 
 const Main = props => {

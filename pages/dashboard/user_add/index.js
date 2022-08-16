@@ -17,7 +17,7 @@ import nextId, { setPrefix } from 'react-id-generator'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { addAccoutObject, getUser } from '../../../store/actions/account'
-import { AdminStyle } from '../AdminStyle'
+import { AdminStyle } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 
 const UserAdd = props => {

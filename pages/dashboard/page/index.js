@@ -29,7 +29,7 @@ import dynamic from 'next/dynamic'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import DiaLogPopup from '../../../admin_components/DiaLogPopup'
 import { deletePageDetail, getPageDetail, updatePageDetail } from '../../../store/actions/page'
-import { AdminStyle, StyledTableCell, StyledTableRow } from '../AdminStyle'
+import { AdminStyle, StyledTableCell, StyledTableRow } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 import { storage } from '../../../utils/firebase'
 

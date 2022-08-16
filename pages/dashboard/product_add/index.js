@@ -27,7 +27,7 @@ import { getSkus } from '../../../store/actions/skus'
 import { getVideo } from '../../../store/actions/videos'
 import { getWarantys } from '../../../store/actions/warantys'
 import { numberInputFormat } from '../../../utils/numberInputFormat'
-import { AdminStyle } from '../AdminStyle'
+import { AdminStyle } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 
 const ProductAdd = props => {

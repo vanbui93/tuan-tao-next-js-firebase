@@ -1,7 +1,7 @@
-import CoreValue from '../../components/CoreValue'
-import CustomerCmt from '../../components/CustomerCmt'
-import HomeProduct from '../../components/HomeProduct'
-import HomeSlide from '../../components/HomeSlide'
+import CoreValue from '../CoreValue'
+import CustomerCmt from '../CustomerCmt'
+import HomeProduct from '../HomeProduct'
+import HomeSlide from '../HomeSlide'
 import LayoutUser from '../../layouts/LayoutUser'
 
 function HomePage() {

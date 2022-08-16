@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import DiaLogPopup from '../../../admin_components/DiaLogPopup'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { deleteWaranty, getWarantys, updateWaranty } from '../../../store/actions/warantys'
-import { AdminStyle, StyledTableCell, StyledTableRow } from '../AdminStyle'
+import { AdminStyle, StyledTableCell, StyledTableRow } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 
 const AdminWaranty = props => {

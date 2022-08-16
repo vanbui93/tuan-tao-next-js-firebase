@@ -16,7 +16,7 @@ import nextId, { setPrefix } from 'react-id-generator'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { addSkuObject, getSkus } from '../../../store/actions/skus'
-import { AdminStyle } from '../AdminStyle'
+import { AdminStyle } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 
 function SkuAdd(props) {

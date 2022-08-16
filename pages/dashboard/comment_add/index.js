@@ -17,7 +17,7 @@ import nextId, { setPrefix } from 'react-id-generator'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { addCommentObject, getComments } from '../../../store/actions/cmt'
-import { AdminStyle } from '../AdminStyle'
+import { AdminStyle } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 
 const CmtAdd = props => {

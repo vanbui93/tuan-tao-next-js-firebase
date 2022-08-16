@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { Stack } from '@mui/material'
 import { addMenuObject, getMenu } from '../../../store/actions/menu'
-import { AdminStyle } from '../AdminStyle'
+import { AdminStyle } from './../../../admin_components/AdminStyle'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
