@@ -3,108 +3,142 @@ input,
 select,
 textarea,
 button {
-  font-family: Arial, Helvetica, Verdana, sans-serif;
-  font-size: 15px;
-  color: #333;
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 15px;
+    color: #333;
 }
 
 ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 *,
 :after,
 :before {
-  border: 0 solid;
-  box-sizing: border-box;
+    border: 0 solid;
+    box-sizing: border-box;
 }
 
 .blind,
 caption span,
 legend {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  font-size: 0;
-  text-indent: -9999px;
-  white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    font-size: 0;
+    text-indent: -9999px;
+    white-space: nowrap;
 }
 
 body {
-  background-color: #f4f4f4;
+    background-color: #f4f4f4;
 }
 
 img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 .tel {
-  position: fixed;
-  bottom: 25px;
-  right: 10px;
-  z-index: 10;
+    position: fixed;
+    bottom: 25px;
+    right: 10px;
+    z-index: 10;
 }
 
 .tel-call {
-  display: block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--darkgray);
-  position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--darkgray);
+    position: relative;
 
-  .fa-phone {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    font-size: 30px;
-    color: var(--white);
-  }
+    .fa-phone {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        font-size: 30px;
+        color: var(--white);
+    }
 }
 
 .wrap-admin {
-  flex-direction: row-reverse;
-  margin-top: 64px;
+    flex-direction: row-reverse;
+    margin-top: 64px;
 }
 
 .admin-content {
-  width: calc(100% - 200px);
+    width: calc(100% - 200px);
 }
 
 .sidebar-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media screen and (min-width: 1024px) {
-  .container {
-    width: 1200px;
-    min-width: 1200px;
-    margin: 0 auto;
-  }
+    .container {
+        width: 1200px;
+        min-width: 1200px;
+        margin: 0 auto;
+    }
 
-  .container-fluid {
-    position: relative;
-    left: 0;
-    right: 0;
-    width: 100%;
-    margin: 0 auto;
-  }
+    .container-fluid {
+        position: relative;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (max-width: 1023px) {
-  .container {
-    padding: 0 5px;
-  }
+    .container {
+        padding: 0 5px;
+    }
 
-  .wrap-admin {
-    display: block;
-  }
+    .wrap-admin {
+        display: block;
+    }
 }
