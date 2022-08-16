@@ -23,28 +23,28 @@ import Paper from '@mui/material/Paper'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import LayoutAdmin from '../../../layouts/LayoutAdmin'
-import DiaLogPopup from './../../../admin_components/DiaLogPopup'
-import { deletePageDetail, getPageDetail, updatePageDetail } from './../../../store/actions/page'
-import { AdminStyle, StyledTableCell, StyledTableRow } from './../AdminStyle'
-import styles from './styles'
-import { storage } from './../../../utils/firebase'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-
-import { EditorState } from 'draft-js'
+import { ContentState, convertFromHTML, EditorState } from 'draft-js'
 import dynamic from 'next/dynamic'
-const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Editor), { ssr: false })
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
+import DiaLogPopup from '../../../admin_components/DiaLogPopup'
+import { deletePageDetail, getPageDetail, updatePageDetail } from '../../../store/actions/page'
+import { AdminStyle, StyledTableCell, StyledTableRow } from '../AdminStyle'
+import styles from './styles'
+import { storage } from '../../../utils/firebase'
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-const AdminPage = props => {
+const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Editor), { ssr: false })
+
+function AdminPage(props) {
     const opensidebar = useSelector(state => state.ui.opensidebar)
     const pageData = useSelector(state => state.page.data)
     const dispatch = useDispatch()
     const router = useRouter()
     const refs = useRef()
 
-    //Thiết lập trạng thái DiaLog
+    // Thiết lập trạng thái DiaLog
     const [dialog, setDialog] = useState({
         message: '',
         isOpenDiaLog: false,
@@ -77,23 +77,21 @@ const AdminPage = props => {
                 const update_date = pageData[key].update_date ? pageData[key].update_date : ''
                 arrayPage.push({
                     id: key,
-                    name: name,
-                    slug: slug,
-                    content: content,
+                    name,
+                    slug,
+                    content,
                     isDisplay: isDisplay.toString(),
-                    create_date: create_date,
-                    update_date: update_date,
+                    create_date,
+                    update_date,
                 })
             }
         })
 
     useEffect(() => {
-        return () => {
-            dispatch(getPageDetail())
-        }
+        dispatch(getPageDetail())
     }, [])
 
-    //Thêm tài khoản mới
+    // Thêm tài khoản mới
     const handleAddAccount = () => {
         router.push('/dashboard/page_add')
     }
@@ -111,7 +109,7 @@ const AdminPage = props => {
         setInitContent(page.content)
     }
 
-    //Nội dung dialog
+    // Nội dung dialog
     const handleDialog = (message, isOpenDiaLog) => {
         setDialog({
             message,
@@ -119,7 +117,7 @@ const AdminPage = props => {
         })
     }
 
-    //Bạn có chắc chắn muốn xóa
+    // Bạn có chắc chắn muốn xóa
     const areUSureDelete = status => {
         if (status) {
             dispatch(deletePageDetail(idPageRef.current))
@@ -131,8 +129,8 @@ const AdminPage = props => {
     }
 
     const handleEditOnchage = e => {
-        let name = e.target.name
-        let value = e.target.value
+        const { name } = e.target
+        const { value } = e.target
         setEditPageObject(prevState => ({
             ...prevState,
             [name]: value,
@@ -150,7 +148,7 @@ const AdminPage = props => {
         setIsEdit(false)
     }
 
-    //Submit edit
+    // Submit edit
     const handleEditSubmit = async () => {
         try {
             dispatch(updatePageDetail(editPageObject))
@@ -161,10 +159,13 @@ const AdminPage = props => {
         }
     }
 
-    const [editorState, setEditorState] = useState(EditorState.createEmpty())
+    const [editorState, setEditorState] = useState(
+        EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(editPageObject?.content)))
+    )
 
     const onEditorStateChange = editorState => {
-        setEditorState(editorState)
+        console.log(editorState)
+        // setEditorState(editPageObject.content)
     }
 
     function uploadImageCallBack(file) {
@@ -224,8 +225,8 @@ const AdminPage = props => {
                                 <TableBody>
                                     {arrayPage !== null &&
                                         arrayPage !== undefined &&
-                                        Object.values(arrayPage)?.map((page, idx) => {
-                                            return (
+                                        Object.values(arrayPage)?.map(
+                                            (page, idx) =>
                                                 page !== null &&
                                                 page !== undefined && (
                                                     <StyledTableRow key={idx}>
@@ -262,8 +263,7 @@ const AdminPage = props => {
                                                         </StyledTableCell>
                                                     </StyledTableRow>
                                                 )
-                                            )
-                                        })}
+                                        )}
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -341,7 +341,7 @@ const AdminPage = props => {
                                                         row
                                                         aria-labelledby='demo-row-radio-buttons-group-label'
                                                         name='isDisplay'
-                                                        defaultValue={editPageObject.isDisplay === '1' ? true : false}
+                                                        defaultValue={editPageObject.isDisplay === '1'}
                                                         value={editPageObject.isDisplay}
                                                         onChange={handleEditOnchage}
                                                     >
