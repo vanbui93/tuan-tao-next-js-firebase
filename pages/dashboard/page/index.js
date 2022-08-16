@@ -192,6 +192,15 @@ function AdminPage(props) {
         })
     }
 
+    const embedVideoCallBack = link => {
+        if (link.indexOf('youtube') >= 0) {
+            link = link.replace('watch?v=', 'embed/')
+            link = link.replace('/watch/', '/embed/')
+            link = link.replace('youtu.be/', 'youtube.com/embed/')
+        }
+        return link
+    }
+
     return (
         <AdminStyle open={!opensidebar}>
             <LayoutAdmin>
@@ -322,6 +331,9 @@ function AdminPage(props) {
                                                         textAlign: { inDropdown: true },
                                                         link: { inDropdown: true },
                                                         history: { inDropdown: true },
+                                                        embedded: {
+                                                            embedCallback: embedVideoCallBack,
+                                                        },
                                                         image: {
                                                             uploadCallback: uploadImageCallBack,
                                                             alt: { present: true, mandatory: false },
