@@ -20,20 +20,8 @@ const Loading = () => {
     )
 }
 function HomePage() {
-    const [currentPathname, setCurrentPathname] = useState('')
     const router = useRouter()
     const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        if (router.isReady) {
-            if (router.pathname !== currentPathname) {
-                setLoading(true)
-                setCurrentPathname(router.pathname)
-                setTimeout(() => {
-                    setLoading(false)
-                }, 1500)
-            }
-        }
-    }, [router, router.pathname])
 
     const dispatch = useDispatch()
     const products = useSelector(state => state.products.data)
@@ -63,6 +51,15 @@ function HomePage() {
 
     useEffect(() => {
         dispatch(getMain())
+    }, [])
+
+    useEffect(() => {
+        if (mainData.length <= 0) {
+            setLoading(true)
+            setTimeout(() => {
+                setLoading(false)
+            }, 1500)
+        }
     }, [])
 
     return (
