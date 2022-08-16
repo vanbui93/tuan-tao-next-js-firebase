@@ -109,8 +109,6 @@ const AdminColors = props => {
         }))
     }
 
-    console.log(editColorObject)
-
     const handleCancel = () => {
         setIsEdit(false)
     }
