@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutUser from '../../layouts/LayoutUser'
 import { getComments } from '../../store/actions/cmt'
@@ -11,7 +12,29 @@ import CustomerCmt from '../CustomerCmt'
 import HomeProduct from '../HomeProduct'
 import HomeSlide from '../HomeSlide'
 
+const Loading = () => {
+    return (
+        <div className='loader'>
+            <img src={'/assets/img/loading.gif'} />
+        </div>
+    )
+}
 function HomePage() {
+    const [currentPathname, setCurrentPathname] = useState('')
+    const router = useRouter()
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        if (router.isReady) {
+            if (router.pathname !== currentPathname) {
+                setLoading(true)
+                setCurrentPathname(router.pathname)
+                setTimeout(() => {
+                    setLoading(false)
+                }, 1500)
+            }
+        }
+    }, [router, router.pathname])
+
     const dispatch = useDispatch()
     const products = useSelector(state => state.products.data)
     const allSlides = useSelector(state => state.slides.data)
@@ -43,12 +66,18 @@ function HomePage() {
     }, [])
 
     return (
-        <LayoutUser>
-            <HomeSlide slideImage={allSlides} />
-            <HomeProduct products={products} />
-            <CustomerCmt comments={cmts} />
-            <CoreValue coreValue={mainData} />
-        </LayoutUser>
+        <>
+            {loading ? (
+                <Loading />
+            ) : (
+                <LayoutUser>
+                    <HomeSlide slideImage={allSlides} />
+                    <HomeProduct products={products} />
+                    <CustomerCmt comments={cmts} />
+                    <CoreValue coreValue={mainData} />
+                </LayoutUser>
+            )}
+        </>
     )
 }
 HomePage.layout = 'L1'

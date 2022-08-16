@@ -8,34 +8,10 @@ import LayoutAdmin from '../layouts/LayoutAdmin'
 import { ThemeProvider } from 'styled-components'
 import { createTheme } from '@material-ui/core'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 // import Font Awesome CSS
 config.autoAddCss = false
 
-const Loading = () => {
-    return (
-        <div className='loader'>
-            <img src={'/assets/img/loading.gif'} />
-        </div>
-    )
-}
-
 function MyApp({ Component, pageProps }) {
-    const [currentPathname, setCurrentPathname] = useState('')
-    const router = useRouter()
-    const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        if (router.isReady) {
-            if (router.pathname !== currentPathname) {
-                setLoading(true)
-                setCurrentPathname(router.pathname)
-                setTimeout(() => {
-                    setLoading(false)
-                }, 3000)
-            }
-        }
-    }, [router, router.pathname])
-
     const theme = createTheme({
         zIndex: {
             appBar: 1200,
@@ -61,7 +37,9 @@ function MyApp({ Component, pageProps }) {
     }
     return (
         <Provider store={store}>
-            <ThemeProvider theme={theme}>{loading ? <Loading /> : <Component {...pageProps} />}</ThemeProvider>
+            <ThemeProvider theme={theme}>
+                <Component {...pageProps} />
+            </ThemeProvider>
         </Provider>
     )
 }
