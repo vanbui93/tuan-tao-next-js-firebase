@@ -36,6 +36,8 @@ import { storage } from '../../../utils/firebase'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const Editor = dynamic(() => import('react-draft-wysiwyg').then(mod => mod.Editor), { ssr: false })
+import draftToHtml from 'draftjs-to-html'
+const htmlToDraft = typeof window === 'object' && require('html-to-draftjs').default
 
 function AdminPage(props) {
     const opensidebar = useSelector(state => state.ui.opensidebar)
@@ -107,7 +109,10 @@ function AdminPage(props) {
         idPageRef.current = page.id
         setIsEdit(true)
         setEditPageObject(page)
-        setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(page.content))))
+
+        const blocksFromHtml = htmlToDraft(page.content)
+        const { contentBlocks, entityMap } = blocksFromHtml
+        setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(contentBlocks, entityMap)))
     }
 
     // Nội dung dialog
@@ -154,8 +159,15 @@ function AdminPage(props) {
     }
 
     const onEditorStateChange = editorState => {
+        const currentContent = draftToHtml(convertToRaw(editorState.getCurrentContent()))
         setEditorState(editorState)
+
+        setEditPageObject(prevState => ({
+            ...prevState,
+            content: currentContent,
+        }))
     }
+    console.log(editPageObject.content)
 
     function uploadImageCallBack(file) {
         const imagesRef = ref(storage, `images/${file.name}`)
