@@ -13,7 +13,7 @@ function LayoutUser({ children }) {
     dispatch(getMain())
   }, [])
   return (
-    <div className='layout1'>
+    <div className='layout_user'>
       <Header headerData={mainData} />
       {children}
       <div className='tel'>

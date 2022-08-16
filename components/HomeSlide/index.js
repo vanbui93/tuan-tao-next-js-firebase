@@ -5,25 +5,9 @@ import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { db } from './../../utils/firebase'
 
-export default function HomeSlide() {
+export default function HomeSlide(props) {
+  const { slideImage } = props;
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
-
-  const [slideImage, setSlideImage] = useState({})
-  //Lấy tất cả sản phẩm từ bảng `home_slide`
-  useEffect(() => {
-    const productRef = ref(db, `home_slide`)
-    onValue(productRef, snapshot => {
-      if (snapshot.val() !== null) {
-        setSlideImage({ ...snapshot.val() })
-      } else {
-        setSlideImage({})
-      }
-    })
-    return () => {
-      setSlideImage({})
-    }
-  }, [])
-
   return (
     <div className='homeSlide'>
       <Swiper

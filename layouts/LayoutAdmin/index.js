@@ -30,7 +30,7 @@ function LayoutAdmin({ children }) {
   }
   else {
     return (
-      <div className='layout2'>
+      <div className='layout_admin'>
         <HeaderAdmin headerData={mainData} openSidebar={opensidebar} onToggleSidebar={handleDrawerOpen} />
         <div className='wrap-admin'>
           {children}
