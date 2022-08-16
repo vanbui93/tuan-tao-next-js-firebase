@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint:es": "eslint . --ext ts,tsx,js",
-    "lint:style": "stylelint 'src/**/styled.ts' 'src/**/*.tsx'",
-    "lint": "yarn lint:es && yarn lint:style"
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
