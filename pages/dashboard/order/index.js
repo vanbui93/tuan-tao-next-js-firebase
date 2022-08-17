@@ -17,8 +17,9 @@ import {
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
+import SearchIcon from '@mui/icons-material/Search'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
-import { Checkbox, FormControlLabel, Stack, TextField } from '@mui/material'
+import { Checkbox, FormControlLabel, IconButton, InputBase, Stack, TextField } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import { AdminStyle, StyledTableCell, StyledTableRow } from './../../../admin_components/AdminStyle'
 import DiaLogPopup from './../../../admin_components/DiaLogPopup'
@@ -322,6 +323,25 @@ const AdminOrder = props => {
                 )}
                 {!isView ? (
                     <div>
+                        <Paper
+                            component='form'
+                            sx={{
+                                p: '2px 4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                width: 400,
+                                marginBottom: '10px',
+                            }}
+                        >
+                            <InputBase
+                                sx={{ ml: 1, flex: 1 }}
+                                placeholder='Tìm kiếm đơn hàng'
+                                inputProps={{ 'aria-label': 'Tìm kiếm đơn hàng' }}
+                            />
+                            <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
+                                <SearchIcon />
+                            </IconButton>
+                        </Paper>
                         <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 700 }} aria-label='customized table'>
                                 <TableHead>
