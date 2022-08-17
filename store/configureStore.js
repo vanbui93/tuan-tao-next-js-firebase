@@ -10,7 +10,8 @@ const initalState = {}
 const middleware = [thunk]
 
 if (process.env.NODE_ENV === 'development') {
-  middleware.push(logger)
+    middleware.push(logger),
+        typeof window !== 'undefined' && window.devToolsExtension ? window.devToolsExtension() : f => f
 }
 
 export const store = createStore(rootReducer, initalState, composeWithDevTools(applyMiddleware(...middleware)))
