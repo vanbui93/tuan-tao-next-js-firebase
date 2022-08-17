@@ -67,10 +67,15 @@
 
         .header-inner {
             display: flex;
+            align-items: center;
         }
 
         .logo {
             margin-right: 20px;
+
+            >a {
+                display: block;
+            }
         }
 
         .search {
@@ -229,6 +234,10 @@
     }
 
     .logo-sp {
+        >a {
+            display: block;
+        }
+
         img {
             display: block;
             max-width: 200px;
@@ -252,6 +261,7 @@
 
     .search-form {
         position: relative;
+        text-align: center;
     }
 
     .text-input {

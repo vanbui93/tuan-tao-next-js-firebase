@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper'
-import { db } from './../../utils/firebase'
-import { onValue, ref } from 'firebase/database'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'swiper/css'
 
 export default function CustomerCmt(props) {
     const { comments } = props
+
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        if (comments && Object.keys(comments)?.length > 0) {
+            setLoading(false)
+        }
+    }, [comments])
 
     const params = {
         slidesPerView: 1,
@@ -31,32 +37,45 @@ export default function CustomerCmt(props) {
     }
 
     return (
-        <section className='customerCmt'>
-            <div className='container'>
-                <div className='page-title'>
-                    <h3>Nhận xét của khách hàng</h3>
-                </div>
+        <div className='container'>
+            <SkeletonTheme baseColor='#ccc' highlightColor='#fff' borderRadius='0.5rem'>
+                {loading && <Skeleton containerClassName='avatar-skeleton' className='page-title--seleketon' />}
+            </SkeletonTheme>
+            <div className='page-title' style={{ display: loading ? 'none' : undefined }}>
+                <h3>Nhận xét của khách hàng</h3>
+            </div>
+            <div className='customerCmtWrap--seleketon'>
+                <SkeletonTheme baseColor='#ccc' highlightColor='#fff' borderRadius='0.5rem'>
+                    {loading && <Skeleton containerClassName='avatar-skeleton' className='customerCmt--seleketon' />}
+                </SkeletonTheme>
+            </div>
+            <section className='customerCmt' style={{ display: loading ? 'none' : undefined }}>
                 <div className='customerCmt__swiper'>
                     <Swiper {...params} className='customerCmt__swiper-inner'>
-                        {Object.values(comments)?.map((cmt, idx) => {
-                            return (
-                                <SwiperSlide key={idx}>
-                                    <div className='customerCmt__item'>
-                                        <div className='customerCmt__img'>
-                                            <img src={cmt.image} alt='' />
+                        {comments &&
+                            Object.values(comments)?.map((cmt, idx) => {
+                                return (
+                                    <SwiperSlide key={idx}>
+                                        <div className='customerCmt__item'>
+                                            <div className='customerCmt__img'>
+                                                <img src={cmt.image} alt='' />
+                                            </div>
+                                            <div
+                                                className={
+                                                    loading ? 'customerCmt__info--sekeleton' : 'customerCmt__info'
+                                                }
+                                            >
+                                                <h3>{cmt.name}</h3>
+                                                <h4>{cmt.position}</h4>
+                                                <div className='customerCmt__note'>{cmt.content}</div>
+                                            </div>
                                         </div>
-                                        <div className='customerCmt__info'>
-                                            <h3>{cmt.name}</h3>
-                                            <h4>{cmt.position}</h4>
-                                            <div className='customerCmt__note'>{cmt.content}</div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                            )
-                        })}
+                                    </SwiperSlide>
+                                )
+                            })}
                     </Swiper>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     )
 }

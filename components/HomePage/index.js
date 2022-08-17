@@ -11,18 +11,7 @@ import CoreValue from '../CoreValue'
 import CustomerCmt from '../CustomerCmt'
 import HomeProduct from '../HomeProduct'
 import HomeSlide from '../HomeSlide'
-
-const Loading = () => {
-    return (
-        <div className='loader'>
-            <img src={'/assets/img/loading.gif'} />
-        </div>
-    )
-}
 function HomePage() {
-    const router = useRouter()
-    const [loading, setLoading] = useState(false)
-
     const dispatch = useDispatch()
     const products = useSelector(state => state.products.data)
     const allSlides = useSelector(state => state.slides.data)
@@ -53,28 +42,13 @@ function HomePage() {
         dispatch(getMain())
     }, [])
 
-    useEffect(() => {
-        if (mainData.length <= 0) {
-            setLoading(true)
-            setTimeout(() => {
-                setLoading(false)
-            }, 1500)
-        }
-    }, [])
-
     return (
-        <>
-            {loading ? (
-                <Loading />
-            ) : (
-                <LayoutUser>
-                    <HomeSlide slideImage={allSlides} />
-                    <HomeProduct products={products} />
-                    <CustomerCmt comments={cmts} />
-                    <CoreValue coreValue={mainData} />
-                </LayoutUser>
-            )}
-        </>
+        <LayoutUser>
+            <HomeSlide slideImage={allSlides} />
+            <HomeProduct products={products} />
+            <CustomerCmt comments={cmts} />
+            <CoreValue coreValue={mainData} />
+        </LayoutUser>
     )
 }
 HomePage.layout = 'L1'

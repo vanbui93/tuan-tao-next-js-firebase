@@ -1,15 +1,24 @@
+import { useEffect, useState } from 'react'
 import ProductItem from './../../components/ProductItem'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const HomeProduct = props => {
     const { products } = props
     let data = { ...products }
+
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        if (products && Object.keys(products)?.length > 0) {
+            setLoading(false)
+        }
+    }, [products])
 
     var arrayHomeProduct = []
     data !== null &&
         data !== undefined &&
         Object.keys(data)?.map(element => {
             const key = element
-            if (data[key] !== null) {
+            if (data[key] !== null && data[key].fullbox) {
                 const name = data[key].name ? data[key].name : ''
                 const price = data[key].price ? data[key].price : ''
                 const comparePrice = data[key].compare_price ? data[key].compare_price : ''
@@ -61,13 +70,19 @@ const HomeProduct = props => {
     return (
         <section className='collections'>
             <div className='home-collect01 container'>
-                <div className='page-title'>
+                <SkeletonTheme baseColor='#ccc' highlightColor='#fff' borderRadius='0.5rem'>
+                    {loading && <Skeleton containerClassName='avatar-skeleton' className='page-title--seleketon' />}
+                </SkeletonTheme>
+                <div className='page-title' style={{ display: loading ? 'none' : undefined }}>
                     <h3>iPhone Đã sử dụng</h3>
                 </div>
                 <ul className='collections__list'>{getDulieu(1, 15)}</ul>
             </div>
             <div className='home-collect02 container'>
-                <div className='page-title'>
+                <SkeletonTheme baseColor='#ccc' highlightColor='#fff' borderRadius='0.5rem'>
+                    {loading && <Skeleton containerClassName='avatar-skeleton' className='page-title--seleketon' />}
+                </SkeletonTheme>
+                <div className='page-title' style={{ display: loading ? 'none' : undefined }}>
                     <h3>iPhone New FullBox</h3>
                 </div>
                 <ul className='collections__list'>{getDulieu(2, 15)}</ul>

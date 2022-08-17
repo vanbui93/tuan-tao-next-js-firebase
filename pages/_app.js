@@ -10,6 +10,7 @@ import { createTheme } from '@material-ui/core'
 import { useEffect, useState } from 'react'
 // import Font Awesome CSS
 config.autoAddCss = false
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function MyApp({ Component, pageProps }) {
     const theme = createTheme({
