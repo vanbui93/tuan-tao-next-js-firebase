@@ -70,15 +70,12 @@ function AdminMedia(props) {
                 () => {
                     // Upload completed successfully, now we can get the download URL
                     getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-                        console.log(downloadURL)
                         resolve(allUrl.push({ downloadURL }))
                     })
                 }
             )
         })
     }
-
-    console.log(allUrl)
 
     return (
         <AdminStyle open={!opensidebar}>

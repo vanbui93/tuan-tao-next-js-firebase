@@ -53,8 +53,6 @@ const PageAdd = props => {
             ...prevState,
             [name]: value,
         }))
-
-        console.log(addPage)
     }
 
     setPrefix('')
