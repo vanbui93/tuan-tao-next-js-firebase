@@ -19,7 +19,8 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
-import { FormControlLabel, Stack, TextField } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import { FormControlLabel, IconButton, InputBase, Stack, TextField } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
@@ -47,6 +48,10 @@ const AdminProduct = props => {
     const allPromotions = useSelector(state => state.promotions.data)
     const { classes } = props
     let router = useRouter()
+
+    //Giá trị nhập vào input searchTerm, kết quả search searchResults
+    const [searchTerm, setSearchTerm] = useState('')
+    const [searchResults, setSearchResults] = useState([])
 
     //Thiết lập trạng thái DiaLog
     const [dialog, setDialog] = useState({
@@ -483,6 +488,19 @@ const AdminProduct = props => {
         setCurrentList([...allList].slice(0, pageLimit))
     }, [products])
 
+    //Kết quả Search
+    const handleSearch = e => {
+        let value = e.target.value
+        setSearchTerm(value)
+    }
+    useEffect(() => {
+        const results = arrayProduct?.filter(e => {
+            return Object.values(e).join('').toLowerCase().includes(searchTerm.toLowerCase())
+        })
+        setSearchResults(results)
+        setCurrentList([...results].slice(0, pageLimit))
+    }, [searchTerm, products])
+
     return (
         <AdminStyle open={!opensidebar}>
             <LayoutAdmin>
@@ -501,6 +519,27 @@ const AdminProduct = props => {
                                 &nbsp;&nbsp;Tạo sản phẩm
                             </Button>
                         </Grid>
+                        <Paper
+                            component='form'
+                            sx={{
+                                p: '2px 4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                width: 400,
+                                marginBottom: '10px',
+                            }}
+                        >
+                            <InputBase
+                                sx={{ ml: 1, flex: 1 }}
+                                placeholder='Tìm kiếm sản phẩm'
+                                value={searchTerm}
+                                inputProps={{ 'aria-label': 'Tìm kiếm sản phẩm' }}
+                                onChange={handleSearch}
+                            />
+                            <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
+                                <SearchIcon />
+                            </IconButton>
+                        </Paper>
                         <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 700 }} aria-label='customized table'>
                                 <TableHead>
