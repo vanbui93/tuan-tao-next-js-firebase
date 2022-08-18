@@ -66,7 +66,7 @@ function Sidebar(props) {
         },
         {
             path: '/dashboard/media',
-            name: 'Hình ảnh bài đăng',
+            name: 'Tệp tin - hình ảnh đã tải',
         },
     ]
 

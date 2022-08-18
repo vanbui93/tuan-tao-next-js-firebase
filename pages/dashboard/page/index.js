@@ -13,7 +13,7 @@ import {
     TableHead,
     TableRow,
     TextField,
-    withStyles
+    withStyles,
 } from '@material-ui/core'
 import AddIcon from '@mui/icons-material/Add'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -169,7 +169,7 @@ function AdminPage(props) {
     }
 
     function uploadImageCallBack(file) {
-        const imagesRef = ref(storage, `images/${file.name}`)
+        const imagesRef = ref(storage, `media/${file.name}`)
         const uploadTask = uploadBytesResumable(imagesRef, file)
 
         return new Promise((resolve, reject) => {

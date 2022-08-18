@@ -1,13 +1,13 @@
 import {
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  TextField,
-  withStyles
+    Button,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    TextField,
+    withStyles,
 } from '@material-ui/core'
 import { Stack } from '@mui/material'
 import { convertToRaw, EditorState } from 'draft-js'
@@ -53,8 +53,8 @@ const PageAdd = props => {
             ...prevState,
             [name]: value,
         }))
-      
-      console.log(addPage);
+
+        console.log(addPage)
     }
 
     setPrefix('')
@@ -84,7 +84,7 @@ const PageAdd = props => {
     }
 
     function uploadImageCallBack(file) {
-        const imagesRef = ref(storage, `images/${file.name}`)
+        const imagesRef = ref(storage, `media/${file.name}`)
         const uploadTask = uploadBytesResumable(imagesRef, file)
 
         return new Promise((resolve, reject) => {
