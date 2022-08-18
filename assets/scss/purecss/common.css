@@ -80,7 +80,6 @@ img {
 .sidebar-wrapper {
     display: flex;
     flex-direction: row;
-    height: 100vh;
 }
 
 @media screen and (min-width: 1024px) {

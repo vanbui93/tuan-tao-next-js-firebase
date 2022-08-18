@@ -40,6 +40,9 @@ const AdminOrder = props => {
     const allPromotions = useSelector(state => state.promotions.data)
     const { classes } = props
 
+    const [searchTerm, setSearchTerm] = useState('')
+    const [searchResults, setSearchResults] = useState([])
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getOrder())
@@ -311,6 +314,20 @@ const AdminOrder = props => {
         }
     }
 
+    const handleSearch = e => {
+        // let value = e.target.value
+        // setSearchTerm(value)
+        // console.log(value)
+    }
+
+    // useEffect(() => {
+    //     const results =
+    //         Object.entries(orders)?.filter(([key, val]) => {
+    //             return Object.values(val).join('').toLowerCase().includes(searchTerm.toLowerCase())
+    //         }) ?? []
+    //     setSearchResults(results)
+    // }, [searchTerm, orders])
+
     return (
         <AdminStyle open={!opensidebar}>
             <LayoutAdmin>
@@ -337,6 +354,7 @@ const AdminOrder = props => {
                                 sx={{ ml: 1, flex: 1 }}
                                 placeholder='Tìm kiếm đơn hàng'
                                 inputProps={{ 'aria-label': 'Tìm kiếm đơn hàng' }}
+                                onChange={handleSearch}
                             />
                             <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
                                 <SearchIcon />

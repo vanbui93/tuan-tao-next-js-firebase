@@ -54,6 +54,17 @@
   margin: 20px 0 30px;
 }
 
+.menu__item--seleketon {
+  >span {
+    display: flex;
+  }
+
+  .menu__link {
+    width: 100px !important;
+    margin: 20px;
+  }
+}
+
 @media screen and (max-width: 1023px) {
   .logo-sp--seleketon {
     width: 96px !important;
@@ -65,12 +76,12 @@
     padding: 15px;
 
     >span {
-      display: flex;
       justify-content: space-between;
     }
 
     .menu__link {
       width: 40px !important;
+      margin: 0;
     }
   }
 

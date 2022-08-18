@@ -62,7 +62,7 @@ export default function Header(props) {
     const handleSearch = e => {
         let value = e.target.value
         setSearchTerm(value)
-        setShowModal(false)
+        setShowModal(true)
     }
 
     useEffect(() => {
@@ -228,17 +228,23 @@ export default function Header(props) {
                     </div>
                 </div>
             </div>
+            {menuLoading && (
+                <div className='container-fluid'>
+                    <div className='menu-inner'>
+                        <div className='container'>
+                            <div className='menu__item--seleketon'>
+                                <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
+                                    <Skeleton height={12} className='menu__link' count={4} />
+                                </SkeletonTheme>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
             <nav className='menu'>
                 <div className='container-fluid'>
                     <div className='menu-inner'>
                         <div className='container'>
-                            {menuLoading && (
-                                <div className='menu__item--seleketon'>
-                                    <SkeletonTheme baseColor='#ccc' highlightColor='#fff' borderRadius='0.5rem'>
-                                        <Skeleton height={12} className='menu__link' count={4} />
-                                    </SkeletonTheme>
-                                </div>
-                            )}
                             <ul className='menu__list' style={{ display: menuLoading ? 'none' : undefined }}>
                                 {Object.values(menus)?.map((menu, idx) => {
                                     return (
@@ -265,12 +271,14 @@ export default function Header(props) {
                         id='search'
                         className='text-input'
                         onChange={handleSearch}
-                        onClick={handleSearch}
                         autoComplete='off'
                         style={{ display: loading ? 'none' : undefined }}
                     />
                     {listSearch()}
-                    {/* <button className="search-icon"><span className="blind">Search</span><i className="fa fa-search" aria-hidden="true" /></button> */}
+                    <button className='search-icon'>
+                        <span className='blind'>Search</span>
+                        <i className='fa fa-search' aria-hidden='true' />
+                    </button>
                 </form>
             </div>
         </header>
