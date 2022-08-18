@@ -17,21 +17,22 @@ import {
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
-import SearchIcon from '@mui/icons-material/Search'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
+import SearchIcon from '@mui/icons-material/Search'
 import { Checkbox, FormControlLabel, IconButton, InputBase, Stack, TextField } from '@mui/material'
 import Paper from '@mui/material/Paper'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import OrderSearchResult from '../../../admin_components/OrderSearchResult'
+import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { AdminStyle, StyledTableCell, StyledTableRow } from './../../../admin_components/AdminStyle'
 import DiaLogPopup from './../../../admin_components/DiaLogPopup'
 import PaginationButtons from './../../../admin_components/Pagination'
-import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { numberInputFormat } from './../../../utils/numberInputFormat'
-import numberWithCommas from './../../../utils/numberWithComas'
 import { deleteOrder, getOrder, updateOrder } from './../../../store/actions/order'
 import { getPromotions } from './../../../store/actions/promotions'
+import { numberInputFormat } from './../../../utils/numberInputFormat'
+import numberWithCommas from './../../../utils/numberWithComas'
 import styles from './styles'
-import LayoutAdmin from '../../../layouts/LayoutAdmin'
 
 const AdminOrder = props => {
     //get state from redux
@@ -172,13 +173,26 @@ const AdminOrder = props => {
 
     const onPageChanged = value => {
         let offset = (value - 1) * pageLimit
-        const currentList = [...allList].slice(offset, offset + pageLimit)
+        const currentList = [...searchResults].slice(offset, offset + pageLimit)
         setCurrentList(currentList)
     }
 
     useEffect(() => {
         setCurrentList([...allList].slice(0, pageLimit))
     }, [orders])
+
+    //Kết quả Search
+    const handleSearch = e => {
+        let value = e.target.value
+        setSearchTerm(value)
+    }
+    useEffect(() => {
+        const results = arrayOrder?.filter(e => {
+            return Object.values(e).join('').toLowerCase().includes(searchTerm.toLowerCase())
+        })
+        setSearchResults(results)
+        setCurrentList([...results].slice(0, pageLimit))
+    }, [searchTerm, orders])
 
     //Cick để edit đơn hàng
     const handleViewOrder = order => {
@@ -314,20 +328,6 @@ const AdminOrder = props => {
         }
     }
 
-    const handleSearch = e => {
-        // let value = e.target.value
-        // setSearchTerm(value)
-        // console.log(value)
-    }
-
-    // useEffect(() => {
-    //     const results =
-    //         Object.entries(orders)?.filter(([key, val]) => {
-    //             return Object.values(val).join('').toLowerCase().includes(searchTerm.toLowerCase())
-    //         }) ?? []
-    //     setSearchResults(results)
-    // }, [searchTerm, orders])
-
     return (
         <AdminStyle open={!opensidebar}>
             <LayoutAdmin>
@@ -353,6 +353,7 @@ const AdminOrder = props => {
                             <InputBase
                                 sx={{ ml: 1, flex: 1 }}
                                 placeholder='Tìm kiếm đơn hàng'
+                                value={searchTerm}
                                 inputProps={{ 'aria-label': 'Tìm kiếm đơn hàng' }}
                                 onChange={handleSearch}
                             />

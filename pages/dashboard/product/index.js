@@ -392,7 +392,7 @@ const AdminProduct = props => {
             //Xóa waranty có sẳn trong sản phẩm
             const newArrWithRemovedWaranty =
                 editObject.warantys.length &&
-                editObject.warantys.filter(e => {
+                editObject.warantys?.filter(e => {
                     return e.waranty_id !== warantyId
                 })
 
