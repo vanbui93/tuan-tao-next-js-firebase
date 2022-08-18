@@ -11,12 +11,12 @@ import CoreValue from '../CoreValue'
 import CustomerCmt from '../CustomerCmt'
 import HomeProduct from '../HomeProduct'
 import HomeSlide from '../HomeSlide'
-function HomePage() {
+function HomePage(props) {
     const dispatch = useDispatch()
     const products = useSelector(state => state.products.data)
     const allSlides = useSelector(state => state.slides.data)
     const cmts = useSelector(state => state.cmt.data)
-    const mainData = useSelector(state => state.main.data)
+    const { mainData } = props
 
     useEffect(() => {
         dispatch(getProduct())
@@ -36,10 +36,6 @@ function HomePage() {
 
     useEffect(() => {
         dispatch(getComments())
-    }, [])
-
-    useEffect(() => {
-        dispatch(getMain())
     }, [])
 
     return (
