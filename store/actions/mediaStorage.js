@@ -6,7 +6,6 @@ import {
     FETCH_STORAGE_REQUEST,
     FETCH_STORAGE_SUCCESS,
     DELETE_STORAGE_OBJECT,
-    ADD_STORAGE_OBJECT,
 } from '../constants/mediaStorage'
 
 //gọi api firebase

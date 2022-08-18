@@ -71,6 +71,7 @@ function AdminMedia(props) {
                     // Upload completed successfully, now we can get the download URL
                     getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
                         resolve(allUrl.push({ downloadURL }))
+                        dispatch(getMediaStorage())
                     })
                 }
             )
@@ -89,92 +90,93 @@ function AdminMedia(props) {
                             </Button>
                         </Grid>
                         <ImageList variant='quilted' cols={6} rowHeight={150}>
-                            {allUrl?.map((item, idx) => {
-                                const typePdf = item.split('.').pop().split('?')[0] == 'pdf'
-                                const typeTxt = item.split('.').pop().split('?')[0] == 'txt'
-                                const typeExcel = item.split('.').pop().split('?')[0] == 'xlsx'
-                                const typeJson = item.split('.').pop().split('?')[0] == 'json'
-                                const typeWord = item.split('.').pop().split('?')[0] == 'docx'
-                                const typePowerPoint = item.split('.').pop().split('?')[0] == 'pptx'
-                                const fileName = item.split('media%2F').pop().split('?')[0]
-                                return (
-                                    <div
-                                        key={idx}
-                                        style={{
-                                            paddingBottom: '20px',
-                                            marginBottom: '20px',
-                                            textAlign: 'right',
-                                            background: 'white',
-                                        }}
-                                    >
-                                        <ImageListItem key={idx}>
-                                            <Chip
-                                                label='Xóa tệp tin'
-                                                variant='outlined'
-                                                style={{
-                                                    position: 'absolute',
-                                                    top: '5px',
-                                                    right: '5px',
-                                                    background: '#fff',
-                                                }}
-                                                onDelete={() => handleDeleteMedia(item)}
-                                            />
-                                            {typePdf ? (
-                                                <img
-                                                    src={'/assets/img/pdf-file-icon.jpg'}
-                                                    className={classes.FileIcon}
+                            {allUrl &&
+                                allUrl?.map((item, idx) => {
+                                    const typePdf = item && item.split('.').pop().split('?')[0] == 'pdf'
+                                    const typeTxt = item && item.split('.').pop().split('?')[0] == 'txt'
+                                    const typeExcel = item && item.split('.').pop().split('?')[0] == 'xlsx'
+                                    const typeJson = item && item.split('.').pop().split('?')[0] == 'json'
+                                    const typeWord = item && item.split('.').pop().split('?')[0] == 'docx'
+                                    const typePowerPoint = item && item.split('.').pop().split('?')[0] == 'pptx'
+                                    const fileName = item && item.split('media%2F').pop().split('?')[0]
+                                    return (
+                                        <div
+                                            key={idx}
+                                            style={{
+                                                paddingBottom: '20px',
+                                                marginBottom: '20px',
+                                                textAlign: 'right',
+                                                background: 'white',
+                                            }}
+                                        >
+                                            <ImageListItem key={idx}>
+                                                <Chip
+                                                    label='Xóa tệp tin'
+                                                    variant='outlined'
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: '5px',
+                                                        right: '5px',
+                                                        background: '#fff',
+                                                    }}
+                                                    onDelete={() => handleDeleteMedia(item)}
                                                 />
-                                            ) : typeTxt ? (
-                                                <img
-                                                    src={'/assets/img/txt-file-icon.png'}
-                                                    className={classes.FileIcon}
-                                                />
-                                            ) : typeExcel ? (
-                                                <img
-                                                    src={'/assets/img/excel-file-icon.png'}
-                                                    className={classes.FileIcon}
-                                                />
-                                            ) : typeWord ? (
-                                                <img
-                                                    src={'/assets/img/word-file-icon.png'}
-                                                    className={classes.FileIcon}
-                                                />
-                                            ) : typePowerPoint ? (
-                                                <img
-                                                    src={'/assets/img/powerpoint-icon.png'}
-                                                    className={classes.FileIcon}
-                                                />
-                                            ) : typeJson ? (
-                                                <img
-                                                    src={'/assets/img/json-file-icon.png'}
-                                                    className={classes.FileIcon}
-                                                />
-                                            ) : (
-                                                <img
-                                                    {...srcset(item, 121)}
-                                                    loading='lazy'
-                                                    className={classes.FileIcon}
-                                                />
-                                            )}
-                                            <p className={classes.FileName}>{fileName}</p>
-                                            <Button
-                                                variant='outlined'
-                                                style={{
-                                                    position: 'absolute',
-                                                    bottom: '-20px',
-                                                    right: '5px',
-                                                    background: '#fff',
-                                                }}
-                                                onClick={() => {
-                                                    navigator.clipboard.writeText(item)
-                                                }}
-                                            >
-                                                Copy link
-                                            </Button>
-                                        </ImageListItem>
-                                    </div>
-                                )
-                            })}
+                                                {typePdf ? (
+                                                    <img
+                                                        src={'/assets/img/pdf-file-icon.jpg'}
+                                                        className={classes.FileIcon}
+                                                    />
+                                                ) : typeTxt ? (
+                                                    <img
+                                                        src={'/assets/img/txt-file-icon.png'}
+                                                        className={classes.FileIcon}
+                                                    />
+                                                ) : typeExcel ? (
+                                                    <img
+                                                        src={'/assets/img/excel-file-icon.png'}
+                                                        className={classes.FileIcon}
+                                                    />
+                                                ) : typeWord ? (
+                                                    <img
+                                                        src={'/assets/img/word-file-icon.png'}
+                                                        className={classes.FileIcon}
+                                                    />
+                                                ) : typePowerPoint ? (
+                                                    <img
+                                                        src={'/assets/img/powerpoint-icon.png'}
+                                                        className={classes.FileIcon}
+                                                    />
+                                                ) : typeJson ? (
+                                                    <img
+                                                        src={'/assets/img/json-file-icon.png'}
+                                                        className={classes.FileIcon}
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        {...srcset(item, 121)}
+                                                        loading='lazy'
+                                                        className={classes.FileIcon}
+                                                    />
+                                                )}
+                                                <p className={classes.FileName}>{fileName ? fileName : ''}</p>
+                                                <Button
+                                                    variant='outlined'
+                                                    style={{
+                                                        position: 'absolute',
+                                                        bottom: '-20px',
+                                                        right: '5px',
+                                                        background: '#fff',
+                                                    }}
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(item)
+                                                    }}
+                                                >
+                                                    Copy link
+                                                </Button>
+                                            </ImageListItem>
+                                        </div>
+                                    )
+                                })}
                         </ImageList>
                     </div>
                 ) : (
