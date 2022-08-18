@@ -15,13 +15,6 @@ export default function Header(props) {
     const showhamburger = useSelector(state => state.hambuger.showhamburger)
     const dispatch = useDispatch()
 
-    const [loading, setLoading] = useState(true)
-    useEffect(() => {
-        if (Object.keys(headerData)?.length > 0) {
-            setLoading(false)
-        }
-    }, [headerData])
-
     const openHambugerMenu = () => {
         dispatch(hamgugerActions.showHamburger())
     }
@@ -69,7 +62,7 @@ export default function Header(props) {
     const handleSearch = e => {
         let value = e.target.value
         setSearchTerm(value)
-        setShowModal(true)
+        setShowModal(false)
     }
 
     useEffect(() => {
@@ -89,6 +82,20 @@ export default function Header(props) {
             )
         )
     }
+
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        if (Object.keys(headerData)?.length > 0) {
+            setLoading(false)
+        }
+    }, [headerData])
+
+    const [menuLoading, setMenuLoading] = useState(true)
+    useEffect(() => {
+        if (Object.keys(menus)?.length > 0) {
+            setMenuLoading(false)
+        }
+    }, [menus])
 
     return (
         <header>
@@ -197,7 +204,7 @@ export default function Header(props) {
             <div className='header-sp'>
                 <div className='header-top'>
                     <div className='menu-hamberger'>
-                        <button className='hamberger' style={{ display: loading ? 'none' : undefined }}>
+                        <button className='hamberger'>
                             <span className='btn-hamberger' onClick={openHambugerMenu}></span>
                         </button>
                         {showhamburger && <MenuHamburger headerData={headerData} />}
@@ -225,7 +232,14 @@ export default function Header(props) {
                 <div className='container-fluid'>
                     <div className='menu-inner'>
                         <div className='container'>
-                            <ul className='menu__list'>
+                            {menuLoading && (
+                                <div className='menu__item--seleketon'>
+                                    <SkeletonTheme baseColor='#ccc' highlightColor='#fff' borderRadius='0.5rem'>
+                                        <Skeleton height={12} className='menu__link' count={4} />
+                                    </SkeletonTheme>
+                                </div>
+                            )}
+                            <ul className='menu__list' style={{ display: menuLoading ? 'none' : undefined }}>
                                 {Object.values(menus)?.map((menu, idx) => {
                                     return (
                                         <li className='menu__item' key={idx}>
