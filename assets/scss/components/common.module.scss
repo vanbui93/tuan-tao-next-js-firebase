@@ -58,20 +58,6 @@
     background-position: center;
 }
 
-.back-to-top {
-    display: inline-block;
-    position: fixed;
-    bottom: 120px;
-    right: 90px;
-}
-
-.to-top {
-    display: block;
-    background: url('./../../icon/back-to-top.png') center right no-repeat;
-    width: 70px;
-    height: 70px;
-}
-
 .promotion {
     &__item {
         margin-bottom: 7px;
