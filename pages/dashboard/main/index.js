@@ -475,21 +475,6 @@ const Main = props => {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className={classes.tbHeadLeft} variant='head'>
-                                            Số điện thoại
-                                        </TableCell>
-                                        <TableCell>
-                                            <TextField
-                                                id='outlined-size-small'
-                                                size='small'
-                                                fullWidth
-                                                defaultValue={editMain.phone}
-                                                name='phone'
-                                                onChange={handleEditOnchage}
-                                            />
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell className={classes.tbHeadLeft} variant='head'>
                                             Tiêu đề trang
                                         </TableCell>
                                         <TableCell>
@@ -499,6 +484,21 @@ const Main = props => {
                                                 fullWidth
                                                 defaultValue={editMain.page_title}
                                                 name='page_title'
+                                                onChange={handleEditOnchage}
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell className={classes.tbHeadLeft} variant='head'>
+                                            Số điện thoại
+                                        </TableCell>
+                                        <TableCell>
+                                            <TextField
+                                                id='outlined-size-small'
+                                                size='small'
+                                                fullWidth
+                                                defaultValue={editMain.phone}
+                                                name='phone'
                                                 onChange={handleEditOnchage}
                                             />
                                         </TableCell>
