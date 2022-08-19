@@ -57,6 +57,14 @@ function HeaderAdmin(props) {
                                 <a className={classes.title}>Admin</a>
                             </Link>
                         </Typography>
+                        <Typography variant='h6' noWrap className={classes.viewWebsite}>
+                            <Link href={'/'}>
+                                <a target='_blank'>
+                                    Xem Website
+                                    <OpenInNewIcon />
+                                </a>
+                            </Link>
+                        </Typography>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
                             <IconButton
