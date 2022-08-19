@@ -30,7 +30,6 @@ import PaginationButtons from './../../../admin_components/Pagination'
 import { deleteOrder, getOrder, updateOrder } from './../../../store/actions/order'
 import { getPromotions } from './../../../store/actions/promotions'
 import { numberInputFormat } from './../../../utils/numberInputFormat'
-import numberWithCommas from './../../../utils/numberWithComas'
 import styles from './styles'
 
 const AdminOrder = props => {
@@ -395,7 +394,7 @@ const AdminOrder = props => {
                                                         </StyledTableCell>
                                                         <StyledTableCell>
                                                             {order.price
-                                                                ? `${numberWithCommas(order.price)} đ`
+                                                                ? `${numberInputFormat(order.price.toString())} đ`
                                                                 : 'Liên hệ'}
                                                         </StyledTableCell>
                                                         <StyledTableCell>

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import methods from 'validator'
 import LayoutUser from '../../layouts/LayoutUser'
 import { db } from '../../utils/firebase'
-import numberWithCommas from '../../utils/numberWithComas'
+import numberInputFormat from '../../utils/numberInputFormat'
 
 function Checkout(props) {
     const mainData = useSelector(state => state.main.data)
@@ -241,7 +241,7 @@ function Checkout(props) {
                                                 <span className='checkout__product-title'>Tạm tính</span>
                                                 <span>
                                                     {state.productPrice
-                                                        ? `${numberWithCommas(state.productPrice)} đ`
+                                                        ? `${numberInputFormat(state.productPrice.toString())} đ`
                                                         : 'Liên hệ'}
                                                 </span>
                                             </div>

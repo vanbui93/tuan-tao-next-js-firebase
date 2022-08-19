@@ -1,7 +1,6 @@
 import { onValue, ref } from 'firebase/database'
 import parse from 'html-react-parser'
 import { useEffect, useState } from 'react'
-import numberWithCommas from '../../utils/numberWithComas'
 import { db } from './../../utils/firebase'
 
 import { faShield } from '@fortawesome/free-solid-svg-icons'
@@ -21,6 +20,7 @@ import { getPromotions } from './../../store/actions/promotions'
 import { getSkus } from './../../store/actions/skus'
 import { getVideo } from './../../store/actions/videos'
 import { getWarantys } from './../../store/actions/warantys'
+import { numberInputFormat } from '../../utils/numberInputFormat'
 
 export default function ProductDetail(props) {
     const [skus, setSkus] = useState({})
@@ -299,7 +299,7 @@ export default function ProductDetail(props) {
                                         <div className='product-detail__current-price'>
                                             <strong>
                                                 {product.price
-                                                    ? `${numberWithCommas(product.price)} đ`
+                                                    ? `${numberInputFormat(product.price.toString())} đ`
                                                     : `Liên hệ : ${mainData?.phone ? mainData?.phone : ''}`}
                                             </strong>
                                             &nbsp;&nbsp; | <i>Giá đã bao gồm 10% VAT</i>
