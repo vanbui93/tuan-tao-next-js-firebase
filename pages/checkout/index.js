@@ -1,14 +1,16 @@
 import { ref, set } from 'firebase/database'
-import methods from 'validator'
-import { db } from '../../utils/firebase'
+import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter, withRouter } from 'next/router'
 import { useState } from 'react'
-import numberWithCommas from '../../utils/numberWithComas'
-import Link from 'next/link'
+import { useSelector } from 'react-redux'
+import methods from 'validator'
 import LayoutUser from '../../layouts/LayoutUser'
-import Head from 'next/head'
+import { db } from '../../utils/firebase'
+import numberWithCommas from '../../utils/numberWithComas'
 
 function Checkout(props) {
+    const mainData = useSelector(state => state.main.data)
     const state = props.router.query
     const [orderData, setOrderData] = useState({
         id: '',
@@ -190,7 +192,7 @@ function Checkout(props) {
         <div>
             <Head>
                 <title>Thanh toán</title>
-                <meta name='description' content='Tuấn táo apple - Thanh toán' />
+                <meta name='description' content={`${mainData?.page_title} - Thanh toán`} />
                 <meta
                     name='viewport'
                     content='width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0'

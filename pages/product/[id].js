@@ -6,6 +6,7 @@ import { db } from './../../utils/firebase'
 
 import { faShield } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,7 +21,6 @@ import { getPromotions } from './../../store/actions/promotions'
 import { getSkus } from './../../store/actions/skus'
 import { getVideo } from './../../store/actions/videos'
 import { getWarantys } from './../../store/actions/warantys'
-import Head from 'next/head'
 
 export default function ProductDetail(props) {
     const [skus, setSkus] = useState({})
@@ -277,7 +277,11 @@ export default function ProductDetail(props) {
         <div>
             <Head>
                 <title>{`${product?.name}`}</title>
-                <meta name='description' content={`Tuấn táo apple - ${product?.name}`} />
+                <meta name='description' content={`${mainData?.page_title} - ${product?.name}`} />
+                <meta
+                    name='viewport'
+                    content='width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0'
+                />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <LayoutUser>

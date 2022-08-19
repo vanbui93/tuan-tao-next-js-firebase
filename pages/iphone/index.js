@@ -1,11 +1,13 @@
 import { onValue, ref } from 'firebase/database'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import LayoutUser from '../../layouts/LayoutUser'
 import { db } from '../../utils/firebase'
 import ProductItem from './../../components/ProductItem'
 
 export default function Iphone() {
+    const mainData = useSelector(state => state.main.data)
     const [products, setProducts] = useState({})
     //Lấy tất cả sản phẩm từ bảng `products`
     useEffect(() => {
@@ -47,7 +49,7 @@ export default function Iphone() {
         <div>
             <Head>
                 <title>iPhone</title>
-                <meta name='description' content='Tuấn táo apple - iPhone' />
+                <meta name='description' content={`${mainData?.page_title} - iPhone`} />
                 <meta
                     name='viewport'
                     content='width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0'

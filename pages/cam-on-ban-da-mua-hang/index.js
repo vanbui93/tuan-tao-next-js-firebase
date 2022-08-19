@@ -6,11 +6,12 @@ import numberWithCommas from '../../utils/numberWithComas'
 
 function ThankYou(props) {
     const state = props.router.query
+    const mainData = useSelector(state => state.main.data)
     return (
         <div>
             <Head>
                 <title>Cảm ơn bạn đã mua hàng</title>
-                <meta name='description' content='Tuấn táo apple - Cảm ơn bạn đã mua hàng' />
+                <meta name='description' content={`${mainData?.page_title} - Cảm ơn bạn đã mua hàng`} />
                 <meta
                     name='viewport'
                     content='width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0'

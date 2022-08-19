@@ -8,6 +8,7 @@ import { getPageDetail } from './../../store/actions/page'
 
 export default function PagesContent() {
     const pageData = useSelector(state => state.page.data)
+    const mainData = useSelector(state => state.main.data)
     const router = useRouter()
     const { slug } = router.query
     const dispatch = useDispatch()
@@ -24,7 +25,7 @@ export default function PagesContent() {
             <div>
                 <Head>
                     <title>{currentPage?.name}</title>
-                    <meta name='description' content={`Tuấn táo apple - ${currentPage?.name}`} />
+                    <meta name='description' content={`${mainData?.page_title} - ${currentPage?.name}`} />
                     <meta
                         name='viewport'
                         content='width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0'

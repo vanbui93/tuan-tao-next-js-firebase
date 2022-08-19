@@ -1,11 +1,13 @@
 import { onValue, ref } from 'firebase/database'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import LayoutUser from '../../layouts/LayoutUser'
 import { db } from '../../utils/firebase'
 import ProductItem from './../../components/ProductItem'
 
 export default function Accessories() {
+    const mainData = useSelector(state => state.main.data)
     const [products, setProducts] = useState({})
     //Lấy tất cả sản phẩm từ bảng `products`
     useEffect(() => {
@@ -47,7 +49,7 @@ export default function Accessories() {
         <div>
             <Head>
                 <title>Phụ kiện điện thoại</title>
-                <meta name='description' content='Tuấn táo apple - Phụ kiện điện thoại' />
+                <meta name='description' content={`${mainData?.page_title} - Phụ kiện điện thoại`} />
                 <meta
                     name='viewport'
                     content='width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0'
