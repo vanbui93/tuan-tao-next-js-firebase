@@ -480,7 +480,7 @@ const AdminProduct = props => {
 
     const onPageChanged = value => {
         let offset = (value - 1) * pageLimit
-        const currentList = [...allList].slice(offset, offset + pageLimit)
+        const currentList = [...searchResults].slice(offset, offset + pageLimit)
         setCurrentList(currentList)
     }
 
