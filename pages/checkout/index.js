@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import methods from 'validator'
 import LayoutUser from '../../layouts/LayoutUser'
 import { db } from '../../utils/firebase'
-import numberInputFormat from '../../utils/numberInputFormat'
+import { numberInputFormat } from '../../utils/numberInputFormat'
 
 function Checkout(props) {
     const mainData = useSelector(state => state.main.data)
@@ -219,7 +219,7 @@ function Checkout(props) {
                                                 <span className='checkout__product-title'></span>
                                                 <span>
                                                     <Link href='/'>
-                                                        <img src={state.productImage} alt='' />
+                                                        <img src={state?.productImage} alt='' />
                                                     </Link>
                                                 </span>
                                             </div>
@@ -229,13 +229,13 @@ function Checkout(props) {
                                                     <dt className='variation__select-color'>Chọn màu:</dt>
                                                     {state.productColor && (
                                                         <dd className='variation__select-color'>
-                                                            <p>{state.productColor}</p>
+                                                            <p>{state?.productColor}</p>
                                                         </dd>
                                                     )}
                                                     <dt className='variation__select-memory'>Chọn dung lượng:</dt>
                                                     {state.productSku && (
                                                         <dd className='variation__select-memory'>
-                                                            <p>{state.productSku}</p>
+                                                            <p>{state?.productSku}</p>
                                                         </dd>
                                                     )}
                                                 </dl>
@@ -244,7 +244,7 @@ function Checkout(props) {
                                                 <span className='checkout__product-title'>Tạm tính</span>
                                                 <span>
                                                     {state.productPrice
-                                                        ? `${numberInputFormat(state.productPrice.toString())} đ`
+                                                        ? `${numberInputFormat(state.productPrice?.toString())} đ`
                                                         : 'Liên hệ'}
                                                 </span>
                                             </div>
@@ -263,7 +263,7 @@ function Checkout(props) {
                                                             type='text'
                                                             name='customer_name'
                                                             className='customer__input'
-                                                            value={orderData.customer_name}
+                                                            value={orderData?.customer_name}
                                                             autoComplete='off'
                                                             onChange={e => handleOnChange(e)}
                                                         />
