@@ -130,27 +130,30 @@ function Checkout(props) {
                 create_date: new Date().toString().replace(/GMT.*/g, ''),
             })
 
-            router.push({
-                pathname: '/cam-on-ban-da-mua-hang',
-                query: {
-                    id_order: key,
-                    product_image: state.productImage,
-                    product_name: state.productName,
-                    product_price: state.productPrice,
-                    product_newBox: state.productNewBox,
-                    product_fullbox: state.product_fullbox,
-                    product_sku: state.productSku ? state.productSku : '',
-                    color_id: state.productColor ? state.productColor : '',
-                    product_promotion: state.productPromotion,
-                    customer_name: orderData.customer_name,
-                    customer_address: orderData.customer_address,
-                    customer_city: orderData.customer_city,
-                    customer_phone: orderData.customer_phone,
-                    customer_email: orderData.customer_email,
-                    customer_notes: orderData.customer_notes,
-                    create_date: orderData.create_date,
+            router.push(
+                {
+                    pathname: '/cam-on-ban-da-mua-hang',
+                    query: {
+                        id_order: key,
+                        product_image: state.productImage,
+                        product_name: state.productName,
+                        product_price: state.productPrice,
+                        product_newBox: state.productNewBox,
+                        product_fullbox: state.product_fullbox,
+                        product_sku: state.productSku ? state.productSku : '',
+                        color_id: state.productColor ? state.productColor : '',
+                        product_promotion: state.productPromotion,
+                        customer_name: orderData.customer_name,
+                        customer_address: orderData.customer_address,
+                        customer_city: orderData.customer_city,
+                        customer_phone: orderData.customer_phone,
+                        customer_email: orderData.customer_email,
+                        customer_notes: orderData.customer_notes,
+                        create_date: orderData.create_date,
+                    },
                 },
-            })
+                '/cam-on-ban-da-mua-hang'
+            )
         } else {
             setErrorsMessage({
                 ...valiErrors(),

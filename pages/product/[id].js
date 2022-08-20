@@ -219,35 +219,41 @@ export default function ProductDetail(props) {
             dataColor.length !== undefined
         ) {
             if (isSkuSelected !== 'init' && isColorSelected !== 'init') {
-                router.push({
+                router.push(
+                    {
+                        pathname: '/checkout',
+                        query: {
+                            productName: product.name ? product.name : '',
+                            productPrice: product.price ? product.price : '',
+                            productNewBox: product.newBox ? product.newBox : '',
+                            productFullBox: product.fullbox ? product.fullbox : '',
+                            productSku: skuSelected ? skuSelected : [],
+                            productPromotion: product.promotions ? product.promotions : [],
+                            productColor: colorSelected ? colorSelected : [],
+                            productImage: getThumbnail(),
+                        },
+                    },
+                    '/checkout'
+                )
+            } else {
+                setSkuInvalid(true)
+                setColorInvalid(true)
+            }
+        } else {
+            router.push(
+                {
                     pathname: '/checkout',
                     query: {
                         productName: product.name ? product.name : '',
                         productPrice: product.price ? product.price : '',
                         productNewBox: product.newBox ? product.newBox : '',
                         productFullBox: product.fullbox ? product.fullbox : '',
-                        productSku: skuSelected ? skuSelected : [],
                         productPromotion: product.promotions ? product.promotions : [],
-                        productColor: colorSelected ? colorSelected : [],
                         productImage: getThumbnail(),
                     },
-                })
-            } else {
-                setSkuInvalid(true)
-                setColorInvalid(true)
-            }
-        } else {
-            router.push({
-                pathname: '/checkout',
-                query: {
-                    productName: product.name ? product.name : '',
-                    productPrice: product.price ? product.price : '',
-                    productNewBox: product.newBox ? product.newBox : '',
-                    productFullBox: product.fullbox ? product.fullbox : '',
-                    productPromotion: product.promotions ? product.promotions : [],
-                    productImage: getThumbnail(),
                 },
-            })
+                '/checkout'
+            )
         }
     }
 
