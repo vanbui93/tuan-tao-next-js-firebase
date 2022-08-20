@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import accountReducer from './account'
 import cmtReducer from './cmt'
+import collectionReducer from './collections'
 import colorsReducer from './colors'
 import mainReducer from './main'
 import menuReducer from './menus'
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     main: mainReducer,
     products: productReducer,
     product: productDetailReducer,
+    collection: collectionReducer,
     ui: uiReducer,
     hambuger: mobileMenuReducer,
     menu: menuReducer,

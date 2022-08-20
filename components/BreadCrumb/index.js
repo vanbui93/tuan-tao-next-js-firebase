@@ -13,14 +13,12 @@ export default function BreadCrumb(props) {
     useEffect(() => {
         dispatch(getMenu())
     }, [])
+
     const colllectName =
         menus.length &&
         menus?.filter(item => {
             return item.link.split('/')[1] == collection
         })
-    console.log(menus)
-    console.log(colllectName)
-    console.log(collection)
 
     return (
         <div className='container'>

@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import DiaLogPopup from '../../../admin_components/DiaLogPopup'
 import PaginationButtons from '../../../admin_components/Pagination'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
+import { getCollection } from '../../../store/actions/collection'
 import { getColors } from '../../../store/actions/colors'
 import { deleteProduct, getProduct, updateImgProduct, updateProduct } from '../../../store/actions/products'
 import { getPromotions } from '../../../store/actions/promotions'
@@ -46,6 +47,7 @@ const AdminProduct = props => {
     const allVideos = useSelector(state => state.videos.data)
     const allWarantys = useSelector(state => state.warantys.data)
     const allPromotions = useSelector(state => state.promotions.data)
+    const collectAll = useSelector(state => state.collection.data)
     const { classes } = props
     let router = useRouter()
 
@@ -81,12 +83,16 @@ const AdminProduct = props => {
         dispatch(getPromotions())
     }, [])
 
+    useEffect(() => {
+        dispatch(getCollection())
+    }, [])
+
     const [isEdit, setIsEdit] = useState(false)
     const [editObject, setEditObject] = useState({
         name: '',
         price: '',
         compare_price: '',
-        category: '',
+        collection: '',
         newBox: '',
         fullbox: '',
         colors: [],
@@ -111,7 +117,7 @@ const AdminProduct = props => {
             if (products[key] !== null) {
                 const name = products[key].name ? products[key].name : ''
                 const images = products[key].images ? products[key].images : ''
-                const category = products[key].category ? products[key].category : ''
+                const collection = products[key].collection ? products[key].collection : ''
                 const price = products[key].price ? products[key].price : ''
                 const compare_price = products[key].compare_price ? products[key].compare_price : ''
                 const newBox = products[key].newBox ? products[key].newBox : ''
@@ -128,7 +134,7 @@ const AdminProduct = props => {
                     id: key,
                     name: name,
                     images: images,
-                    category: category,
+                    collection: collection,
                     price: price,
                     compare_price: compare_price,
                     newBox: newBox,
@@ -568,9 +574,7 @@ const AdminProduct = props => {
                                                 <StyledTableCell align='left' className={classes.thumbnail}>
                                                     {getImgThumb(product?.images)}
                                                 </StyledTableCell>
-                                                <StyledTableCell>
-                                                    {product?.category === 1 ? 'iPhone' : 'Phụ kiện'}
-                                                </StyledTableCell>
+                                                <StyledTableCell>{product?.collection}</StyledTableCell>
                                                 <StyledTableCell>
                                                     {product?.fullbox === 1 ? 'Đã sử dụng' : 'Mới fullbox'}
                                                 </StyledTableCell>
@@ -814,12 +818,16 @@ const AdminProduct = props => {
                                                     <Select
                                                         labelId='demo-simple-select-label'
                                                         id='demo-simple-select'
-                                                        defaultValue={editObject.category}
-                                                        name='category'
+                                                        value={editObject.collection}
+                                                        name='collection'
                                                         onChange={handleEditOnchage}
                                                     >
-                                                        <MenuItem value={1}>Iphone</MenuItem>
-                                                        <MenuItem value={2}>Phụ kiện</MenuItem>
+                                                        {collectAll &&
+                                                            Object.values(collectAll)?.map((item, idx) => (
+                                                                <MenuItem value={item.collection} key={idx}>
+                                                                    {item.name}
+                                                                </MenuItem>
+                                                            ))}
                                                     </Select>
                                                 </FormControl>
                                             </TableCell>
