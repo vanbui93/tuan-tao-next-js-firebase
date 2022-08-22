@@ -46,6 +46,7 @@
         flex-direction: column;
         justify-content: center;
         width: calc(100% - 85px);
+        text-align: left;
     }
 
     &__price {
@@ -68,6 +69,7 @@
         .header-inner {
             display: flex;
             align-items: center;
+            justify-content: space-around;
         }
 
         .logo {
@@ -84,7 +86,7 @@
         }
 
         .search-form {
-            width: 450px;
+            width: 450*100/1920*1vw;
             padding: 6px 14px;
             position: relative;
 
