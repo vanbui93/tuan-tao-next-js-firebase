@@ -171,7 +171,9 @@ const AdminOrder = props => {
 
     const onPageChanged = value => {
         let offset = (value - 1) * pageLimit
-        const currentList = [...searchResults].slice(offset, offset + pageLimit)
+        const currentList = [...searchResults]
+            .slice(offset, offset + pageLimit)
+            .sort((a, b) => new Date(b.create_date) - new Date(a.create_date))
         setCurrentList(currentList)
     }
 
