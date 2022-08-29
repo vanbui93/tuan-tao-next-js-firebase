@@ -1,4 +1,9 @@
-import { FETCH_COLLECTIONS_REQUEST, FETCH_COLLECTIONS_SUCCESS, FETCH_COLLECTIONS_FAIL } from '../constants/collections'
+import {
+    FETCH_COLLECTIONS_FAIL,
+    FETCH_COLLECTIONS_REQUEST,
+    FETCH_COLLECTIONS_SUCCESS,
+    UPDATE_COLLECTIONS_SUCCESS,
+} from '../constants/collections'
 
 const initialState = {
     requesting: false,
@@ -27,6 +32,14 @@ const collectionReducer = (state = initialState, payload) => {
                 requesting: false,
                 success: false,
                 message: payload.message,
+            }
+        case UPDATE_COLLECTIONS_SUCCESS:
+            //update data sau hành động update
+            const oldState = Object.values(state.data)?.filter(e => e.id !== payload.collection.id)
+            const newState = [...oldState, payload.collection]
+            return {
+                ...state,
+                data: newState,
             }
         default:
             return state

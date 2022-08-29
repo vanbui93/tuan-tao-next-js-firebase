@@ -93,7 +93,6 @@ const AdminCollections = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteCollection(idCollectionRef.current))
-            dispatch(getCollection())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -118,7 +117,6 @@ const AdminCollections = props => {
         try {
             dispatch(updateCollection(editCollectionObject))
             setIsEdit(false)
-            dispatch(getCollection())
         } catch (err) {
             console.log(err)
         }

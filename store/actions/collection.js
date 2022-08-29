@@ -7,7 +7,9 @@ import {
     FETCH_COLLECTIONS_FAIL,
     FETCH_COLLECTIONS_REQUEST,
     FETCH_COLLECTIONS_SUCCESS,
-    UPDATE_COLLECTIONS_OBJECT,
+    UPDATE_COLLECTIONS_REQUEST,
+    UPDATE_COLLECTIONS_SUCCESS,
+    UPDATE_COLLECTIONS_FAIL,
 } from '../constants/collections'
 
 //gọi api firebase
@@ -75,14 +77,22 @@ export const deleteCollection = id => async dispatch => {
 export const updateCollection = collection => async dispatch => {
     try {
         dispatch({
-            type: UPDATE_COLLECTIONS_OBJECT,
+            type: UPDATE_COLLECTIONS_REQUEST,
         })
 
         const collectionUpdate = ref(db, `collections/${collection.id}`)
         update(collectionUpdate, collection).catch(error => {
             alert('Có lỗi xảy ra :' + error)
         })
+        dispatch({
+            type: UPDATE_COLLECTIONS_SUCCESS,
+            collection,
+        })
     } catch (error) {
         console.log(error)
+        dispatch({
+            type: UPDATE_COLLECTIONS_FAIL,
+            message: error,
+        })
     }
 }
