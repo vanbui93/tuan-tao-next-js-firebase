@@ -2,7 +2,8 @@ import { onValue, ref, remove, set, update } from 'firebase/database'
 import { db } from './../../utils/firebase'
 
 import {
-    ADD_COLLECTIONS_FAIL, ADD_COLLECTIONS_REQUEST,
+    ADD_COLLECTIONS_FAIL,
+    ADD_COLLECTIONS_REQUEST,
     ADD_COLLECTIONS_SUCCESS,
     DELETE_COLLECTIONS_FAIL,
     DELETE_COLLECTIONS_REQUEST,
@@ -12,7 +13,7 @@ import {
     FETCH_COLLECTIONS_SUCCESS,
     UPDATE_COLLECTIONS_FAIL,
     UPDATE_COLLECTIONS_REQUEST,
-    UPDATE_COLLECTIONS_SUCCESS
+    UPDATE_COLLECTIONS_SUCCESS,
 } from '../constants/collections'
 
 //gọi api firebase
@@ -52,12 +53,14 @@ export const addCollectionObject = (collection, id) => async dispatch => {
             type: ADD_COLLECTIONS_REQUEST,
         })
 
-        set(ref(db, 'collections/' + id), collection).catch(error => {
+        const newCollect = Object.assign(collection, { id })
+
+        set(ref(db, 'collections/' + id), newCollect).catch(error => {
             alert('Có lỗi xảy ra :' + error)
         })
         dispatch({
             type: ADD_COLLECTIONS_SUCCESS,
-            collect,
+            collection: newCollect,
         })
     } catch (error) {
         console.log(error)

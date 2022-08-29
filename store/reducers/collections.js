@@ -38,7 +38,7 @@ const collectionReducer = (state = initialState, payload) => {
         case DELETE_COLLECTIONS_SUCCESS:
             //Xóa data sau hành động xóa
             let deletedData = Object.values(state.data)?.filter(e => {
-                return payload.id !== e.id
+                return payload.id != e.id
             })
             return {
                 ...state,
