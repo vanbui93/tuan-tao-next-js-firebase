@@ -1,12 +1,13 @@
 import {
-    Button, Paper,
+    Button,
+    Paper,
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TableRow,
     TextField,
-    withStyles
+    withStyles,
 } from '@material-ui/core'
 import { Stack } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -45,7 +46,7 @@ const CollectionAdd = props => {
     const handleSaveCollect = async () => {
         try {
             dispatch(addCollectionObject(collection, Number(keyAdd)))
-            dispatch(getCollection())
+            // dispatch(getCollection())
             router.push('/dashboard/collection')
         } catch (err) {
             console.log(err)

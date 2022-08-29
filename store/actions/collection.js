@@ -2,14 +2,17 @@ import { onValue, ref, remove, set, update } from 'firebase/database'
 import { db } from './../../utils/firebase'
 
 import {
-    ADD_COLLECTIONS_OBJECT,
-    DELETE_COLLECTIONS_OBJECT,
+    ADD_COLLECTIONS_FAIL, ADD_COLLECTIONS_REQUEST,
+    ADD_COLLECTIONS_SUCCESS,
+    DELETE_COLLECTIONS_FAIL,
+    DELETE_COLLECTIONS_REQUEST,
+    DELETE_COLLECTIONS_SUCCESS,
     FETCH_COLLECTIONS_FAIL,
     FETCH_COLLECTIONS_REQUEST,
     FETCH_COLLECTIONS_SUCCESS,
-    UPDATE_COLLECTIONS_REQUEST,
-    UPDATE_COLLECTIONS_SUCCESS,
     UPDATE_COLLECTIONS_FAIL,
+    UPDATE_COLLECTIONS_REQUEST,
+    UPDATE_COLLECTIONS_SUCCESS
 } from '../constants/collections'
 
 //gọi api firebase
@@ -46,14 +49,22 @@ export const getCollection = () => async dispatch => {
 export const addCollectionObject = (collection, id) => async dispatch => {
     try {
         dispatch({
-            type: ADD_COLLECTIONS_OBJECT,
+            type: ADD_COLLECTIONS_REQUEST,
         })
 
         set(ref(db, 'collections/' + id), collection).catch(error => {
             alert('Có lỗi xảy ra :' + error)
         })
+        dispatch({
+            type: ADD_COLLECTIONS_SUCCESS,
+            collect,
+        })
     } catch (error) {
         console.log(error)
+        dispatch({
+            type: ADD_COLLECTIONS_FAIL,
+            message: error,
+        })
     }
 }
 
@@ -61,15 +72,23 @@ export const addCollectionObject = (collection, id) => async dispatch => {
 export const deleteCollection = id => async dispatch => {
     try {
         dispatch({
-            type: DELETE_COLLECTIONS_OBJECT,
+            type: DELETE_COLLECTIONS_REQUEST,
         })
 
         const collectionDelete = ref(db, `collections/${id}`)
         remove(collectionDelete).catch(error => {
             alert('Có lỗi xảy ra :' + error)
         })
+        dispatch({
+            type: DELETE_COLLECTIONS_SUCCESS,
+            id,
+        })
     } catch (error) {
         console.log(error)
+        dispatch({
+            type: DELETE_COLLECTIONS_FAIL,
+            message: error,
+        })
     }
 }
 
