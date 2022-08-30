@@ -94,7 +94,6 @@ const AdminSku = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteSku(idMenuRef.current))
-            dispatch(getSkus())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -119,7 +118,6 @@ const AdminSku = props => {
         try {
             dispatch(updateSku(editMenuObject))
             setIsEdit(false)
-            dispatch(getSkus())
         } catch (err) {
             console.log(err)
         }
