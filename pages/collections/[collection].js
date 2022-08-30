@@ -25,7 +25,7 @@ export default function Collections() {
 
     const colllectName =
         menus &&
-        menus?.filter(item => {
+        Object.values(menus)?.filter(item => {
             return item.link.split('/')[1] == collection
         })
 

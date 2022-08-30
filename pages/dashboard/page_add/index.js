@@ -59,8 +59,7 @@ const PageAdd = props => {
     const keyAdd = nextId()
     const handleSavePage = async () => {
         try {
-            dispatch(addPageObject(addPage, Number(keyAdd)))
-            dispatch(getPageDetail())
+            dispatch(addPageObject(addPage, Number(keyAdd).toString()))
             router.push('/dashboard/page')
         } catch (err) {
             console.log(err)

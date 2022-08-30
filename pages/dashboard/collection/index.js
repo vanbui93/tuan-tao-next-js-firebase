@@ -50,10 +50,11 @@ const AdminCollections = props => {
         Object.keys(collectAll)?.map(element => {
             const key = element
             if (collectAll[key] !== null) {
+                const id = collectAll[key].id ? collectAll[key].id : ''
                 const name = collectAll[key].name ? collectAll[key].name : ''
                 const collection = collectAll[key].collection ? collectAll[key].collection : ''
                 arrayCollection.push({
-                    id: key,
+                    id: id,
                     name: name,
                     collection: collection,
                 })

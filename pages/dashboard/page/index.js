@@ -72,6 +72,7 @@ function AdminPage(props) {
         Object.keys(pageData)?.map(element => {
             const key = element
             if (pageData[key] !== null) {
+                const id = pageData[key].id ? pageData[key].id : ''
                 const name = pageData[key].name ? pageData[key].name : ''
                 const slug = pageData[key].slug ? pageData[key].slug : ''
                 const content = pageData[key].content ? pageData[key].content : ''
@@ -79,7 +80,7 @@ function AdminPage(props) {
                 const create_date = pageData[key].create_date ? pageData[key].create_date : ''
                 const update_date = pageData[key].update_date ? pageData[key].update_date : ''
                 arrayPage.push({
-                    id: key,
+                    id: id,
                     name,
                     slug,
                     content,
@@ -127,7 +128,6 @@ function AdminPage(props) {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deletePageDetail(idPageRef.current))
-            dispatch(getPageDetail())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -152,7 +152,6 @@ function AdminPage(props) {
         try {
             dispatch(updatePageDetail(editPageObject))
             setIsEdit(false)
-            dispatch(getPageDetail())
         } catch (err) {
             console.log(err)
         }

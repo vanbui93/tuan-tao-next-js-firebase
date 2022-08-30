@@ -48,7 +48,7 @@ const collectionReducer = (state = initialState, payload) => {
             }
         case UPDATE_COLLECTIONS_SUCCESS:
             //update data sau hành động update
-            const oldState = Object.values(state.data)?.filter(e => e.id !== payload.collection.id)
+            const oldState = Object.values(state.data)?.filter(e => e.id != payload.collection.id)
             const newState = [...oldState, payload.collection]
             return {
                 ...state,

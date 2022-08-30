@@ -50,10 +50,11 @@ const AdminSku = props => {
         Object.keys(skus)?.map(element => {
             const key = element
             if (skus[key] !== null) {
+                const id = skus[key].id ? skus[key].id : ''
                 const memory = skus[key].memory ? skus[key].memory : ''
                 const data_sku = skus[key].data_sku ? skus[key].data_sku : ''
                 arraySku.push({
-                    id: key,
+                    id: id,
                     memory: memory,
                     data_sku: data_sku,
                 })

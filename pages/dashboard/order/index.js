@@ -94,6 +94,7 @@ const AdminOrder = props => {
         Object.keys(orders)?.map(element => {
             const key = element
             if (orders[key] !== null) {
+                const id = orders[key].id ? orders[key].id : ''
                 const productName = orders[key].product_name ? orders[key].product_name : ''
                 const productImg = orders[key].product_image ? orders[key].product_image : ''
                 const productPrice = orders[key].product_price ? orders[key].product_price : ''
@@ -110,7 +111,7 @@ const AdminOrder = props => {
                 const notes = orders[key].customer_notes ? orders[key].customer_notes : ''
                 const create_date = orders[key].create_date ? orders[key].create_date : ''
                 arrayOrder.push({
-                    id: key,
+                    id: id,
                     name: productName,
                     img: productImg,
                     price: productPrice,

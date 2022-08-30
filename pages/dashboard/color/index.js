@@ -50,10 +50,11 @@ const AdminColors = props => {
         Object.keys(colors)?.map(element => {
             const key = element
             if (colors[key] !== null) {
+                const id = colors[key].id ? colors[key].id : ''
                 const color_name = colors[key].color_name ? colors[key].color_name : ''
                 const data_color = colors[key].data_color ? colors[key].data_color : ''
                 arrayColor.push({
-                    id: key,
+                    id: id,
                     color_name: color_name,
                     data_color: data_color,
                 })

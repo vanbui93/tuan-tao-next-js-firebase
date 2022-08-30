@@ -53,12 +53,13 @@ const AdminCmts = props => {
         Object.keys(cmts)?.map(element => {
             const key = element
             if (cmts[key] !== null) {
+                const id = cmts[key].id ? cmts[key].id : ''
                 const name = cmts[key].name ? cmts[key].name : ''
                 const image = cmts[key].image ? cmts[key].image : ''
                 const content = cmts[key].content ? cmts[key].content : ''
                 const position = cmts[key].position ? cmts[key].position : ''
                 arrayComment.push({
-                    id: key,
+                    id: id,
                     name: name,
                     image: image,
                     content: content,

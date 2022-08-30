@@ -50,10 +50,11 @@ const AdminMenus = props => {
         Object.keys(menus)?.map(element => {
             const key = element
             if (menus[key] !== null) {
+                const id = menus[key].id ? menus[key].id : ''
                 const name = menus[key].name ? menus[key].name : ''
                 const link = menus[key].link ? menus[key].link : ''
                 arrayMenu.push({
-                    id: key,
+                    id: id,
                     name: name,
                     link: link,
                 })

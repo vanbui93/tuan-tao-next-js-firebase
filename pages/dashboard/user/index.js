@@ -51,11 +51,12 @@ const AdminUsers = props => {
         Object.keys(users)?.map(element => {
             const key = element
             if (users[key] !== null) {
+                const id = users[key].id ? users[key].id : ''
                 const name = users[key].name ? users[key].name : ''
                 const email = users[key].email ? users[key].email : ''
                 const pass = users[key].pass ? users[key].pass : ''
                 arrayUser.push({
-                    id: key,
+                    id: id,
                     name: name,
                     email: email,
                     pass: pass,

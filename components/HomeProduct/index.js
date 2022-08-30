@@ -19,6 +19,7 @@ const HomeProduct = props => {
         Object.keys(data)?.map(element => {
             const key = element
             if (data[key] !== null && data[key].fullbox) {
+                const id = data[key].id ? data[key].id : ''
                 const name = data[key].name ? data[key].name : ''
                 const price = data[key].price ? data[key].price : ''
                 const comparePrice = data[key].compare_price ? data[key].compare_price : ''
@@ -28,7 +29,7 @@ const HomeProduct = props => {
                 const promotions = data[key].promotions ? data[key].promotions : ''
                 const isDisplay = data[key].isDisplay ? data[key].isDisplay : ''
                 arrayHomeProduct.push({
-                    id: key,
+                    id: id,
                     name: name,
                     price: price,
                     comparePrice: comparePrice,

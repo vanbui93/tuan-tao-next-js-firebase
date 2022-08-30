@@ -115,6 +115,7 @@ const AdminProduct = props => {
         Object.keys(products)?.map(element => {
             const key = element
             if (products[key] !== null) {
+                const id = products[key].id ? products[key].id : ''
                 const name = products[key].name ? products[key].name : ''
                 const images = products[key].images ? products[key].images : ''
                 const collection = products[key].collection ? products[key].collection : ''
@@ -131,7 +132,7 @@ const AdminProduct = props => {
                 const updateDate = products[key].update_date ? products[key].update_date : ''
                 const isDisplay = products[key].isDisplay ? products[key].isDisplay : ''
                 arrayProduct.push({
-                    id: key,
+                    id: id,
                     name: name,
                     images: images,
                     collection: collection,

@@ -3,14 +3,15 @@ import { db } from './../../utils/firebase'
 
 import {
     ADD_MENUS_REQUEST,
+    ADD_MENUS_SUCCESS,
     DELETE_MENUS_FAIL,
     DELETE_MENUS_REQUEST,
     DELETE_MENUS_SUCCESS,
     FETCH_MENUS_FAIL,
     FETCH_MENUS_REQUEST,
     FETCH_MENUS_SUCCESS,
-    UPDATE_MENUS_REQUEST,
     UPDATE_MENUS_FAIL,
+    UPDATE_MENUS_REQUEST,
     UPDATE_MENUS_SUCCESS,
 } from '../constants/menus'
 
@@ -51,14 +52,14 @@ export const addMenuObject = (menu, id) => async dispatch => {
             type: ADD_MENUS_REQUEST,
         })
 
-        const newCollect = Object.assign(menu, { id })
+        const newMenu = Object.assign(menu, { id })
 
         set(ref(db, 'menus/' + id), menu).catch(error => {
             alert('Có lỗi xảy ra :' + error)
         })
         dispatch({
-            type: ADD_COLLECTIONS_SUCCESS,
-            menu: newCollect,
+            type: ADD_MENUS_SUCCESS,
+            menu: newMenu,
         })
     } catch (error) {
         console.log(error)

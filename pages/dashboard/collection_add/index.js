@@ -45,8 +45,7 @@ const CollectionAdd = props => {
     const keyAdd = nextId()
     const handleSaveCollect = async () => {
         try {
-            dispatch(addCollectionObject(collection, Number(keyAdd)))
-            // dispatch(getCollection())
+            dispatch(addCollectionObject(collection, Number(keyAdd).toString()))
             router.push('/dashboard/collection')
         } catch (err) {
             console.log(err)

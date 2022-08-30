@@ -48,7 +48,7 @@ const menuReducer = (state = initialState, payload) => {
             }
         case UPDATE_MENUS_SUCCESS:
             //update data sau hành động update
-            const oldState = Object.values(state.data)?.filter(e => e.id !== payload.menu.id)
+            const oldState = Object.values(state.data)?.filter(e => e.id != payload.menu.id)
             const newState = [...oldState, payload.menu]
             return {
                 ...state,
