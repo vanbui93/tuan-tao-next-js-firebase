@@ -94,7 +94,6 @@ const AdminColors = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteColor(idColorRef.current))
-            dispatch(getColors())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -119,7 +118,6 @@ const AdminColors = props => {
         try {
             dispatch(updateColor(editColorObject))
             setIsEdit(false)
-            dispatch(getColors())
         } catch (err) {
             console.log(err)
         }
