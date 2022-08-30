@@ -45,7 +45,7 @@ const UserAdd = props => {
     const keyAdd = nextId()
     const handleSaveAccount = async () => {
         try {
-            dispatch(addAccoutObject(user, Number(keyAdd)))
+            dispatch(addAccoutObject(user, Number(keyAdd).toString()))
             router.push('/dashboard/user')
         } catch (err) {
             console.log(err)

@@ -47,7 +47,7 @@ function ColorAdd(props) {
     const keyAdd = nextId()
     const handleSaveColor = async () => {
         try {
-            dispatch(addColorObject(color, Number(keyAdd)))
+            dispatch(addColorObject(color, Number(keyAdd).toString()))
             router.push('/dashboard/color')
         } catch (err) {
             console.log(err)

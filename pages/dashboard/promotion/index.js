@@ -90,7 +90,6 @@ const AdminPromotion = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deletePromotion(idPromotionRef.current))
-            dispatch(getPromotions())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -115,7 +114,6 @@ const AdminPromotion = props => {
         try {
             dispatch(updatePromotion(editPromotionObject))
             setIsEdit(false)
-            dispatch(getPromotions())
         } catch (err) {
             console.log(err)
         }

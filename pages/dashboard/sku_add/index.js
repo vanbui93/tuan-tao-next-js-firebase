@@ -45,7 +45,7 @@ function SkuAdd(props) {
     const keyAdd = nextId()
     const handleSaveSku = async () => {
         try {
-            dispatch(addSkuObject(sku, Number(keyAdd)))
+            dispatch(addSkuObject(sku, Number(keyAdd).toString()))
             router.push('/dashboard/sku')
         } catch (err) {
             console.log(err)

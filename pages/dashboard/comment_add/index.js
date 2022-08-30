@@ -48,7 +48,7 @@ const CmtAdd = props => {
     const keyAdd = nextId()
     const handleSaveAccount = async () => {
         try {
-            dispatch(addCommentObject(cmt, Number(keyAdd)))
+            dispatch(addCommentObject(cmt, Number(keyAdd).toString()))
             router.push('/dashboard/comment')
         } catch (err) {
             console.log(err)
