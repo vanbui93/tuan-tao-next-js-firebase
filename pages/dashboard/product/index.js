@@ -30,7 +30,7 @@ import PaginationButtons from '../../../admin_components/Pagination'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
 import { getCollection } from '../../../store/actions/collection'
 import { getColors } from '../../../store/actions/colors'
-import { deleteProduct, getProduct, updateImgProduct, updateProduct } from '../../../store/actions/products'
+import { deleteProduct, getProduct, updateProduct } from '../../../store/actions/products'
 import { getPromotions } from '../../../store/actions/promotions'
 import { getSkus } from '../../../store/actions/skus'
 import { getVideo } from '../../../store/actions/videos'
@@ -90,6 +90,7 @@ const AdminProduct = props => {
     const [isEdit, setIsEdit] = useState(false)
     const [editObject, setEditObject] = useState({
         name: '',
+        images: [],
         price: '',
         compare_price: '',
         collection: '',
@@ -103,6 +104,7 @@ const AdminProduct = props => {
         update_date: '',
         isDisplay: '1',
     })
+
     const [imgsSrc, setImgsSrc] = useState([])
 
     useEffect(() => {
@@ -203,8 +205,7 @@ const AdminProduct = props => {
     //Submit edit
     const handleEditSubmit = async () => {
         try {
-            dispatch(updateProduct(editObject))
-            dispatch(updateImgProduct(editObject.id, imgsSrc))
+            dispatch(updateProduct(editObject, imgsSrc))
             setIsEdit(false)
         } catch (err) {
             console.log(err)

@@ -75,7 +75,7 @@ export const deleteProduct = id => async dispatch => {
 }
 
 //Update sản phẩm
-export const updateProduct = product => async dispatch => {
+export const updateProduct = (product, images) => async dispatch => {
     try {
         dispatch({
             type: UPDATE_PRODUCT_REQUEST,
@@ -84,6 +84,7 @@ export const updateProduct = product => async dispatch => {
         const productUpdate = ref(db, `products/${product.id}`)
         const valueUpdate = {
             ...product,
+            images: images,
             update_date: new Date().toString().replace(/GMT.*/g, ''),
         }
         update(productUpdate, valueUpdate)
@@ -100,22 +101,6 @@ export const updateProduct = product => async dispatch => {
         console.log(error)
     }
 }
-
-//Update hình sản phẩm
-export const updateImgProduct = (id, images) => async dispatch => {
-    try {
-        dispatch({
-            type: UPDATE_IMGs_PRODUCT_OBJECT,
-        })
-        const productImgRef = ref(db, `products/${id}`)
-        update(productImgRef, {
-            images: images,
-        })
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 //Thêm sản phẩm
 export const addProductObject = (product, id) => async dispatch => {
     try {
