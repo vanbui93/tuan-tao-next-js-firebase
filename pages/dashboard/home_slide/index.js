@@ -38,6 +38,7 @@ const AdminSlide = props => {
 
     const [isEdit, setIsEdit] = useState(false)
     const [editSlideObject, setEditSlideObject] = useState({
+        id: '',
         image_url: '',
         text: '',
     })
@@ -94,7 +95,6 @@ const AdminSlide = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteSlide(idSlideRef.current))
-            dispatch(getSlides())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -119,7 +119,6 @@ const AdminSlide = props => {
         try {
             dispatch(updateSlide(editSlideObject))
             setIsEdit(false)
-            dispatch(getSlides())
         } catch (err) {
             console.log(err)
         }

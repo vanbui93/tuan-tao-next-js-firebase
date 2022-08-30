@@ -11,7 +11,7 @@ import {
     FETCH_PRODUCTS_FAIL,
     FETCH_PRODUCTS_REQUEST,
     FETCH_PRODUCTS_SUCCESS,
-    UPDATE_IMGs_PRODUCT_OBJECT,
+    UPDATE_PRODUCT_FAIL,
     UPDATE_PRODUCT_REQUEST,
     UPDATE_PRODUCT_SUCCESS,
 } from '../constants/products'
@@ -56,7 +56,6 @@ export const deleteProduct = id => async dispatch => {
         const productDelete = ref(db, `products/${id}`)
         remove(productDelete)
             .then(() => {
-                console.log('Đã xóa sản phẩm thành công sản phẩm', id)
                 dispatch({
                     type: DELETE_PRODUCT_SUCCESS,
                     id,
@@ -99,6 +98,10 @@ export const updateProduct = (product, images) => async dispatch => {
             })
     } catch (error) {
         console.log(error)
+        dispatch({
+            type: UPDATE_PRODUCT_FAIL,
+            message: error,
+        })
     }
 }
 //Thêm sản phẩm

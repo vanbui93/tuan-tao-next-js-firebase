@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from 'react'
 import nextId, { setPrefix } from 'react-id-generator'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
-import { addSlideObject, getSlides } from '../../../store/actions/slides'
+import { addSlideObject } from '../../../store/actions/slides'
 import { AdminStyle } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 
@@ -35,9 +35,8 @@ function SlideAdd(props) {
     const keyAdd = nextId()
     const handleSaveSlide = async () => {
         try {
-            dispatch(addSlideObject(slide, Number(keyAdd)))
-            dispatch(getSlides())
-            router.push('/dashboard/slide')
+            dispatch(addSlideObject(slide, Number(keyAdd).toString()))
+            router.push('/dashboard/home_slide')
         } catch (err) {
             console.log(err)
         }
