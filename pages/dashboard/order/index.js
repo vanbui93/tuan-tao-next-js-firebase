@@ -64,7 +64,7 @@ const AdminOrder = props => {
         promotion: [],
         img: '',
         price: '',
-        category: '',
+        collection: '',
         newBox: '',
         fullbox: '',
         notes: '',

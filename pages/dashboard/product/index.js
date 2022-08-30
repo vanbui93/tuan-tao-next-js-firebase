@@ -172,7 +172,6 @@ const AdminProduct = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteProduct(idRef.current))
-            dispatch(getProduct())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -207,7 +206,6 @@ const AdminProduct = props => {
             dispatch(updateProduct(editObject))
             dispatch(updateImgProduct(editObject.id, imgsSrc))
             setIsEdit(false)
-            dispatch(getProduct())
         } catch (err) {
             console.log(err)
         }
