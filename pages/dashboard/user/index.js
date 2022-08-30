@@ -97,7 +97,6 @@ const AdminUsers = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteUser(idUserRef.current))
-            dispatch(getUser())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -122,7 +121,6 @@ const AdminUsers = props => {
         try {
             dispatch(updateUser(editUserObject))
             setIsEdit(false)
-            dispatch(getUser())
         } catch (err) {
             console.log(err)
         }

@@ -2,6 +2,7 @@ import { onValue, ref, remove, set, update } from 'firebase/database'
 import { db } from './../../utils/firebase'
 
 import {
+    ADD_CMT_FAIL,
     ADD_CMT_REQUEST,
     ADD_CMT_SUCCESS,
     DELETE_CMT_FAIL,
@@ -66,6 +67,10 @@ export const addCommentObject = (cmt, id) => async dispatch => {
         })
     } catch (error) {
         console.log(error)
+        dispatch({
+            type: ADD_CMT_FAIL,
+            message: error,
+        })
     }
 }
 
