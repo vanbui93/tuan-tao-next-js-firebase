@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { withRouter } from 'next/router'
 import React from 'react'
 import LayoutUser from '../../layouts/LayoutUser'
+import { useSelector } from 'react-redux'
 import { numberInputFormat } from '../../utils/numberInputFormat'
 
 function ThankYou(props) {

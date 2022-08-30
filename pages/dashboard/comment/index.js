@@ -101,7 +101,6 @@ const AdminCmts = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteComment(idCmtRef.current))
-            dispatch(getComments())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -126,7 +125,6 @@ const AdminCmts = props => {
         try {
             dispatch(updateComment(editCmtObject))
             setIsEdit(false)
-            dispatch(getComments())
         } catch (err) {
             console.log(err)
         }
