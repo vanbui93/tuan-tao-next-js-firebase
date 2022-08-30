@@ -93,7 +93,6 @@ const AdminMenus = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteMenu(idMenuRef.current))
-            dispatch(getMenu())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -118,7 +117,6 @@ const AdminMenus = props => {
         try {
             dispatch(updateMenu(editMenuObject))
             setIsEdit(false)
-            dispatch(getMenu())
         } catch (err) {
             console.log(err)
         }
