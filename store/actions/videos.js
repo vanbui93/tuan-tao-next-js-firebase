@@ -62,7 +62,7 @@ export const addVideoObject = (video, id) => async dispatch => {
             .then(() => {
                 dispatch({
                     type: ADD_VIDEOS_SUCCESS,
-                    product: valueAdd,
+                    video: valueAdd,
                 })
             })
             .catch(error => {

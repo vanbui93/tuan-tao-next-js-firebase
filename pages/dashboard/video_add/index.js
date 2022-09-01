@@ -16,7 +16,7 @@ import React, { useState } from 'react'
 import nextId, { setPrefix } from 'react-id-generator'
 import { useDispatch, useSelector } from 'react-redux'
 import LayoutAdmin from '../../../layouts/LayoutAdmin'
-import { addVideoObject, getVideo } from '../../../store/actions/videos'
+import { addVideoObject } from '../../../store/actions/videos'
 import { AdminStyle } from './../../../admin_components/AdminStyle'
 import styles from './styles'
 

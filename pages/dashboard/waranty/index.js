@@ -90,7 +90,6 @@ const AdminWaranty = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteWaranty(idWarantyRef.current))
-            dispatch(getWarantys())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -115,7 +114,6 @@ const AdminWaranty = props => {
         try {
             dispatch(updateWaranty(editWarantyObject))
             setIsEdit(false)
-            dispatch(getWarantys())
         } catch (err) {
             console.log(err)
         }
