@@ -93,7 +93,6 @@ const AdminColor = props => {
     const areUSureDelete = status => {
         if (status) {
             dispatch(deleteVideo(idVideoRef.current))
-            dispatch(getVideo())
             handleDialog('', false)
         } else {
             handleDialog('', false)
@@ -118,7 +117,6 @@ const AdminColor = props => {
         try {
             dispatch(updateVideo(editVideoObject))
             setIsEdit(false)
-            dispatch(getVideo())
         } catch (err) {
             console.log(err)
         }

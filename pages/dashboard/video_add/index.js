@@ -47,7 +47,6 @@ function VideoAdd(props) {
     const handleSaveVideo = async () => {
         try {
             dispatch(addVideoObject(video, Number(keyAdd).toString()))
-            dispatch(getVideo())
             router.push('/dashboard/video', { replace: true })
         } catch (err) {
             console.log(err)
