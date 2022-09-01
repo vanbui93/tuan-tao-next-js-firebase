@@ -1,4 +1,9 @@
-import { FETCH_STORAGE_REQUEST, FETCH_STORAGE_SUCCESS, FETCH_STORAGE_FAIL } from '../constants/mediaStorage'
+import {
+    FETCH_STORAGE_REQUEST,
+    FETCH_STORAGE_SUCCESS,
+    FETCH_STORAGE_FAIL,
+    DELETE_STORAGE_SUCCESS,
+} from '../constants/mediaStorage'
 
 const initialState = {
     requesting: false,
@@ -27,6 +32,17 @@ const storageReducer = (state = initialState, payload) => {
                 requesting: false,
                 success: false,
                 message: payload.message,
+            }
+        case DELETE_STORAGE_SUCCESS:
+            //Xóa data sau hành động xóa
+            let deletedData = Object.values(state.data)?.filter(e => {
+                return payload.item != e.item
+            })
+            return {
+                ...state,
+                requesting: false,
+                success: true,
+                data: deletedData,
             }
         default:
             return state

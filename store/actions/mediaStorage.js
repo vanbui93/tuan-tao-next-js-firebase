@@ -6,6 +6,9 @@ import {
     FETCH_STORAGE_REQUEST,
     FETCH_STORAGE_SUCCESS,
     DELETE_STORAGE_OBJECT,
+    DELETE_STORAGE_REQUEST,
+    DELETE_STORAGE_FAIL,
+    DELETE_STORAGE_SUCCESS,
 } from '../constants/mediaStorage'
 
 //gọi api firebase
@@ -40,17 +43,25 @@ export const getMediaStorage = () => async dispatch => {
 export const deleteMediaStorage = itemFile => async dispatch => {
     try {
         dispatch({
-            type: DELETE_STORAGE_OBJECT,
+            type: DELETE_STORAGE_REQUEST,
         })
         const deletePhotoRef = ref(storage, itemFile)
         deleteObject(deletePhotoRef)
             .then(() => {
                 console.log('File deleted successfully')
+                dispatch({
+                    type: DELETE_STORAGE_SUCCESS,
+                    item: itemFile,
+                })
             })
             .catch(error => {
                 console.log(error.message)
             })
     } catch (error) {
         console.log(error)
+        dispatch({
+            type: DELETE_STORAGE_FAIL,
+            message: error,
+        })
     }
 }
