@@ -63,7 +63,7 @@ export const addAccoutObject = (user, id) => async dispatch => {
         })
         dispatch({
             type: ADD_USER_SUCCESS,
-            cmt: valueUpdate,
+            user: valueUpdate,
         })
     } catch (error) {
         console.log(error)
