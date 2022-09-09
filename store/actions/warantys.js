@@ -16,7 +16,7 @@ import {
     UPDATE_WARANTYS_SUCCESS,
 } from '../constants/waranty'
 
-//load video
+//load waranty
 export const getWarantys = () => async dispatch => {
     try {
         dispatch({ type: FETCH_WARANTYS_REQUEST })
@@ -46,7 +46,7 @@ export const getWarantys = () => async dispatch => {
     }
 }
 
-//Thêm video
+//Thêm waranty
 export const addWarantyObject = (waranty, id) => async dispatch => {
     try {
         dispatch({
@@ -77,15 +77,15 @@ export const addWarantyObject = (waranty, id) => async dispatch => {
     }
 }
 
-//Xóa video
+//Xóa waranty
 export const deleteWaranty = id => async dispatch => {
     try {
         dispatch({
             type: DELETE_WARANTYS_REQUEST,
         })
 
-        const videoDelete = ref(db, `warantys/${id}`)
-        remove(videoDelete)
+        const warantyDelete = ref(db, `warantys/${id}`)
+        remove(warantyDelete)
             .then(() => {
                 dispatch({
                     type: DELETE_WARANTYS_SUCCESS,
@@ -104,15 +104,15 @@ export const deleteWaranty = id => async dispatch => {
     }
 }
 
-//Update video
-export const updateWaranty = video => async dispatch => {
+//Update waranty
+export const updateWaranty = waranty => async dispatch => {
     try {
         dispatch({
             type: UPDATE_WARANTYS_REQUEST,
         })
 
-        const videoUpdate = ref(db, `warantys/${video.id}`)
-        update(videoUpdate, video)
+        const warantyUpdate = ref(db, `warantys/${waranty.id}`)
+        update(warantyUpdate, waranty)
             .then(() => {
                 dispatch({
                     type: UPDATE_WARANTYS_SUCCESS,

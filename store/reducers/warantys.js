@@ -5,6 +5,7 @@ import {
     DELETE_WARANTYS_SUCCESS,
     UPDATE_WARANTYS_REQUEST,
     ADD_WARANTYS_SUCCESS,
+    UPDATE_WARANTYS_SUCCESS,
 } from '../constants/waranty'
 
 const initialState = {
@@ -46,10 +47,11 @@ const warantysReducer = (state = initialState, payload) => {
                 success: true,
                 data: deletedData,
             }
-        case UPDATE_WARANTYS_REQUEST:
+        case UPDATE_WARANTYS_SUCCESS:
             //update data sau hành động update
             const oldState = Object.values(state.data)?.filter(e => e.id != payload.waranty.id)
             const newState = [...oldState, payload.waranty]
+
             return {
                 ...state,
                 data: newState,

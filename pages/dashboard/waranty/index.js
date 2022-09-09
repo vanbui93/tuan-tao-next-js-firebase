@@ -38,6 +38,7 @@ const AdminWaranty = props => {
 
     const [isEdit, setIsEdit] = useState(false)
     const [editWarantyObject, setEditWarantyObject] = useState({
+        id: '',
         waranty_text: '',
     })
 
