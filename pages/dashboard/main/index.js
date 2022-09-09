@@ -253,8 +253,6 @@ const Main = props => {
         }
     }
 
-    console.log(mainData)
-
     return (
         <AdminStyle open={!opensidebar}>
             <LayoutAdmin>

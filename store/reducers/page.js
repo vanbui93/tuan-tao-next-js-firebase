@@ -40,9 +40,6 @@ const pageReducer = (state = initialState, payload) => {
             let deletedData = Object.values(state.data)?.filter(e => {
                 return payload.id !== e.id
             })
-            console.log(payload.id)
-            console.log(state.data)
-            console.log(deletedData)
             return {
                 ...state,
                 requesting: false,
