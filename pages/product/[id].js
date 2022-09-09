@@ -63,14 +63,8 @@ export default function ProductDetail(props) {
     }, [])
 
     const [isSkuSelected, setIsSkuSelected] = useState('init')
-    const setSkuValue = newValue => {
-        setIsSkuSelected({ ...isSkuSelected, value: newValue })
-    }
 
     const [isColorSelected, setIsColorSelected] = useState('init')
-    const setColorValue = newValue => {
-        setIsColorSelected({ ...isColorSelected, newValue })
-    }
 
     // Lấy phiên bản từ bảng màu `product_sku`
     useEffect(() => {
@@ -189,11 +183,13 @@ export default function ProductDetail(props) {
     const toggleClassSku = (index, skuId) => {
         setIsSkuSelected(index)
         setSkuSelected(skuId)
+        setSkuInvalid(false)
     }
 
     const toggleClassColor = (index, colorId) => {
         setIsColorSelected(index)
         setColorSelected(colorId)
+        setColorInvalid(false)
     }
 
     const getThumbnail = () => {
@@ -218,7 +214,7 @@ export default function ProductDetail(props) {
             dataColor.length !== undefined &&
             dataColor.length !== undefined
         ) {
-            if (isSkuSelected !== 'init' && isColorSelected !== 'init') {
+            if (isSkuSelected !== 'init' || isColorSelected !== 'init') {
                 router.push(
                     {
                         pathname: '/checkout',
@@ -327,7 +323,6 @@ export default function ProductDetail(props) {
                                                         Lựa chọn màu
                                                         {colorInvalid && (
                                                             <span className={colorInvalid ? 'option__highlight' : ''}>
-                                                                {' '}
                                                                 ( vui lòng chọn màu ! )
                                                             </span>
                                                         )}

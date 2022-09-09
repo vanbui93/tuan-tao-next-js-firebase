@@ -90,9 +90,6 @@ const AdminOrder = props => {
         product_fullbox: '',
     })
 
-    console.log('viewObject', viewObject)
-    console.log('editObject', editObject)
-
     var arrayOrder = []
     orders !== null &&
         orders !== undefined &&
