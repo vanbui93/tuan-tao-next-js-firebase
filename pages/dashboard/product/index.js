@@ -271,7 +271,7 @@ const AdminProduct = props => {
         editObject.colors?.length &&
         editObject.colors.map(item => {
             if (item !== null) {
-                return item.color_id
+                return item.id
             }
         })
 
@@ -282,7 +282,7 @@ const AdminProduct = props => {
             const newArrWithRemovedColor =
                 editObject.colors.length &&
                 editObject.colors.filter(e => {
-                    return e.color_id !== colorId
+                    return e.id !== colorId
                 })
 
             setEditObject(prevState => ({
@@ -294,9 +294,9 @@ const AdminProduct = props => {
             const colorIndex =
                 allColors !== null &&
                 allColors !== undefined &&
-                Object.values(allColors)?.filter(color => color.color_id === colorId)
+                Object.values(allColors)?.filter(color => color.id === colorId)
 
-            const newArrWithAddedColor = [...editObject.colors, { color_id: colorIndex[0].color_id }]
+            const newArrWithAddedColor = [...editObject.colors, { id: colorIndex[0].id }]
 
             setEditObject(prevState => ({
                 ...prevState,
@@ -310,7 +310,7 @@ const AdminProduct = props => {
         editObject.skus?.length &&
         editObject.skus.map(item => {
             if (item !== null) {
-                return item.sku_id
+                return item.id
             }
         })
     //Thêm/bớt dung lượng
@@ -320,7 +320,7 @@ const AdminProduct = props => {
             const newArrWithRemovedSku =
                 editObject.skus.length &&
                 editObject.skus.filter(e => {
-                    return e.sku_id !== skuId
+                    return e.id !== skuId
                 })
 
             setEditObject(prevState => ({
@@ -334,11 +334,11 @@ const AdminProduct = props => {
                 allSkus !== undefined &&
                 Object.values(allSkus)?.filter(sku => {
                     if (sku !== null && sku !== undefined) {
-                        return sku.sku_id === skuId
+                        return sku.id === skuId
                     }
                 })
 
-            const newArrWithAddedSku = [...editObject.skus, { sku_id: skuIndex[0].sku_id }]
+            const newArrWithAddedSku = [...editObject.skus, { id: skuIndex[0].id }]
 
             setEditObject(prevState => ({
                 ...prevState,
@@ -347,12 +347,12 @@ const AdminProduct = props => {
         }
     }
 
-    //Kiểm tra video_id có nằm trong danh sách video_id hay không
+    //Kiểm tra id có nằm trong danh sách id hay không
     const ckVideoIds =
         editObject.videos?.length &&
         editObject.videos.map(item => {
             if (item !== null) {
-                return item.video_id
+                return item.id
             }
         })
 
@@ -363,7 +363,7 @@ const AdminProduct = props => {
             const newArrWithRemovedVideo =
                 editObject.videos.length &&
                 editObject.videos.filter(e => {
-                    return e.video_id !== videoId
+                    return e.id !== videoId
                 })
 
             setEditObject(prevState => ({
@@ -371,16 +371,16 @@ const AdminProduct = props => {
                 videos: newArrWithRemovedVideo,
             }))
         } else {
-            //Thêm video_id vào bảng sản phẩm
+            //Thêm id vào bảng sản phẩm
             const videoIndex =
                 allVideos !== null &&
                 allVideos !== undefined &&
                 Object.values(allVideos)?.filter(video => {
                     if (video) {
-                        return video.video_id === videoId
+                        return video.id === videoId
                     }
                 })
-            const newArrWithAddedVideo = [...editObject.videos, { video_id: videoIndex[0].video_id }]
+            const newArrWithAddedVideo = [...editObject.videos, { id: videoIndex[0].id }]
 
             setEditObject(prevState => ({
                 ...prevState,
@@ -389,12 +389,12 @@ const AdminProduct = props => {
         }
     }
 
-    //Kiểm tra waranty_id có nằm trong danh sách waranty_id hay không
+    //Kiểm tra id có nằm trong danh sách id hay không
     const ckWarantyIds =
         editObject.warantys?.length &&
         editObject.warantys.map(item => {
             if (item !== null) {
-                return item.waranty_id
+                return item.id
             }
         })
     //Thêm/bớt waranty
@@ -404,7 +404,7 @@ const AdminProduct = props => {
             const newArrWithRemovedWaranty =
                 editObject.warantys.length &&
                 editObject.warantys?.filter(e => {
-                    return e.waranty_id !== warantyId
+                    return e.id !== warantyId
                 })
 
             setEditObject(prevState => ({
@@ -412,17 +412,17 @@ const AdminProduct = props => {
                 warantys: newArrWithRemovedWaranty,
             }))
         } else {
-            //Thêm waranty_id vào bảng sản phẩm
+            //Thêm id vào bảng sản phẩm
             const warantyIndex =
                 allWarantys !== null &&
                 allWarantys !== undefined &&
                 Object.values(allWarantys)?.filter(waranty => {
                     if (waranty) {
-                        return waranty.waranty_id === warantyId
+                        return waranty.id === warantyId
                     }
                 })
 
-            const newArrWithAddedWaranty = [...editObject.warantys, { waranty_id: warantyIndex[0].waranty_id }]
+            const newArrWithAddedWaranty = [...editObject.warantys, { id: warantyIndex[0].id }]
 
             setEditObject(prevState => ({
                 ...prevState,
@@ -431,12 +431,12 @@ const AdminProduct = props => {
         }
     }
 
-    //Kiểm tra promotion_id có nằm trong danh sách promotion_id hay không
+    //Kiểm tra id có nằm trong danh sách id hay không
     const ckPromotionIds =
         editObject.promotions?.length &&
         editObject.promotions?.map(item => {
             if (item !== null) {
-                return item.promotion_id
+                return item.id
             }
         })
     //Thêm/bớt promotion
@@ -446,7 +446,7 @@ const AdminProduct = props => {
             const newArrWithRemovedPromotion =
                 editObject.promotions.length &&
                 editObject.promotions?.filter(e => {
-                    return e.promotion_id !== promotionId
+                    return e.id !== promotionId
                 })
 
             setEditObject(prevState => ({
@@ -454,20 +454,17 @@ const AdminProduct = props => {
                 promotions: newArrWithRemovedPromotion,
             }))
         } else {
-            //Thêm promotion_id vào bảng sản phẩm
+            //Thêm id vào bảng sản phẩm
             const promotionIndex =
                 allPromotions !== null &&
                 allPromotions !== undefined &&
                 Object.values(allPromotions)?.filter(promotion => {
                     if (promotion !== null && promotion !== undefined) {
-                        return promotion.promotion_id === promotionId
+                        return promotion.id === promotionId
                     }
                 })
 
-            const newArrWithAddedPromotion = [
-                ...editObject.promotions,
-                { promotion_id: promotionIndex[0].promotion_id },
-            ]
+            const newArrWithAddedPromotion = [...editObject.promotions, { id: promotionIndex[0].id }]
 
             setEditObject(prevState => ({
                 ...prevState,
@@ -730,15 +727,13 @@ const AdminProduct = props => {
                                                                         control={
                                                                             <Checkbox
                                                                                 defaultChecked={ckColorIds?.includes(
-                                                                                    ckColor.color_id
+                                                                                    ckColor.id
                                                                                 )}
                                                                                 name='ckColor'
                                                                                 style={{
                                                                                     color: `${ckColor.data_color}`,
                                                                                 }}
-                                                                                onChange={handleChangeColor(
-                                                                                    ckColor.color_id
-                                                                                )}
+                                                                                onChange={handleChangeColor(ckColor.id)}
                                                                             />
                                                                         }
                                                                     />
@@ -766,11 +761,11 @@ const AdminProduct = props => {
                                                                         control={
                                                                             <Checkbox
                                                                                 defaultChecked={ckSkuIds?.includes(
-                                                                                    ckSku.sku_id
+                                                                                    ckSku.id
                                                                                 )}
                                                                                 name='ckSku'
                                                                                 color='primary'
-                                                                                onChange={handleChangeSku(ckSku.sku_id)}
+                                                                                onChange={handleChangeSku(ckSku.id)}
                                                                             />
                                                                         }
                                                                     />
@@ -872,13 +867,11 @@ const AdminProduct = props => {
                                                                     control={
                                                                         <Checkbox
                                                                             defaultChecked={ckWarantyIds?.includes(
-                                                                                ckWaranty.waranty_id
+                                                                                ckWaranty.id
                                                                             )}
                                                                             name='ckWaranty'
                                                                             color='primary'
-                                                                            onChange={handleChangeWaranty(
-                                                                                ckWaranty.waranty_id
-                                                                            )}
+                                                                            onChange={handleChangeWaranty(ckWaranty.id)}
                                                                         />
                                                                     }
                                                                 />
@@ -925,12 +918,12 @@ const AdminProduct = props => {
                                                                         control={
                                                                             <Checkbox
                                                                                 defaultChecked={ckPromotionIds?.includes(
-                                                                                    ckPromotion.promotion_id
+                                                                                    ckPromotion.id
                                                                                 )}
                                                                                 name='ckPromotion'
                                                                                 color='primary'
                                                                                 onChange={handleChangePromotion(
-                                                                                    ckPromotion.promotion_id
+                                                                                    ckPromotion.id
                                                                                 )}
                                                                             />
                                                                         }
@@ -959,13 +952,11 @@ const AdminProduct = props => {
                                                                         control={
                                                                             <Checkbox
                                                                                 defaultChecked={ckVideoIds?.includes(
-                                                                                    ckVideo.video_id
+                                                                                    ckVideo.id
                                                                                 )}
                                                                                 name='ckVideo'
                                                                                 color='primary'
-                                                                                onChange={handleChangeVideo(
-                                                                                    ckVideo.video_id
-                                                                                )}
+                                                                                onChange={handleChangeVideo(ckVideo.id)}
                                                                             />
                                                                         }
                                                                     />

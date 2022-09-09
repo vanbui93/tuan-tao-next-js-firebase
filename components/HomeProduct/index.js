@@ -58,7 +58,7 @@ const HomeProduct = props => {
                         id={item.id}
                         name={item.name}
                         price={item.price}
-                        comparePrice={item.compare_price}
+                        comparePrice={item.comparePrice}
                         images={item.images}
                         newPercent={item.newBox}
                         promotions={item.promotions}

@@ -40,7 +40,7 @@ export default function ProductItem(props) {
         promotions.length &&
         promotions?.map(item => {
             if (item !== null) {
-                return item.promotion_id
+                return item.id
             }
         })
 
@@ -109,7 +109,7 @@ export default function ProductItem(props) {
                                 {allPromotions !== null &&
                                     allPromotions !== undefined &&
                                     Object.values(allPromotions)?.map((item, idx) => {
-                                        if (ckPromotionIds?.includes(item.promotion_id)) {
+                                        if (ckPromotionIds?.includes(item.id)) {
                                             return (
                                                 item && (
                                                     <li className='promo-list__item' key={idx}>

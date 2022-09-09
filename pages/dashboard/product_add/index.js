@@ -165,7 +165,7 @@ const ProductAdd = props => {
         addProduct.colors?.length &&
         addProduct.colors?.map(item => {
             if (item !== null) {
-                return item.color_id
+                return item.id
             }
         })
     //Thêm bớt màu
@@ -175,7 +175,7 @@ const ProductAdd = props => {
             const newArrWithRemovedColor =
                 addProduct.colors.length &&
                 addProduct.colors?.filter(e => {
-                    return e.color_id !== colorId
+                    return e.id !== colorId
                 })
 
             setAddProduct(prevState => ({
@@ -184,9 +184,9 @@ const ProductAdd = props => {
             }))
         } else {
             //Thêm color vào bảng sản phẩm
-            const colorIndex = allColors.length && allColors?.filter(color => color.color_id === colorId)
+            const colorIndex = allColors.length && allColors?.filter(color => color.id === colorId)
 
-            const newArrWithAddedColor = [...addProduct.colors, { color_id: colorIndex[0].color_id }]
+            const newArrWithAddedColor = [...addProduct.colors, { id: colorIndex[0].id }]
 
             setAddProduct(prevState => ({
                 ...prevState,
@@ -200,7 +200,7 @@ const ProductAdd = props => {
         addProduct.skus?.length &&
         addProduct.skus?.map(item => {
             if (item !== null) {
-                return item.sku_id
+                return item.id
             }
         })
     //Thêm/bớt dung lượng
@@ -210,7 +210,7 @@ const ProductAdd = props => {
             const newArrWithRemovedSku =
                 addProduct.skus.length &&
                 addProduct.skus?.filter(e => {
-                    return e.sku_id !== skuId
+                    return e.id !== skuId
                 })
 
             setAddProduct(prevState => ({
@@ -223,11 +223,11 @@ const ProductAdd = props => {
                 allSkus.length &&
                 allSkus?.filter(sku => {
                     if (sku) {
-                        return sku.sku_id === skuId
+                        return sku.id === skuId
                     }
                 })
 
-            const newArrWithAddedSku = [...addProduct.skus, { sku_id: skuIndex[0].sku_id }]
+            const newArrWithAddedSku = [...addProduct.skus, { id: skuIndex[0].id }]
 
             setAddProduct(prevState => ({
                 ...prevState,
@@ -236,12 +236,12 @@ const ProductAdd = props => {
         }
     }
 
-    //Kiểm tra video_id có nằm trong danh sách video_id hay không
+    //Kiểm tra id có nằm trong danh sách id hay không
     const tempVideo =
         addProduct.videos?.length &&
         addProduct.videos?.map(item => {
             if (item !== null) {
-                return item.video_id
+                return item.id
             }
         })
 
@@ -252,7 +252,7 @@ const ProductAdd = props => {
             const newArrWithRemovedVideo =
                 addProduct.videos.length &&
                 addProduct.videos?.filter(e => {
-                    return e.video_id !== videoId
+                    return e.id !== videoId
                 })
 
             setAddProduct(prevState => ({
@@ -260,15 +260,15 @@ const ProductAdd = props => {
                 videos: newArrWithRemovedVideo,
             }))
         } else {
-            //Thêm video_id vào bảng sản phẩm
+            //Thêm id vào bảng sản phẩm
             const videoIndex =
                 allVideos.length &&
                 allVideos?.filter(video => {
                     if (video) {
-                        return video.video_id === videoId
+                        return video.id === videoId
                     }
                 })
-            const newArrWithAddedVideo = [...addProduct.videos, { video_id: videoIndex[0].video_id }]
+            const newArrWithAddedVideo = [...addProduct.videos, { id: videoIndex[0].id }]
 
             setAddProduct(prevState => ({
                 ...prevState,
@@ -277,12 +277,12 @@ const ProductAdd = props => {
         }
     }
 
-    //Kiểm tra waranty_id có nằm trong danh sách waranty_id hay không
+    //Kiểm tra id có nằm trong danh sách id hay không
     const tempWaranty =
         addProduct.warantys?.length &&
         addProduct.warantys.map(item => {
             if (item !== null) {
-                return item.waranty_id
+                return item.id
             }
         })
     //Thêm/bớt waranty
@@ -292,7 +292,7 @@ const ProductAdd = props => {
             const newArrWithRemovedWaranty =
                 addProduct.warantys.length &&
                 addProduct.warantys?.filter(e => {
-                    return e.waranty_id !== warantyId
+                    return e.id !== warantyId
                 })
 
             setAddProduct(prevState => ({
@@ -300,16 +300,16 @@ const ProductAdd = props => {
                 warantys: newArrWithRemovedWaranty,
             }))
         } else {
-            //Thêm waranty_id vào bảng sản phẩm
+            //Thêm id vào bảng sản phẩm
             const warantyIndex =
-                allWarantys.length &&
-                allWarantys?.filter(waranty => {
+                allWarantys &&
+                Object.values(allWarantys)?.filter(waranty => {
                     if (waranty) {
-                        return waranty.waranty_id === warantyId
+                        return waranty.id === warantyId
                     }
                 })
 
-            const newArrWithAddedWaranty = [...addProduct.warantys, { waranty_id: warantyIndex[0].waranty_id }]
+            const newArrWithAddedWaranty = [...addProduct.warantys, { id: warantyIndex[0].id }]
 
             setAddProduct(prevState => ({
                 ...prevState,
@@ -318,12 +318,12 @@ const ProductAdd = props => {
         }
     }
 
-    //Kiểm tra promotion_id có nằm trong danh sách promotion_id hay không
+    //Kiểm tra id có nằm trong danh sách id hay không
     const temPromotion =
         addProduct.promotions?.length &&
         addProduct.promotions?.map(item => {
             if (item !== null) {
-                return item.promotion_id
+                return item.id
             }
         })
 
@@ -334,7 +334,7 @@ const ProductAdd = props => {
             const newArrWithRemovedPromotion =
                 addProduct.promotions.length &&
                 addProduct.promotions?.filter(e => {
-                    return e.promotion_id !== promotionId
+                    return e.id !== promotionId
                 })
 
             setAddProduct(prevState => ({
@@ -342,19 +342,16 @@ const ProductAdd = props => {
                 promotions: newArrWithRemovedPromotion,
             }))
         } else {
-            //Thêm promotion_id vào bảng sản phẩm
+            //Thêm id vào bảng sản phẩm
             const promotionIndex =
                 allPromotions &&
                 Object.values(allPromotions)?.filter(promotion => {
                     if (promotion) {
-                        return promotion.promotion_id === promotionId
+                        return promotion.id === promotionId
                     }
                 })
 
-            const newArrWithAddedPromotion = [
-                ...addProduct.promotions,
-                { promotion_id: promotionIndex[0].promotion_id },
-            ]
+            const newArrWithAddedPromotion = [...addProduct.promotions, { id: promotionIndex[0].id }]
 
             setAddProduct(prevState => ({
                 ...prevState,
@@ -491,7 +488,7 @@ const ProductAdd = props => {
                                                             <Checkbox
                                                                 name='ckColor'
                                                                 style={{ color: `${ckColor.data_color}` }}
-                                                                onChange={handleChangeColor(ckColor.color_id)}
+                                                                onChange={handleChangeColor(ckColor.id)}
                                                             />
                                                         }
                                                     />
@@ -516,7 +513,7 @@ const ProductAdd = props => {
                                                             <Checkbox
                                                                 name='ckSku'
                                                                 color='primary'
-                                                                onChange={handleChangeSku(ckSku.sku_id)}
+                                                                onChange={handleChangeSku(ckSku.id)}
                                                             />
                                                         }
                                                     />
@@ -580,7 +577,7 @@ const ProductAdd = props => {
                                                         <Checkbox
                                                             name='waranty'
                                                             color='primary'
-                                                            onChange={handleChangeWaranty(ckWaranty.waranty_id)}
+                                                            onChange={handleChangeWaranty(ckWaranty.id)}
                                                         />
                                                     }
                                                 />
@@ -625,9 +622,7 @@ const ProductAdd = props => {
                                                             <Checkbox
                                                                 name='promotion'
                                                                 color='primary'
-                                                                onChange={handleChangePromotion(
-                                                                    ckPromotion.promotion_id
-                                                                )}
+                                                                onChange={handleChangePromotion(ckPromotion.id)}
                                                             />
                                                         }
                                                     />
@@ -652,7 +647,7 @@ const ProductAdd = props => {
                                                             <Checkbox
                                                                 name='video'
                                                                 color='primary'
-                                                                onChange={handleChangeVideo(ckVideo.video_id)}
+                                                                onChange={handleChangeVideo(ckVideo.id)}
                                                             />
                                                         }
                                                     />

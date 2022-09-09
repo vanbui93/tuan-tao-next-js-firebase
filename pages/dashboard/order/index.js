@@ -99,7 +99,7 @@ const AdminOrder = props => {
                 const productPrice = orders[key].product_price ? orders[key].product_price : ''
                 const productNewBox = orders[key].product_newBox ? orders[key].product_newBox : ''
                 const productFullBox = orders[key].product_fullbox ? orders[key].product_fullbox : ''
-                const productColor = orders[key].color_id ? orders[key].color_id : ''
+                const productColor = orders[key].id ? orders[key].id : ''
                 const productType = orders[key].product_sku ? orders[key].product_sku : ''
                 const promotion = orders[key].product_promotion ? orders[key].product_promotion : ''
                 const name = orders[key].customer_name ? orders[key].customer_name : ''
@@ -220,7 +220,7 @@ const AdminOrder = props => {
         editObject.product_promotion?.length &&
         editObject.product_promotion?.map(item => {
             if (item !== null) {
-                return item.promotion_id
+                return item.id
             }
         })
 
@@ -228,7 +228,7 @@ const AdminOrder = props => {
         viewObject.promotion?.length &&
         viewObject.promotion?.map(item => {
             if (item !== null) {
-                return item.promotion_id
+                return item.id
             }
         })
 
@@ -239,7 +239,7 @@ const AdminOrder = props => {
             const newArrWithRemovedPromotion =
                 editObject.product_promotion.length &&
                 editObject.product_promotion?.filter(e => {
-                    return e.promotion_id !== promotionId
+                    return e.id !== promotionId
                 })
 
             setEditObject(prevState => ({
@@ -247,19 +247,16 @@ const AdminOrder = props => {
                 product_promotion: newArrWithRemovedPromotion,
             }))
         } else {
-            //Thêm promotion_id vào bảng sản phẩm
+            //Thêm id vào bảng sản phẩm
             const promotionIndex =
                 allPromotions &&
                 Object.values(allPromotions)?.filter(promotion => {
                     if (promotion) {
-                        return promotion.promotion_id === promotionId
+                        return promotion.id === promotionId
                     }
                 })
 
-            const newArrWithAddedPromotion = [
-                ...editObject.product_promotion,
-                { promotion_id: promotionIndex[0].promotion_id },
-            ]
+            const newArrWithAddedPromotion = [...editObject.product_promotion, { id: promotionIndex[0].id }]
 
             setEditObject(prevState => ({
                 ...prevState,
@@ -549,9 +546,7 @@ const AdminOrder = props => {
                                                                 {allPromotions !== null &&
                                                                     allPromotions !== undefined &&
                                                                     Object.values(allPromotions)?.map((item, idx) => {
-                                                                        if (
-                                                                            ckPromoViewId?.includes(item.promotion_id)
-                                                                        ) {
+                                                                        if (ckPromoViewId?.includes(item.id)) {
                                                                             return (
                                                                                 <li key={idx}>
                                                                                     - {item.promotion_text}
@@ -762,12 +757,12 @@ const AdminOrder = props => {
                                                                             control={
                                                                                 <Checkbox
                                                                                     defaultChecked={ckPromotionId?.includes(
-                                                                                        ckPromotion.promotion_id
+                                                                                        ckPromotion.id
                                                                                     )}
                                                                                     name='ckPromotion'
                                                                                     color='primary'
                                                                                     onChange={handleChangePromotion(
-                                                                                        ckPromotion.promotion_id
+                                                                                        ckPromotion.id
                                                                                     )}
                                                                                 />
                                                                             }

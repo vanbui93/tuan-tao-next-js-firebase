@@ -138,7 +138,7 @@ export default function ProductDetail(props) {
         const productColor = product.colors
         Object.values(colors).filter(el => {
             return productColor?.some(f => {
-                if (f.color_id === el.color_id) {
+                if (f.id === el.id) {
                     dataColor.push(el)
                 }
             })
@@ -151,7 +151,7 @@ export default function ProductDetail(props) {
         const productSku = product.skus
         Object.values(skus)?.filter(el => {
             return productSku?.some(f => {
-                if (f.sku_id === el.sku_id) {
+                if (f.id === el.id) {
                     dataSku.push(el)
                 }
             })
@@ -164,7 +164,7 @@ export default function ProductDetail(props) {
         const productWaranty = product.warantys
         Object.values(warantys)?.filter(el => {
             return productWaranty?.some(f => {
-                if (f.waranty_id === el.waranty_id) {
+                if (f.id === el.id) {
                     dataWaranty.push(el)
                 }
             })
@@ -178,7 +178,7 @@ export default function ProductDetail(props) {
         Object.values(videos)?.filter(el => {
             if (el) {
                 return productVideo?.some(f => {
-                    if (f.video_id === el.video_id) {
+                    if (f.id === el.id) {
                         dataVideo.push(el)
                     }
                 })
@@ -264,7 +264,7 @@ export default function ProductDetail(props) {
         product.promotions !== undefined &&
         product.promotions?.map(item => {
             if (item !== null) {
-                return item.promotion_id
+                return item.id
             }
         })
 
@@ -275,7 +275,7 @@ export default function ProductDetail(props) {
         product.warantys !== undefined &&
         product.warantys?.map(item => {
             if (item !== null) {
-                return item.waranty_id
+                return item.id
             }
         })
 
@@ -308,6 +308,13 @@ export default function ProductDetail(props) {
                                                     ? `${numberInputFormat(product.price.toString())} đ`
                                                     : `Liên hệ : ${mainData?.phone ? mainData?.phone : ''}`}
                                             </strong>
+                                            <i>
+                                                <strike>
+                                                    {product.compare_price
+                                                        ? `${numberInputFormat(product.compare_price.toString())} đ`
+                                                        : ''}
+                                                </strike>
+                                            </i>
                                             &nbsp;&nbsp; | <i>Giá đã bao gồm 10% VAT</i>
                                         </div>
                                         <p className='product-detail__free-ship'>
@@ -402,7 +409,7 @@ export default function ProductDetail(props) {
                                                     {allPromotions !== null &&
                                                         allPromotions !== undefined &&
                                                         Object.values(allPromotions)?.map((ckPromotion, idx) => {
-                                                            if (ckPromotionIds?.includes(ckPromotion.promotion_id)) {
+                                                            if (ckPromotionIds?.includes(ckPromotion.id)) {
                                                                 return (
                                                                     <li className='promotion__item' key={idx}>
                                                                         <span className='bag'>KM {idx}</span>
@@ -440,24 +447,28 @@ export default function ProductDetail(props) {
                                         <div className='waranty'>
                                             <h4 className='waranty__title'>Thông tin sản phẩm</h4>
                                             <div className='warranty__info'>
-                                                {allWarantys?.map((item, idx) => {
-                                                    if (ckWarantyIds?.includes(item.waranty_id)) {
-                                                        return (
-                                                            <div className='waranty__item' key={idx}>
-                                                                <span className='waranty__icon'>
-                                                                    <FontAwesomeIcon
-                                                                        icon={faShield}
-                                                                        style={{ color: '#515154' }}
-                                                                    />
-                                                                    <i className='fa fa-shield' aria-hidden='true'></i>
-                                                                </span>
-                                                                <p className='waranty__detail'>
-                                                                    {parse(item.waranty_text)}
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    }
-                                                })}
+                                                {allWarantys &&
+                                                    Object.values(allWarantys)?.map((item, idx) => {
+                                                        if (ckWarantyIds?.includes(item.id)) {
+                                                            return (
+                                                                <div className='waranty__item' key={idx}>
+                                                                    <span className='waranty__icon'>
+                                                                        <FontAwesomeIcon
+                                                                            icon={faShield}
+                                                                            style={{ color: '#515154' }}
+                                                                        />
+                                                                        <i
+                                                                            className='fa fa-shield'
+                                                                            aria-hidden='true'
+                                                                        ></i>
+                                                                    </span>
+                                                                    <p className='waranty__detail'>
+                                                                        {parse(item.waranty_text)}
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    })}
                                                 <div className='waranty__item waranty__item--more'>
                                                     <Link href={'/page/chinh-sach-bao-hanh'}>
                                                         <a>
