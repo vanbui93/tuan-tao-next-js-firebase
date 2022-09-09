@@ -69,7 +69,7 @@ function ThankYou(props) {
                             </div>
                             <div className='thankyou__product-color'>
                                 <span className='thankyou__product-title'>Màu sắc</span>
-                                <span className='thankyou__product-content'>{state.color_id}</span>
+                                <span className='thankyou__product-content'>{state.product_color}</span>
                             </div>
                             <div className='thankyou__product-color'>
                                 <span className='thankyou__product-title'>Giá tiền</span>

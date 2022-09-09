@@ -64,6 +64,8 @@ const AdminOrder = props => {
         promotion: [],
         img: '',
         price: '',
+        type: '',
+        product_color: '',
         collection: '',
         newBox: '',
         fullbox: '',
@@ -88,6 +90,9 @@ const AdminOrder = props => {
         product_fullbox: '',
     })
 
+    console.log('viewObject', viewObject)
+    console.log('editObject', editObject)
+
     var arrayOrder = []
     orders !== null &&
         orders !== undefined &&
@@ -99,7 +104,7 @@ const AdminOrder = props => {
                 const productPrice = orders[key].product_price ? orders[key].product_price : ''
                 const productNewBox = orders[key].product_newBox ? orders[key].product_newBox : ''
                 const productFullBox = orders[key].product_fullbox ? orders[key].product_fullbox : ''
-                const productColor = orders[key].id ? orders[key].id : ''
+                const productColor = orders[key].product_color ? orders[key].product_color : ''
                 const productType = orders[key].product_sku ? orders[key].product_sku : ''
                 const promotion = orders[key].product_promotion ? orders[key].product_promotion : ''
                 const name = orders[key].customer_name ? orders[key].customer_name : ''
@@ -116,7 +121,7 @@ const AdminOrder = props => {
                     price: productPrice,
                     newBox: productNewBox,
                     fullbox: productFullBox,
-                    color: productColor,
+                    product_color: productColor,
                     type: productType,
                     promotion: promotion,
                     cusName: name,
@@ -217,7 +222,7 @@ const AdminOrder = props => {
 
     //Lọc khuyến mãi từ bảng promotion dựa trên id
     const ckPromotionId =
-        editObject.product_promotion?.length &&
+        editObject.product_promotion &&
         editObject.product_promotion?.map(item => {
             if (item !== null) {
                 return item.id
@@ -278,7 +283,7 @@ const AdminOrder = props => {
             product_name: order.name ? order.name : '',
             product_price: order.price ? order.price : '',
             product_sku: order.type ? order.type : '',
-            product_color: order.color,
+            product_color: order.product_color,
             product_promotion: order.promotion,
             product_newBox: order.newBox,
             product_fullbox: order.fullbox,
@@ -399,7 +404,7 @@ const AdminOrder = props => {
                                                         <StyledTableCell>
                                                             <span
                                                                 className={classes.pColor}
-                                                                style={{ backgroundColor: `${order.color}` }}
+                                                                style={{ backgroundColor: `${order.product_color}` }}
                                                             ></span>
                                                         </StyledTableCell>
                                                         <StyledTableCell>{order.type}</StyledTableCell>
@@ -519,7 +524,7 @@ const AdminOrder = props => {
                                                 ) : (
                                                     ''
                                                 )}
-                                                {viewObject.color ? (
+                                                {viewObject.product_color ? (
                                                     <TableRow>
                                                         <TableCell className={classes.tbHeadLeft} variant='head'>
                                                             Màu sắc
@@ -528,7 +533,9 @@ const AdminOrder = props => {
                                                             <Grid style={{ display: 'flex' }}>
                                                                 <span
                                                                     className={classes.colorStyle}
-                                                                    style={{ background: `${viewObject.color}` }}
+                                                                    style={{
+                                                                        background: `${viewObject.product_color}`,
+                                                                    }}
                                                                 ></span>
                                                             </Grid>
                                                         </TableCell>
