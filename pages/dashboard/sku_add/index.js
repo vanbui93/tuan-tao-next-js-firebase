@@ -27,7 +27,7 @@ function SkuAdd(props) {
     const { classes } = props
 
     const [sku, setSku] = useState({
-        sku_name: '',
+        memory: '',
         data_sku: '',
     })
 
@@ -72,7 +72,7 @@ function SkuAdd(props) {
                                             id='outlined-size-small'
                                             size='small'
                                             fullWidth
-                                            name='memory'
+                                            name='data_sku'
                                             onChange={handleEditOnchange}
                                         />
                                     </TableCell>
@@ -86,7 +86,7 @@ function SkuAdd(props) {
                                             id='outlined-size-small'
                                             size='small'
                                             fullWidth
-                                            name='data_sku'
+                                            name='memory'
                                             onChange={handleEditOnchange}
                                         />
                                     </TableCell>

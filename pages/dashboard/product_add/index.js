@@ -184,9 +184,9 @@ const ProductAdd = props => {
             }))
         } else {
             //Thêm color vào bảng sản phẩm
-            const colorIndex = allColors.length && allColors?.filter(color => color.id === colorId)
+            const colorIndex = allColors && Object.values(allColors)?.filter(color => color.id === colorId)
 
-            const newArrWithAddedColor = [...addProduct.colors, { id: colorIndex[0].id }]
+            const newArrWithAddedColor = [...addProduct.colors, { id: colorIndex[0]?.id }]
 
             setAddProduct(prevState => ({
                 ...prevState,
@@ -219,15 +219,9 @@ const ProductAdd = props => {
             }))
         } else {
             //Thêm sku vào bảng sản phẩm
-            const skuIndex =
-                allSkus.length &&
-                allSkus?.filter(sku => {
-                    if (sku) {
-                        return sku.id === skuId
-                    }
-                })
+            const skuIndex = allSkus && Object.values(allSkus)?.filter(sku => sku.id === skuId)
 
-            const newArrWithAddedSku = [...addProduct.skus, { id: skuIndex[0].id }]
+            const newArrWithAddedSku = [...addProduct?.skus, { id: skuIndex[0]?.id }]
 
             setAddProduct(prevState => ({
                 ...prevState,
