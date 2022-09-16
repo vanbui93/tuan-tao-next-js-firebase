@@ -51,13 +51,10 @@ export default function ProductItem(props) {
         }
     }, [mainData])
 
-    return (
+    return Object.keys(mainData).length ? (
         <li className='collections__item'>
             <Link href={`/product/${id}`} className='collection__link'>
                 <a>
-                    <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
-                        {loading && <Skeleton className='collections__img--sekeleton' />}
-                    </SkeletonTheme>
                     <div className='collections__img' style={{ display: loading ? 'none' : undefined }}>
                         <img src={img[0]} alt='' />
                     </div>
@@ -71,15 +68,9 @@ export default function ProductItem(props) {
                         )}
                     </div>
                     <div className='collections__info'>
-                        <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
-                            {loading && <Skeleton className='collections__title--sekeleton' />}
-                        </SkeletonTheme>
                         <h4 className='collections__title' style={{ display: loading ? 'none' : undefined }}>
                             {name}
                         </h4>
-                        <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
-                            {loading && <Skeleton className='collections__price--sekeleton' />}
-                        </SkeletonTheme>
                         <p className='collections__price' style={{ display: loading ? 'none' : undefined }}>
                             <strong className='collections__new-price'>
                                 {price ? `${numberInputFormat(price.toString())} đ` : `Liên hệ: ${mainData?.phone}`}
@@ -91,9 +82,6 @@ export default function ProductItem(props) {
                             )}
                         </p>
                     </div>
-                    <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
-                        {loading.length > 0 && <Skeleton className='collections__promotion--sekeleton' />}
-                    </SkeletonTheme>
                     {ckPromotionIds ? (
                         <div className='collections__promotion' style={{ display: loading ? 'none' : undefined }}>
                             <div className='promotion'>
@@ -127,6 +115,23 @@ export default function ProductItem(props) {
                     )}
                 </a>
             </Link>
+        </li>
+    ) : (
+        <li className='collections__item'>
+            <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
+                {loading && <Skeleton className='collections__img--sekeleton' />}
+            </SkeletonTheme>
+            <div className='collections__info'>
+                <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
+                    {loading && <Skeleton className='collections__title--sekeleton' />}
+                </SkeletonTheme>
+                <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
+                    {loading && <Skeleton className='collections__price--sekeleton' />}
+                </SkeletonTheme>
+            </div>
+            <SkeletonTheme baseColor='#ccc' highlightColor='#fff'>
+                {loading.length > 0 && <Skeleton className='collections__promotion--sekeleton' />}
+            </SkeletonTheme>
         </li>
     )
 }
